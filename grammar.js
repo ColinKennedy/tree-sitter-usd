@@ -11,7 +11,12 @@ module.exports = grammar(
             // TODO: Add this, later. Plus unittest
             // layer_metadata: $ =>
 
-            body: $ => "def",
+            prim_definition: $ => seq(
+                field("prim_type", choice("class", "def", "over")),
+                // optional(field("schema_type", "blah")),
+                // field("name", '"foo"'),  // TODO: Add string literal, here
+                // $.block,
+            ),
 
             // body: $ => optional(repeat($.prim_definition)),
             //
