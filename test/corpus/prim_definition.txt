@@ -2,27 +2,108 @@
 Empty Prim no type
 ==============================================================================
 
+#usda 1.0
+
 def "foo"
 {
 }
 
 ------------------------------------------------------------------------------
 
-(prim_definition
-  (identifier)
-  (block))
+(module
+  (sheline)
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (block)))
 
 ==============================================================================
 Empty Prim with type
 ==============================================================================
 
-def scope "foo"
+#usda 1.0
+
+def Scope "foo"
 {
 }
 
 ------------------------------------------------------------------------------
 
-(prim_definition
-  (identifier)
-  (identifier)
-  (block))
+(module
+  (sheline)
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (identifier)
+    (block)))
+
+==============================================================================
+Prim with nested children
+==============================================================================
+
+#usda 1.0
+
+def Scope "foo"
+{
+  def Plane "bar"
+  {
+  }
+
+  def Thing "more"
+  {
+    def Inner "child"
+    {
+      def More "grand_children"
+      {
+      }
+
+      def More "camelCase"
+      {
+      }
+    }
+
+    def Last "one"
+    {
+    }
+  }
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (sheline)
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (identifier)
+    (block
+      (prim_definition
+        (prim_type)
+        (identifier)
+        (identifier)
+        (block))
+      (prim_definition
+        (prim_type)
+        (identifier)
+        (identifier)
+        (block
+          (prim_definition
+            (prim_type)
+            (identifier)
+            (identifier)
+            (block
+              (prim_definition
+                (prim_type)
+                (identifier)
+                (identifier)
+                (block))
+              (prim_definition
+                (prim_type)
+                (identifier)
+                (identifier)
+                (block))))
+          (prim_definition
+            (prim_type)
+            (identifier)
+            (identifier)
+            (block)))))))

@@ -2,6 +2,8 @@
 Simple Attribute Definition
 ==============================================================================
 
+#usda 1.0
+
 def Scope "Prim"
 {
     int value = 8
@@ -9,8 +11,14 @@ def Scope "Prim"
 
 ------------------------------------------------------------------------------
 
-(expression_statement
-    (assignment
-        left
-    )
-)
+(module
+  (sheline)
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (identifier)
+    (block
+      (attribute_definition
+        (attribute_declaration
+          (identifier))
+        (value_list)))))
