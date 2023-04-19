@@ -31,7 +31,7 @@ module.exports = grammar(
             attribute_definition: $ => seq(
                 field("left", $.attribute_declaration),
                 "=",
-                field("right", $._value_list),
+                field("right", $.value_list),
             ),
 
             custom: $ => "custom",
@@ -91,8 +91,7 @@ module.exports = grammar(
             ),
 
             // TODO: Finish
-            _value_list: $ => "8",
-
+            value_list: $ => "8",
 
             block: $ => seq(
                 "{",
