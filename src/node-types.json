@@ -1,8 +1,38 @@
 [
   {
-    "type": "shebang",
+    "type": "block",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "prim_definition",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "\"",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "block",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "\"",
@@ -13,7 +43,7 @@
     "named": false
   },
   {
-    "type": "#usda 1.0",
+    "type": "def",
     "named": false
   },
   {
