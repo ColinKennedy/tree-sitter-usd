@@ -5,8 +5,41 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "def"
+          "type": "FIELD",
+          "name": "prim_type",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "class"
+              },
+              {
+                "type": "STRING",
+                "value": "def"
+              },
+              {
+                "type": "STRING",
+                "value": "over"
+              }
+            ]
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "schema_type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "identifier"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "FIELD",
@@ -89,7 +122,7 @@
     },
     "_schema_type": {
       "type": "PATTERN",
-      "value": "[a-z0-9]+"
+      "value": "[a-zA-Z0-9_]+"
     },
     "_statement": {
       "type": "STRING",
@@ -97,7 +130,7 @@
     },
     "identifier": {
       "type": "PATTERN",
-      "value": "[\\p{L}_$][\\p{L}\\p{Nd}_$]*"
+      "value": "[a-zA-Z0-9_]+"
     },
     "string_literal": {
       "type": "CHOICE",

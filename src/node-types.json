@@ -5,6 +5,11 @@
     "fields": {}
   },
   {
+    "type": "identifier",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "prim_definition",
     "named": true,
     "fields": {
@@ -16,6 +21,34 @@
             "type": "\"",
             "named": false
           },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "prim_type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "class",
+            "named": false
+          },
+          {
+            "type": "def",
+            "named": false
+          },
+          {
+            "type": "over",
+            "named": false
+          }
+        ]
+      },
+      "schema_type": {
+        "multiple": false,
+        "required": false,
+        "types": [
           {
             "type": "identifier",
             "named": true
@@ -43,12 +76,16 @@
     "named": false
   },
   {
+    "type": "class",
+    "named": false
+  },
+  {
     "type": "def",
     "named": false
   },
   {
-    "type": "identifier",
-    "named": true
+    "type": "over",
+    "named": false
   },
   {
     "type": "{",

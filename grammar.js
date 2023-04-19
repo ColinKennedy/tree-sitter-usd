@@ -3,7 +3,8 @@ module.exports = grammar(
         name: "usd",
 	rules: {
 	    prim_definition: $ => seq(
-		"def",
+		field("prim_type", choice("class", "def", "over")),
+		optional(field("schema_type", $.identifier)),
 		field("name", seq('"', $.identifier, '"')),  // TODO: Add string literal, here
 		$.block,
 	    ),
@@ -28,13 +29,13 @@ module.exports = grammar(
 	    ),
 
 	    // TODO: Make sure this works. Can prims be named with )@(*#$& special characters?
-	    _schema_type: $ => /[a-z0-9]+/i,
+	    _schema_type: $ => /[a-zA-Z0-9_]+/i,
 
 	    // TODO: Finish
 	    _statement: $ => "",
 
 	    // TODO: Double-check what is allowed, as an identifier
-	    identifier: $ => /[\p{L}_$][\p{L}\p{Nd}_$]*/,
+	    identifier: $ => /[a-zA-Z0-9_]+/i,
 
 	    string_literal: $ => choice($._string_literal, $._multiline_string_literal),
 
