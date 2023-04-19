@@ -3,14 +3,16 @@ module.exports = grammar(
         name: "usd",
         rules:
         {
+            module: $ => seq($.sheline, optional($.layer_metadata), optional(repeat($.prim_definition))),
+
             // TODO: Fix
-            // sheline: $ => seq(
-            //     "#",
-            //     /[a-z]+ [\d+\.]+/
-            // ),
+            sheline: $ => seq(
+                "#",
+                /[a-z]+ [\d+\.]+/
+            ),
 
             // TODO: Add this, later. Plus unittest
-            // layer_metadata: $ =>
+            layer_metadata: $ => "()",
 
             prim_definition: $ => seq(
                 field("prim_type", $.prim_type),
