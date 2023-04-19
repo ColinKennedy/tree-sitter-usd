@@ -1,0 +1,23 @@
+{
+  "name": "tree-sitter-usd",
+  "version": "1.0.0",
+  "description": "Parse Pixar's USD files, using tree-sitter ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ColinKennedy/tree-sitter-usd.git"
+  },
+  "keywords": [
+    "usd",
+    "tree-sitter"
+  ],
+  "author": "Colin Kennedy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ColinKennedy/tree-sitter-usd/issues"
+  },
+  "homepage": "https://github.com/ColinKennedy/tree-sitter-usd#readme"
+}
