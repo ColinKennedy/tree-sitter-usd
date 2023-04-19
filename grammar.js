@@ -1,8 +1,8 @@
 module.exports = grammar(
     {
         name: "usd",
-        rules:
-        {
+
+        rules: {
             module: $ => seq($.sheline, optional($.layer_metadata), optional(repeat($.prim_definition))),
 
             // TODO: Fix
@@ -24,10 +24,9 @@ module.exports = grammar(
             prim_type: $ => choice("class", "def", "over"),
 
             attribute_declaration: $ => seq(
-                field("custom", $.custom),
-                field("uniform", $.uniform),
+                optional(field("custom", $.custom)),
+                optional(field("uniform", $.uniform)),
                 $._pattern_list,
-                $.identifier,
             ),
 
             attribute_definition: $ => seq(
@@ -113,6 +112,9 @@ module.exports = grammar(
             ),
 
             identifier: $ => /[a-zA-Z0-9_]+/i,
+
+            // TODO: Incorporate this later
+            comment: $ => token(seq('#', /.*/)),
 
             // string_literal: $ => choice($._string_literal, $._multiline_string_literal),
             //
