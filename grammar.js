@@ -13,22 +13,29 @@ module.exports = grammar(
             // layer_metadata: $ =>
 
             prim_definition: $ => seq(
-                field("prim_type", choice("class", "def", "over")),
+                field("prim_type", $.prim_type),
                 optional(field("schema_type", $.identifier)),
                 field("name", seq('"', $.identifier, '"')),  // TODO: Add string literal, here
                 optional($.block),
             ),
 
-            attribute_definition: $ => seq(
-                $._attribute_declaration,
-                "=",
-                $._value_list,
-            ),
+            prim_type: $ => choice("class", "def", "over"),
 
-            _attribute_declaration: $ => seq(
+            attribute_declaration: $ => seq(
+                field("custom", $.custom),
+                field("uniform", $.uniform),
                 $._pattern_list,
                 $.identifier,
             ),
+
+            attribute_definition: $ => seq(
+                field("left", $.attribute_declaration),
+                "=",
+                field("right", $._value_list),
+            ),
+
+            custom: $ => "custom",
+            uniform: $ => "uniform",
 
             _pattern_list: $ => seq(
                 $._attribute_type,
@@ -94,13 +101,11 @@ module.exports = grammar(
                         choice(
                             $.prim_definition,
 
-                            // $._attribute_declaration,  // TODO: Add later
+                            $.attribute_declaration,
                             $.attribute_definition,
                         )
                     )
                 ),
-                // // TODO: All recursive Prims / attributes
-                // optional(choice($._attribute_declaration, $.attribute_definition)),
                 // // TODO: Add attribute / variant / etc implementation
                 // // optional(repeat($._statement)),
                 "}"
