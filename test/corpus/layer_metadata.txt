@@ -1,0 +1,46 @@
+==============================================================================
+Layer Metadata
+==============================================================================
+
+#usda 1.0
+(
+    "Some comment."
+    colorConfiguration = @colorconfig@
+    colorManagementSystem = """asdfasdf
+    asdfasdf
+
+    """
+    customLayerData = {}
+    defaultPrim = "root"
+    doc = "documentation data."
+    endTimeCode = 1200.4
+    framesPerSecond = 24
+    owner = "owner"
+    startTimeCode = 1001.2
+    subLayers = [
+        @./relative/path1.usda@,
+        @relative/path2.usda@,
+        @/absolute/path3.usda@,
+        @uri:www.foobar.com:JOB()as/df(*$%&)?fizz=buzz&extension=.usda:.usd:.usdc@,
+    ]
+)
+
+------------------------------------------------------------------------------
+
+(module
+  (sheline)
+  (layer_metadata
+    (string_literal)
+    (asset_path)
+    (string_literal)
+    (dictionary)
+    (string_literal)
+    (string_literal)
+    (digit)
+    (digit)
+    (string_literal)
+    (digit)
+    (asset_path)
+    (asset_path)
+    (asset_path)
+    (asset_path)))
