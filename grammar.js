@@ -2,6 +2,11 @@ module.exports = grammar(
     {
         name: "usd",
 
+        // extras: $ => [
+        //   $.comment,
+        //   /[\s\f\uFEFF\u2060\u200B]|\\\r?\n/
+        // ],
+
         rules: {
             module: $ => seq($.sheline, optional($.layer_metadata), optional(repeat($.prim_definition))),
 
@@ -12,7 +17,23 @@ module.exports = grammar(
             ),
 
             // TODO: Add this, later. Plus unittest
-            layer_metadata: $ => "()",
+            layer_metadata: $ => seq(
+                "(",
+                // TODO: This should only have one field for "subLayers". At
+                // the moment, there's multiple. Fix that later.
+                //
+                optional(field("subLayers", seq("subLayers", "=", $._asset_list))),
+                ")",
+            ),
+
+            _asset_list: $ => seq("[", comma_separate($.usd_asset_path), "]"),
+
+            usd_asset_path: $ => seq("@", /[^@]+/, "@"),  // TODO: Check if any text is okay
+            usd_asset_prim_path: $ => seq(
+                $.usd_asset_path, optional($.prim_path),
+            ),
+
+            prim_path: $ => seq("<", /[^<>]+/, ">"),
 
             prim_definition: $ => seq(
                 field("prim_type", $.prim_type),
@@ -132,3 +153,11 @@ module.exports = grammar(
         }
     }
 )
+
+function comma_separate_1(rule) {
+  return seq(rule, repeat(seq(",", rule)));
+}
+
+function comma_separate(rule) {
+  return optional(comma_separate_1(rule));
+}
