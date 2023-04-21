@@ -1,72 +1,122 @@
 ==============================================================================
-Comment - empty
+Prim - def - empty
 ==============================================================================
 
-#
+def "root" {}
 
 ------------------------------------------------------------------------------
 
 (module
-  (comment))
+  (prim_definition
+    (prim_type)
+    (string_literal)
+    (block)))
 
 ==============================================================================
-Comment - single
+Prim - def - empty, with a schema
 ==============================================================================
 
-# t
+def Scope "root" {}
 
 ------------------------------------------------------------------------------
 
 (module
-  (comment))
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string_literal)
+    (block)))
 
 ==============================================================================
-Comment - multiple text
+Prim - class - empty, with a schema
 ==============================================================================
 
-# tasdfasdfj aslkj2314
+class Scope "thing" {}
 
 ------------------------------------------------------------------------------
 
 (module
-  (comment))
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string_literal)
+    (block)))
 
 ==============================================================================
-Comment - multiple lines
+Prim - over - empty
 ==============================================================================
 
-# something
-# another thing here
-#
+over "thing" {}
 
 ------------------------------------------------------------------------------
 
 (module
-  (comment)
-  (comment)
-  (comment))
+  (prim_definition
+    (prim_type)
+    (string_literal)
+    (block)))
 
 ==============================================================================
-Comment - inline
+Prim - over - empty, with a schema
 ==============================================================================
 
-# stop
-def "root" # tasdfasdfj aslkj2314
-{ # more comments
-# thing
-} # last
-
-------------------------------------------------------------------------------
-
-(comment)
-
-==============================================================================
-Comment - unicode
-==============================================================================
-
-# tasdfasdfj aslkj2314
+over Scope "thing" {}
 
 ------------------------------------------------------------------------------
 
 (module
-  (comment))
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string_literal)
+    (block)))
+
+==============================================================================
+Prim with metadata
+==============================================================================
+
+def Scope "something" (
+    kind = "component"
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string_literal)
+    (metadata
+      (metadata_assignment
+	(identifier)
+	(string_literal)))
+    (block)))
+
+==============================================================================
+Prim with block + metadata
+==============================================================================
+
+def Scope "something" (
+    kind = "component"
+)
+{
+    custom int value = 8
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string_literal)
+    (metadata
+      (metadata_assignment
+	(identifier)
+	(string_literal)))
+    (block
+      (attribute_definition
+	(custom)
+	(identifier)))))

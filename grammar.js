@@ -14,7 +14,7 @@ module.exports = grammar(
         rules: {
             module: $ => repeat($._statement),
 
-            _statement: $ => choice($.metadata),
+            _statement: $ => choice($.comment, $.metadata, $.prim_definition),
 
             comment: $ => token(seq("#", /.*/)),
             metadata: $ => seq("(", repeat($.metadata_assignment), ")"),
@@ -37,19 +37,107 @@ module.exports = grammar(
             integer: $ => /\d+/,
             prim_path: $ => seq("<", /[^<>]+/, ">"),
             prim_paths: $ => seq("[", comma_separated($.prim_path), optional(","), "]"),
+
             string_literal: $ => choice($._string_literal, $._multiline_string_literal),
             _multiline_string_literal: $ => seq(
               '"""',
               repeat(/[^"]/),
               '"""'
             ),
-
             _string_literal: $ => seq(
               '"',
               repeat(/[^"]/),
               '"'
             ),
 
+            prim_definition: $ => seq(
+                $.prim_type,
+                optional($.identifier),
+                $.string_literal,
+                optional($.metadata),
+                $.block,
+            ),
+
+            prim_type: $ => choice("class", "def", "over"),
+
+            block: $ => seq(
+                "{",
+                repeat(
+                    choice(
+                        $.prim_definition,
+
+                        $.attribute_declaration,  // Useful for USD schema files
+                        $.attribute_definition,  // Most USD files prefer this
+                    )
+                ),
+                // // // TODO: Add attribute / variant / etc implementation
+                // // // optional(repeat($._statement)),
+                "}",
+            ),
+
+            attribute_declaration: $ => $._attribute_declaration,
+            _attribute_declaration: $ => seq(
+                optional($.custom),
+                optional($.uniform),
+                $._pattern_list,
+            ),
+            attribute_definition: $ => seq($._attribute_declaration, "=", $._attribute_value),
+            // TODO: Finish
+            _attribute_value: $ => "8",
+
+            custom: $ => "custom",
+            uniform: $ => "uniform",
+            _pattern_list: $ => seq(
+                $._attribute_type,
+                $.identifier,  // TODO: Check if identifier has to be ASCII. might be stricter than a regular identifier
+            ),
+
+            // Reference: https://openusd.org/release/api/sdf_page_front.html
+            _attribute_type: $ => choice(
+                $._scalar_type,
+                $._dimensioned_type,
+                $._dictionary_type,
+            ),
+
+            _scalar_type: $ => choice(
+                "asset", "asset[]",
+                "bool", "bool[]",
+                "double", "double[]",
+                "float", "float[]",
+                "half", "half[]",
+                "int", "int[]",
+                // TODO: Add later
+                // "int64", "int64[]",
+                "string", "string[]",
+                "timecode", "timecode[]",
+                "token", "token[]",
+                "uchar", "uchar[]",
+                "uint", "uint[]",
+                "uint64", "uint64[]",
+            ),
+
+            _dictionary_type: $ => "dictionary",
+
+            _dimensioned_type: $ => choice(
+                "double2", "double2[]",
+                "double3", "double3[]",
+                "double4", "double4[]",
+                "float2", "float2[]",
+                "float3", "float3[]",
+                "float4", "float4[]",
+                "half2", "half2[]",
+                "half3", "half3[]",
+                "half4", "half4[]",
+                "int2", "int2[]",
+                "int3", "int3[]",
+                "int4", "int4[]",
+                "matrix2d", "matrix2d[]",
+                "matrix3d", "matrix3d[]",
+                "matrix4d", "matrix4d[]",
+                "quatd", "quatd[]",
+                "quatf", "quatf[]",
+                "quath", "quath[]",
+            ),
 
             // module: $ => repeat($._statement),
             //
@@ -121,7 +209,7 @@ module.exports = grammar(
             // attribute_definition: $ => seq(
             //     field("left", $.attribute_declaration),
             //     "=",
-            //     field("right", $.value_list),
+            //     field("right", $._attribute_value),
             // ),
             //
             // block: $ => seq(
@@ -197,7 +285,7 @@ module.exports = grammar(
             // ),
             //
             // // TODO: Finish
-            // value_list: $ => "8",
+            // _attribute_value: $ => "8",
             //
             // identifier: $ => /[a-zA-Z0-9_\.]+/i,
             //
