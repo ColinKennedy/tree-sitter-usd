@@ -119,4 +119,5 @@ def Scope "something" (
     (block
       (attribute_definition
 	(custom)
-	(identifier)))))
+	(identifier)
+	(digit)))))

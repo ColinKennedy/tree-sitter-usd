@@ -82,8 +82,7 @@ module.exports = grammar(
                 $._pattern_list,
             ),
             attribute_definition: $ => seq($._attribute_declaration, "=", $._attribute_value),
-            // TODO: Finish
-            _attribute_value: $ => "8",
+            _attribute_value: $ => seq($._metadata_value, optional($.metadata)),
 
             custom: $ => "custom",
             uniform: $ => "uniform",
