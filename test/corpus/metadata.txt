@@ -1,9 +1,26 @@
 ==============================================================================
-subLayers - empty
+colorConfiguration
+==============================================================================
+
+(colorConfiguration = @colorconfig@)
+
+------------------------------------------------------------------------------
+
+(module
+  (metadata
+    (metadata_assignment
+      (identifier)
+      (asset_path))))
+
+==============================================================================
+colorManagementSystem
 ==============================================================================
 
 (
-    subLayers = []
+	colorManagementSystem = """asdfasdf
+	asdfasdf
+
+	"""
 )
 
 ------------------------------------------------------------------------------
@@ -12,15 +29,13 @@ subLayers - empty
   (metadata
     (metadata_assignment
       (identifier)
-      (asset_paths))))
+      (string_literal))))
 
 ==============================================================================
-subLayers - single
+defaultPrim
 ==============================================================================
 
-(
-    subLayers = [@foo.usda@]
-)
+(defaultPrim = "root")
 
 ------------------------------------------------------------------------------
 
@@ -28,16 +43,13 @@ subLayers - single
   (metadata
     (metadata_assignment
       (identifier)
-      (asset_paths
-        (asset_path)))))
+      (string_literal))))
 
 ==============================================================================
-subLayers - multiple
+doc
 ==============================================================================
 
-(
-    subLayers = [@foo.usda@, @bar.usda@, @fizz.usda@]
-)
+(doc = "documentation data.")
 
 ------------------------------------------------------------------------------
 
@@ -45,18 +57,13 @@ subLayers - multiple
   (metadata
     (metadata_assignment
       (identifier)
-      (asset_paths
-	(asset_path)
-	(asset_path)
-	(asset_path)))))
+      (string_literal))))
 
 ==============================================================================
-subLayers - multiple and trailing comma
+endTimeCode
 ==============================================================================
 
-(
-    subLayers = [@foo.usda@, @bar.usda@, @fizz.usda@, ]
-)
+(endTimeCode = 1200.4)
 
 ------------------------------------------------------------------------------
 
@@ -64,7 +71,47 @@ subLayers - multiple and trailing comma
   (metadata
     (metadata_assignment
       (identifier)
-      (asset_paths
-	(asset_path)
-	(asset_path)
-	(asset_path)))))
+      (digit))))
+
+==============================================================================
+framesPerSecond
+==============================================================================
+
+(framesPerSecond = 24)
+
+------------------------------------------------------------------------------
+
+(module
+  (metadata
+    (metadata_assignment
+      (identifier)
+      (digit))))
+
+
+==============================================================================
+owner
+==============================================================================
+
+(owner = "owner")
+
+------------------------------------------------------------------------------
+
+(module
+  (metadata
+    (metadata_assignment
+      (identifier)
+      (string_literal))))
+
+==============================================================================
+startTimeCode
+==============================================================================
+
+(startTimeCode = 1001.2)
+
+------------------------------------------------------------------------------
+
+(module
+  (metadata
+    (metadata_assignment
+      (identifier)
+      (digit))))

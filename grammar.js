@@ -24,7 +24,6 @@ module.exports = grammar(
                 $.asset_path,
                 $.dictionary,
                 $.digit,
-                $.integer,
                 $.prim_path,
                 prec(1, $.prim_paths),
                 $.string_literal,
@@ -34,7 +33,7 @@ module.exports = grammar(
             // TODO: Check if any text is okay for ``asset_path``
             asset_path: $ => seq(seq("@", /[^@]+/, "@"), optional($.prim_path)),
             dictionary: $ => seq("{", "}"),  // TODO: Finish, later
-            digit: $ => /\d+[\.\d]+/,
+            digit: $ => /\d+[\.\d]*/,
             integer: $ => /\d+/,
             prim_path: $ => seq("<", /[^<>]+/, ">"),
             prim_paths: $ => seq("[", comma_separated($.prim_path), optional(","), "]"),
