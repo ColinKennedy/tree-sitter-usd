@@ -466,7 +466,16 @@ float value.timeSamples = {
 
 ------------------------------------------------------------------------------
 
-(block)
+(module
+  (attribute_assignment
+    (identifier)
+    (timeSamples
+      (digit)
+      (digit)
+      (digit)
+      (digit)
+      (digit)
+      (digit))))
 
 ==============================================================================
 Simple Attribute definition
