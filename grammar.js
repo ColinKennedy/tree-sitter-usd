@@ -18,6 +18,7 @@ module.exports = grammar(
             module: $ => repeat($._statement),
 
             _statement: $ => choice(
+                // TODO: Remove the non prim-definition / comment from this, later
                 $.prim_definition,
                 $.attribute_assignment,
                 $.relationship_assignment,
@@ -38,10 +39,14 @@ module.exports = grammar(
             // TODO: Add "list-of" support to ``metadata_assignment``. e.g. asset paths, prim paths
             // Not sure if USD supports it. Double check
             metadata_assignment: $ => seq(
+                optional($.orderer),
                 $.identifier,
                 "=",
                 choice($.list, $._attribute_value),
             ),
+
+            orderer: $ => choice("add", "append", "delete", "prepend", "reorder"),
+
             _attribute_value: $ => choice(
                 $.asset_path,
                 $.dictionary,
@@ -51,8 +56,12 @@ module.exports = grammar(
             ),
             identifier: $ => /[a-zA-Z0-9_:\.]+/i,
             // TODO: Check if any text is okay for ``asset_path``
-            asset_path: $ => seq(seq("@", /[^@]+/, "@"), optional($.prim_path)),
-            dictionary: $ => seq("{", repeat(seq($.identifier, "=", $.string_literal)), "}"),  // TODO: Finish, later
+            asset_path: $ => seq("@", /[^@]+/, "@", optional($.prim_path)),
+            dictionary: $ => seq(  // TODO: Finish, later
+                "{",
+                repeat(seq($._attribute_type, $.identifier, "=", $.string_literal)),
+                "}",
+            ),
             digit: $ => /-*\d+[\.\d]*/,
             integer: $ => /\d+/,
             prim_paths: $ => seq("[", repeat(seq($.prim_path, optional(","))), "]"),
@@ -205,7 +214,9 @@ module.exports = grammar(
                 "quath", "quath[]",
             ),
 
-            _extra_type: $ => "color3f"
+            _extra_type: $ => choice(
+                "color3f", "color3f[]",
+            )
         }
     }
 )

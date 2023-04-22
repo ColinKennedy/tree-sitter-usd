@@ -1,0 +1,79 @@
+==============================================================================
+variantSet - composition arc
+==============================================================================
+
+over "SomeSphere" (
+    prepend variantSets = ["some_variant_set"]
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string_literal)
+    (metadata
+      (metadata_assignment
+        (orderer)
+        (identifier)
+        (list
+          (string_literal))))
+    (block)))
+
+==============================================================================
+variantSet - variants
+==============================================================================
+
+over "SomeSphere" (
+    prepend variantSets = ["some_variant_set"]
+    variants = {
+        string some_variant_set = "variant_name_1"
+    }
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string_literal)
+    (metadata
+      (metadata_assignment
+        (orderer)
+        (identifier)
+        (list
+          (string_literal)))
+      (metadata_assignment
+        (identifier)
+        (dictionary
+          (identifier)
+          (string_literal))))
+    (block)))
+
+==============================================================================
+variantSet - complex
+==============================================================================
+
+over "SomeSphere" (
+    prepend variantSets = ["some_variant_set"]
+    variants = {
+        string some_variant_set = "variant_name_1"
+    }
+)
+{
+    double radius = 20
+
+    variantSet "some_variant_set" = {
+        "variant_name_1" {
+            color3f[] primvars:displayColor = [(1, 0, 0)]
+        }
+    }
+}
+
+------------------------------------------------------------------------------
+
+(block)
