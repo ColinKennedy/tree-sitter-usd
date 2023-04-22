@@ -7,7 +7,7 @@ asset foo = @./path/to.jpg@
 ------------------------------------------------------------------------------
 
 (module
-  (attribute_definition
+  (attribute_assignment
     (identifier)
     (asset_path)))
 
@@ -20,10 +20,11 @@ asset[] foo = [@./path/to.jpg@, @/blah.txt@]
 ------------------------------------------------------------------------------
 
 (module
-  (attribute_definition
+  (attribute_assignment
     (identifier)
-    (asset_path)
-    (asset_path)))
+    (list
+      (asset_path)
+      (asset_path))))
 
 ==============================================================================
 Attribute - bool
@@ -34,7 +35,7 @@ bool foo = 1
 ------------------------------------------------------------------------------
 
 (module
-  (attribute_definition
+  (attribute_assignment
     (identifier)
     (digit)))
 
@@ -47,11 +48,12 @@ bool[] foo = [1, 0, 1]
 ------------------------------------------------------------------------------
 
 (module
-  (attribute_definition
+  (attribute_assignment
     (identifier)
-    (digit)
-    (digit)
-    (digit)))
+    (list
+      (digit)
+      (digit)
+      (digit))))
 
 ==============================================================================
 Attribute - double, negative
@@ -62,7 +64,7 @@ double foo = -123121.12313214
 ------------------------------------------------------------------------------
 
 (module
-  (attribute_definition
+  (attribute_assignment
     (identifier)
     (digit)))
 
@@ -75,7 +77,7 @@ double foo = -0.0
 ------------------------------------------------------------------------------
 
 (module
-  (attribute_definition
+  (attribute_assignment
     (identifier)
     (digit)))
 
@@ -88,7 +90,7 @@ double foo = 0.0
 ------------------------------------------------------------------------------
 
 (module
-  (attribute_definition
+  (attribute_assignment
     (identifier)
     (digit)))
 
@@ -101,7 +103,7 @@ float foo = -0.0
 ------------------------------------------------------------------------------
 
 (module
-  (attribute_definition
+  (attribute_assignment
     (identifier)
     (digit)))
 
@@ -114,7 +116,7 @@ float foo = 0.0
 ------------------------------------------------------------------------------
 
 (module
-  (attribute_definition
+  (attribute_assignment
     (identifier)
     (digit)))
 
@@ -127,7 +129,7 @@ half foo = 2
 ------------------------------------------------------------------------------
 
 (module
-  (attribute_definition
+  (attribute_assignment
     (identifier)
     (digit)))
 
@@ -140,11 +142,12 @@ half[] foo = [2, 1, 2]
 ------------------------------------------------------------------------------
 
 (module
-  (attribute_definition
+  (attribute_assignment
     (identifier)
-    (digit)
-    (digit)
-    (digit)))
+    (list
+      (digit)
+      (digit)
+      (digit))))
 
 ==============================================================================
 Attribute - int
@@ -155,7 +158,7 @@ int foo = 2
 ------------------------------------------------------------------------------
 
 (module
-  (attribute_definition
+  (attribute_assignment
     (identifier)
     (digit)))
 
@@ -168,11 +171,12 @@ int[] foo = [2, 1, 2]
 ------------------------------------------------------------------------------
 
 (module
-  (attribute_definition
+  (attribute_assignment
     (identifier)
-    (digit)
-    (digit)
-    (digit)))
+    (list
+      (digit)
+      (digit)
+      (digit))))
 
 ==============================================================================
 Attribute - int64
@@ -183,7 +187,7 @@ int64 foo = 2
 ------------------------------------------------------------------------------
 
 (module
-  (attribute_definition
+  (attribute_assignment
     (identifier)
     (digit)))
 
@@ -196,11 +200,12 @@ int64[] foo = [2, 1, 2]
 ------------------------------------------------------------------------------
 
 (module
-  (attribute_definition
+  (attribute_assignment
     (identifier)
-    (digit)
-    (digit)
-    (digit)))
+    (list
+      (digit)
+      (digit)
+      (digit))))
 
 ==============================================================================
 Attribute - string
@@ -211,7 +216,7 @@ string foo = "something"
 ------------------------------------------------------------------------------
 
 (module
-  (attribute_definition
+  (attribute_assignment
     (identifier)
     (string_literal)))
 
@@ -224,12 +229,13 @@ string[] foo = ["something", "stuff", "", "123"]
 ------------------------------------------------------------------------------
 
 (module
-  (attribute_definition
+  (attribute_assignment
     (identifier)
-    (string_literal)
-    (string_literal)
-    (string_literal)
-    (string_literal)))
+    (list
+      (string_literal)
+      (string_literal)
+      (string_literal)
+      (string_literal))))
 
 ==============================================================================
 Attribute - timecode
@@ -240,7 +246,7 @@ timecode time = 1.0
 ------------------------------------------------------------------------------
 
 (module
-  (attribute_definition
+  (attribute_assignment
     (identifier)
     (digit)))
 
@@ -253,11 +259,12 @@ timecode[] time = [1.0, 10.0, -20.3]
 ------------------------------------------------------------------------------
 
 (module
-  (attribute_definition
+  (attribute_assignment
     (identifier)
-    (digit)
-    (digit)
-    (digit)))
+    (list
+      (digit)
+      (digit)
+      (digit))))
 
 ==============================================================================
 Attribute - token
@@ -268,7 +275,7 @@ token purpose = "default"
 ------------------------------------------------------------------------------
 
 (module
-  (attribute_definition
+  (attribute_assignment
     (identifier)
     (string_literal)))
 
@@ -281,10 +288,11 @@ token[] purpose = ["default", "render"]
 ------------------------------------------------------------------------------
 
 (module
-  (attribute_definition
+  (attribute_assignment
     (identifier)
-    (string_literal)
-    (string_literal)))
+    (list
+      (string_literal)
+      (string_literal))))
 
 ==============================================================================
 Attribute - uchar
@@ -295,7 +303,7 @@ uchar foo = 2
 ------------------------------------------------------------------------------
 
 (module
-  (attribute_definition
+  (attribute_assignment
     (identifier)
     (digit)))
 
@@ -308,11 +316,12 @@ uchar[] foo = [2, 1, 2]
 ------------------------------------------------------------------------------
 
 (module
-  (attribute_definition
+  (attribute_assignment
     (identifier)
-    (digit)
-    (digit)
-    (digit)))
+    (list
+      (digit)
+      (digit)
+      (digit))))
 
 ==============================================================================
 Attribute - uint
@@ -323,7 +332,7 @@ uint foo = 2
 ------------------------------------------------------------------------------
 
 (module
-  (attribute_definition
+  (attribute_assignment
     (identifier)
     (digit)))
 
@@ -336,11 +345,12 @@ uint[] foo = [2, 1, 2]
 ------------------------------------------------------------------------------
 
 (module
-  (attribute_definition
+  (attribute_assignment
     (identifier)
-    (digit)
-    (digit)
-    (digit)))
+    (list
+      (digit)
+      (digit)
+      (digit))))
 
 ==============================================================================
 Attribute - uint64
@@ -351,7 +361,7 @@ uint64 foo = 2
 ------------------------------------------------------------------------------
 
 (module
-  (attribute_definition
+  (attribute_assignment
     (identifier)
     (digit)))
 
@@ -364,8 +374,9 @@ uint64[] foo = [2, 1, 2]
 ------------------------------------------------------------------------------
 
 (module
-  (attribute_definition
+  (attribute_assignment
     (identifier)
-    (digit)
-    (digit)
-    (digit)))
+    (list
+      (digit)
+      (digit)
+      (digit))))

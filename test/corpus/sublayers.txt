@@ -12,7 +12,7 @@ subLayers - empty
   (metadata
     (metadata_assignment
       (identifier)
-      (asset_paths))))
+      (list))))
 
 ==============================================================================
 subLayers - single
@@ -28,7 +28,7 @@ subLayers - single
   (metadata
     (metadata_assignment
       (identifier)
-      (asset_paths
+      (list
 	(asset_path)))))
 
 ==============================================================================
@@ -45,7 +45,7 @@ subLayers - multiple
   (metadata
     (metadata_assignment
       (identifier)
-      (asset_paths
+      (list
 	(asset_path)
 	(asset_path)
 	(asset_path)))))
@@ -64,7 +64,7 @@ subLayers - multiple and trailing comma
   (metadata
     (metadata_assignment
       (identifier)
-      (asset_paths
+      (list
 	(asset_path)
 	(asset_path)
 	(asset_path)))))

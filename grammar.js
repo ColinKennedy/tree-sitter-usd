@@ -7,23 +7,30 @@ module.exports = grammar(
         //   /[\s\f\uFEFF\u2060\u200B]|\\\r?\n/
         // ],
 
+        // precedences: $ => [
+        //     [$.attribute_assignment],
+        //     // [$._attribute_value
+        //     // [$.asset_paths, $.prim_paths],
+        //     // // [$.attribute_assignment, $.attribute_declaration],
+        // ],
+
         rules: {
             module: $ => repeat($._statement),
 
             _statement: $ => choice(
-                $.attribute_definition,
-                // $.comment,
-                // $.metadata,
-                // $.prim_definition,
-                // // prec(2, $.attribute_declaration),
-                // // prec(3, $.attribute_definition),
+                $.attribute_assignment,
+                $.comment,
+                $.metadata,
+                $.prim_definition,
+                // prec(2, $.attribute_declaration),
+                // prec(3, $.attribute_assignment),
             ),
 
             comment: $ => token(seq("#", /.*/)),
             metadata: $ => seq("(", repeat($.metadata_assignment), ")"),
             // TODO: Add "list-of" support to ``metadata_assignment``. e.g. asset paths, prim paths
             // Not sure if USD supports it. Double check
-            metadata_assignment: $ => seq($.identifier, "=", $._attribute_value),
+            metadata_assignment: $ => seq($.identifier, "=", choice($.list, $._attribute_value)),
             _attribute_value: $ => choice(
                 $.asset_path,
                 $.dictionary,
@@ -68,7 +75,7 @@ module.exports = grammar(
                         $.prim_definition,
 
                         // $.attribute_declaration,  // Useful for USD schema files TODO Add
-                        $.attribute_definition,  // Most USD files prefer this
+                        $.attribute_assignment,  // Most USD files prefer this
                         // TODO: Add attribute / variant / etc implementation
                     )
                 ),
@@ -82,17 +89,27 @@ module.exports = grammar(
             //     optional($.uniform),
             //     $._pattern_list,
             // ),
-            attribute_definition: $ => seq(
-                optional($.custom),
-                optional($.uniform),
-                $._attribute_type,
-                $.identifier,  // TODO: Check if identifier has to be ASCII. might be stricter than a regular identifier
+            attribute_assignment: $ => seq(
+                prec.left(
+                    2,
+                    seq(
+                        optional($.custom),
+                        optional($.uniform),
+                        $._attribute_type,
+                        $.identifier,  // TODO: Check if identifier has to be ASCII. might be stricter than a regular identifier
+                    )
+                ),
                 "=",
-                choice($._attribute_values, $._attribute_value),
-                optional($.metadata),
+                prec.left(
+                    1,
+                    seq(
+                        choice($.list, $._attribute_value),
+                        optional($.metadata),
+                    ),
+                )
             ),
-            _attribute_values: $ => seq("[", comma_separated($._attribute_value), "]"),
 
+            list: $ => seq("[", comma_separated($._attribute_value), optional(","), "]"),
             custom: $ => "custom",
             uniform: $ => "uniform",
 
