@@ -22,6 +22,7 @@ module.exports = grammar(
                 $.comment,
                 $.metadata,
                 $.prim_definition,
+                // TODO: Add this later, maybe
                 // prec(2, $.attribute_declaration),
                 // prec(3, $.attribute_assignment),
             ),
@@ -35,7 +36,11 @@ module.exports = grammar(
             ),
             // TODO: Add "list-of" support to ``metadata_assignment``. e.g. asset paths, prim paths
             // Not sure if USD supports it. Double check
-            metadata_assignment: $ => seq($.identifier, "=", choice($.list, $._attribute_value)),
+            metadata_assignment: $ => seq(
+                $.identifier,
+                "=",
+                choice($.list, $._attribute_value),
+            ),
             _attribute_value: $ => choice(
                 $.asset_path,
                 $.dictionary,
@@ -124,7 +129,21 @@ module.exports = grammar(
             ),
 
             list: $ => seq("[", comma_separated($._attribute_value), optional(","), "]"),
-            timeSamples: $ => prec(2, seq("{", repeat(seq("10", ":", $._attribute_value, optional(","))), "}")),
+            timeSamples: $ => prec(
+                2,
+                seq(
+                    "{",
+                    repeat(
+                        seq(
+                            field("left", $.digit),
+                            ":",
+                            field("right", $._attribute_value),
+                            optional(",")
+                        )
+                    ),
+                    "}",
+                )
+            ),
             custom: $ => "custom",
             uniform: $ => "uniform",
 
