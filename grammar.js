@@ -27,7 +27,12 @@ module.exports = grammar(
             ),
 
             comment: $ => token(seq("#", /.*/)),
-            metadata: $ => seq("(", repeat($.metadata_assignment), ")"),
+            metadata: $ => seq(
+                "(",
+                // Note: In USD, SdfLayer::SetComment is written as a raw, string literal
+                repeat(choice($.metadata_assignment, $.string_literal)),
+                ")",
+            ),
             // TODO: Add "list-of" support to ``metadata_assignment``. e.g. asset paths, prim paths
             // Not sure if USD supports it. Double check
             metadata_assignment: $ => seq($.identifier, "=", choice($.list, $._attribute_value)),
@@ -41,7 +46,7 @@ module.exports = grammar(
             identifier: $ => /[a-zA-Z0-9_\.]+/i,
             // TODO: Check if any text is okay for ``asset_path``
             asset_path: $ => seq(seq("@", /[^@]+/, "@"), optional($.prim_path)),
-            dictionary: $ => seq("{", "}"),  // TODO: Finish, later
+            dictionary: $ => seq("{", repeat(seq($.identifier, "=", $.string_literal)), "}"),  // TODO: Finish, later
             digit: $ => /-*\d+[\.\d]*/,
             integer: $ => /\d+/,
             prim_path: $ => seq("<", /[^<>]+/, ">"),
