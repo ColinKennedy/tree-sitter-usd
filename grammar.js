@@ -101,20 +101,30 @@ module.exports = grammar(
                         optional($.custom),
                         optional($.uniform),
                         $._attribute_type,
-                        $.identifier,  // TODO: Check if identifier has to be ASCII. might be stricter than a regular identifier
+                        field("name", $.identifier),  // TODO: Check if identifier has to be ASCII. might be stricter than a regular identifier
+                        optional(
+                            seq(
+                                ".",
+                                choice(
+                                    field("timeSamples", "timeSamples"),
+                                    field("connect", "connect"),
+                                ),
+                            ),
+                        ),
                     )
                 ),
                 "=",
                 prec.left(
                     1,
                     seq(
-                        choice($.list, $._attribute_value),
+                        choice($.list, $._attribute_value, $.timeSamples),
                         optional($.metadata),
                     ),
                 )
             ),
 
             list: $ => seq("[", comma_separated($._attribute_value), optional(","), "]"),
+            timeSamples: $ => prec(2, seq("{", repeat(seq("10", ":", $._attribute_value, optional(","))), "}")),
             custom: $ => "custom",
             uniform: $ => "uniform",
 
