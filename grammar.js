@@ -9,17 +9,24 @@ module.exports = grammar(
 
         precedences: $ => [
             [$.asset_paths, $.prim_paths],
+            // [$.attribute_definition, $.attribute_declaration],
         ],
 
         rules: {
             module: $ => repeat($._statement),
 
-            _statement: $ => choice($.comment, $.metadata, $.prim_definition),
+            _statement: $ => choice(
+                $.comment,
+                $.metadata,
+                $.prim_definition,
+                // prec(2, $.attribute_declaration),
+                // prec(3, $.attribute_definition),
+            ),
 
             comment: $ => token(seq("#", /.*/)),
             metadata: $ => seq("(", repeat($.metadata_assignment), ")"),
-            metadata_assignment: $ => seq($.identifier, "=", $._metadata_value),
-            _metadata_value: $ => choice(
+            metadata_assignment: $ => seq($.identifier, "=", $._data_value),
+            _data_value: $ => choice(
                 prec(2, $.asset_paths),
                 $.asset_path,
                 $.dictionary,
@@ -68,10 +75,9 @@ module.exports = grammar(
 
                         $.attribute_declaration,  // Useful for USD schema files
                         $.attribute_definition,  // Most USD files prefer this
+                        // TODO: Add attribute / variant / etc implementation
                     )
                 ),
-                // // // TODO: Add attribute / variant / etc implementation
-                // // // optional(repeat($._statement)),
                 "}",
             ),
 
@@ -82,7 +88,7 @@ module.exports = grammar(
                 $._pattern_list,
             ),
             attribute_definition: $ => seq($._attribute_declaration, "=", $._attribute_value),
-            _attribute_value: $ => seq($._metadata_value, optional($.metadata)),
+            _attribute_value: $ => seq($._data_value, optional($.metadata)),
 
             custom: $ => "custom",
             uniform: $ => "uniform",
@@ -105,8 +111,7 @@ module.exports = grammar(
                 "float", "float[]",
                 "half", "half[]",
                 "int", "int[]",
-                // TODO: Add later
-                // "int64", "int64[]",
+                "int64", "int64[]",
                 "string", "string[]",
                 "timecode", "timecode[]",
                 "token", "token[]",
@@ -144,8 +149,8 @@ module.exports = grammar(
             //
             // comment: $ => seq("#", /.+$/),
             // metadata: $ => seq("(", repeat($.metadata_assignment), ")"),
-            // metadata_assignment: $ => seq($.identifier, "=", $._metadata_value),
-            // _metadata_value: $ => choice(
+            // metadata_assignment: $ => seq($.identifier, "=", $._data_value),
+            // _data_value: $ => choice(
             //     prec(2, $.asset_paths),
             //     $.asset_path,
             //     $.dictionary,
