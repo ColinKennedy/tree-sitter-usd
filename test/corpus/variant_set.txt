@@ -76,4 +76,34 @@ over "SomeSphere" (
 
 ------------------------------------------------------------------------------
 
-(block)
+(module
+  (prim_definition
+    (prim_type)
+    (string_literal)
+    (metadata
+      (metadata_assignment
+        (orderer)
+        (identifier)
+        (list
+          (string_literal)))
+      (metadata_assignment
+        (identifier)
+        (dictionary
+          (identifier)
+          (string_literal))))
+    (block
+      (attribute_assignment
+        (identifier)
+        (digit))
+      (variant_set_definition
+        (string_literal)
+        (variant
+          (string_literal)
+          (block
+            (attribute_assignment
+              (identifier)
+              (list
+                (tuple
+                  (digit)
+                  (digit)
+                  (digit))))))))))

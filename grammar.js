@@ -53,6 +53,7 @@ module.exports = grammar(
                 $.digit,
                 $.prim_path,
                 $.string_literal,
+                $.tuple,
             ),
             identifier: $ => /[a-zA-Z0-9_:\.]+/i,
             // TODO: Check if any text is okay for ``asset_path``
@@ -99,7 +100,8 @@ module.exports = grammar(
 
                         // $.attribute_declaration,  // Useful for USD schema files TODO Add
                         $.attribute_assignment,  // Most USD files prefer this
-                        // TODO: Add attribute / variant / etc implementation
+
+                        $.variant_set_definition,
                     )
                 ),
                 "}",
@@ -149,6 +151,8 @@ module.exports = grammar(
             ),
 
             list: $ => seq("[", comma_separated($._attribute_value), optional(","), "]"),
+            tuple: $ => seq("(", comma_separated1($._attribute_value), optional(","), ")"),
+
             timeSamples: $ => prec(
                 2,
                 seq(
@@ -216,15 +220,30 @@ module.exports = grammar(
 
             _extra_type: $ => choice(
                 "color3f", "color3f[]",
-            )
+            ),
+
+            variant_set_definition: $ => seq(
+                "variantSet",
+                $.string_literal,
+                "=",
+                "{",
+                $.variant,
+                "}"
+            ),
+
+            variant: $ => seq(
+                $.string_literal,
+                optional($.metadata),
+                $.block,
+            ),
         }
     }
 )
 
-function comma_separate(rule) {
-  return seq(rule, repeat(seq(",", rule)));
+function comma_separated(rule) {
+  return optional(seq(rule, repeat(seq(",", rule))));
 }
 
-function comma_separated(rule) {
-  return optional(comma_separate(rule));
+function comma_separated1(rule) {
+  return optional(seq(rule, repeat1(seq(",", rule))));
 }
