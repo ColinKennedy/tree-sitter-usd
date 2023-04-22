@@ -68,7 +68,11 @@ over "SomeSphere" (
     double radius = 20
 
     variantSet "some_variant_set" = {
-        "variant_name_1" {
+        "variant_name_1" (
+            "Some comment"
+            add references = [@foo.usda@]
+        )
+        {
             color3f[] primvars:displayColor = [(1, 0, 0)]
         }
     }
@@ -99,6 +103,13 @@ over "SomeSphere" (
         (string_literal)
         (variant
           (string_literal)
+          (metadata
+            (string_literal)
+            (metadata_assignment
+              (orderer)
+              (identifier)
+              (list
+                (asset_path))))
           (block
             (attribute_assignment
               (identifier)
