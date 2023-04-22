@@ -1,0 +1,194 @@
+==============================================================================
+AssetPath - Implicit relative
+==============================================================================
+
+def "root" (
+    add references = @inner/folder/foo.usda@
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string_literal)
+    (metadata
+      (metadata_assignment
+        (orderer)
+        (identifier)
+        (asset_path)))
+    (block)))
+
+==============================================================================
+AssetPath - Explicit relative parent path
+==============================================================================
+
+def "root" (
+    add references = @../../inner/folder/foo.usda@
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string_literal)
+    (metadata
+      (metadata_assignment
+        (orderer)
+        (identifier)
+        (asset_path)))
+    (block)))
+
+==============================================================================
+AssetPath - Explicit relative current folder
+==============================================================================
+
+def "root" (
+    add references = @./inner/folder/foo.usda@
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string_literal)
+    (metadata
+      (metadata_assignment
+        (orderer)
+        (identifier)
+        (asset_path)))
+    (block)))
+
+==============================================================================
+AssetPath - Absolute path
+==============================================================================
+
+def "root" (
+    add references = @/absolute/folder/foo.usda@
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string_literal)
+    (metadata
+      (metadata_assignment
+        (orderer)
+        (identifier)
+        (asset_path)))
+    (block)))
+
+==============================================================================
+AssetPath - URI
+==============================================================================
+
+def "root" (
+    add references = @scheme:www.foobar.com:virtual/folder?version=8&extension=.usda@
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string_literal)
+    (metadata
+      (metadata_assignment
+        (orderer)
+        (identifier)
+        (asset_path)))
+    (block)))
+
+==============================================================================
+AssetPath - Prim path - relative
+==============================================================================
+
+def "root" (
+    add references = @foo.usda@</thing>
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string_literal)
+    (metadata
+      (metadata_assignment
+        (orderer)
+        (identifier)
+        (asset_path
+          (prim_path))))
+    (block)))
+
+==============================================================================
+AssetPath - Prim - Layer offset
+==============================================================================
+
+def "root" (
+    add references = @foo.usda@</Model> (offset = 1; scale = 2.0)
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(block)
+
+==============================================================================
+AssetPath - Layer offset 1
+==============================================================================
+
+def "root" (
+    add references = @foo.usda@ (offset = 1; scale = 2.0)
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(block)
+
+==============================================================================
+AssetPath - Layer offset 2
+==============================================================================
+
+def "root" (
+    add references = @foo.usda@ (scale = 2.0)
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(block)
+
+==============================================================================
+AssetPath - empty Layer offset
+==============================================================================
+
+def "root" (
+    add references = @foo.usda@ ()
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(block)

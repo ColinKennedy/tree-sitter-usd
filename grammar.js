@@ -68,6 +68,12 @@ module.exports = grammar(
             prim_paths: $ => seq("[", repeat(seq($.prim_path, optional(","))), "]"),
             prim_path: $ => seq("<", /[^<>]+/, ">"),
 
+            layer_offset: $ => seq(
+                "(",
+                semicolon_separated(seq($.identifier, "=", $.digit)),
+                ")",
+            ),
+
             string_literal: $ => choice($._string_literal, $._multiline_string_literal),
             _multiline_string_literal: $ => seq(
               '"""',
@@ -246,4 +252,8 @@ function comma_separated(rule) {
 
 function comma_separated1(rule) {
   return optional(seq(rule, repeat1(seq(",", rule))));
+}
+
+function semicolon_separated(rule) {
+  return optional(seq(rule, repeat(seq(";", rule))));
 }
