@@ -452,6 +452,7 @@ float value.timeSamples = {
   (attribute_assignment
     (identifier)
     (timeSamples
+      (digit)
       (digit))))
 
 ==============================================================================
