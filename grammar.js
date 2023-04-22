@@ -48,7 +48,7 @@ module.exports = grammar(
                 $.prim_path,
                 $.string_literal,
             ),
-            identifier: $ => /[a-zA-Z0-9_\.]+/i,
+            identifier: $ => /[a-zA-Z0-9_:\.]+/i,
             // TODO: Check if any text is okay for ``asset_path``
             asset_path: $ => seq(seq("@", /[^@]+/, "@"), optional($.prim_path)),
             dictionary: $ => seq("{", repeat(seq($.identifier, "=", $.string_literal)), "}"),  // TODO: Finish, later
@@ -152,6 +152,7 @@ module.exports = grammar(
                 $._scalar_type,
                 $._dimensioned_type,
                 $._dictionary_type,
+                $._extra_type,
             ),
 
             _scalar_type: $ => choice(
@@ -192,6 +193,8 @@ module.exports = grammar(
                 "quatf", "quatf[]",
                 "quath", "quath[]",
             ),
+
+            _extra_type: $ => "color3f"
         }
     }
 )

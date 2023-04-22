@@ -501,3 +501,51 @@ def Scope "Prim"
       (attribute_assignment
 	(identifier)
 	(digit)))))
+
+==============================================================================
+Attribute namespace - shader input
+==============================================================================
+
+#usda 1.0
+
+def Scope "Prim"
+{
+    color3f input:value.connect = </some/prim>
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (comment)
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string_literal)
+    (block
+      (attribute_assignment
+	(identifier)
+	(prim_path)))))
+
+==============================================================================
+Attribute nested namespace
+==============================================================================
+
+#usda 1.0
+
+def Scope "Prim"
+{
+    color3f foo:bar:value.connect = </some/prim>
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (comment)
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string_literal)
+    (block
+      (attribute_assignment
+	(identifier)
+	(prim_path)))))
