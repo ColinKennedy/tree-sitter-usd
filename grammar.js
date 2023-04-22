@@ -18,10 +18,11 @@ module.exports = grammar(
             module: $ => repeat($._statement),
 
             _statement: $ => choice(
-                $.attribute_assignment,
-                $.comment,
-                $.metadata,
                 $.prim_definition,
+                $.attribute_assignment,
+                $.relationship_assignment,
+                $.metadata,
+                $.comment,
                 // TODO: Add this later, maybe
                 // prec(2, $.attribute_declaration),
                 // prec(3, $.attribute_assignment),
@@ -54,6 +55,7 @@ module.exports = grammar(
             dictionary: $ => seq("{", repeat(seq($.identifier, "=", $.string_literal)), "}"),  // TODO: Finish, later
             digit: $ => /-*\d+[\.\d]*/,
             integer: $ => /\d+/,
+            prim_paths: $ => seq("[", repeat(seq($.prim_path, optional(","))), "]"),
             prim_path: $ => seq("<", /[^<>]+/, ">"),
 
             string_literal: $ => choice($._string_literal, $._multiline_string_literal),
@@ -83,6 +85,8 @@ module.exports = grammar(
                 repeat(
                     choice(
                         $.prim_definition,
+
+                        $.relationship_assignment,
 
                         // $.attribute_declaration,  // Useful for USD schema files TODO Add
                         $.attribute_assignment,  // Most USD files prefer this
@@ -126,6 +130,13 @@ module.exports = grammar(
                         optional($.metadata),
                     ),
                 )
+            ),
+
+            relationship_assignment: $ => seq(
+                "rel",
+                $.identifier,
+                "=",
+                choice($.prim_paths, $.prim_path),
             ),
 
             list: $ => seq("[", comma_separated($._attribute_value), optional(","), "]"),

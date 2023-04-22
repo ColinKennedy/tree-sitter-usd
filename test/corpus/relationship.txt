@@ -1,0 +1,31 @@
+==============================================================================
+Relationship nested material namespace
+==============================================================================
+rel material:binding:collection:Erasers = [
+    </foo/child>,
+    <../relative_1/thing>,
+    <relative_2/thing>
+]
+
+------------------------------------------------------------------------------
+
+(module
+  (relationship_assignment
+    (identifier)
+    (prim_paths
+      (prim_path)
+      (prim_path)
+      (prim_path))))
+
+==============================================================================
+Relationship single
+==============================================================================
+
+rel foo = </foo/child>
+
+------------------------------------------------------------------------------
+
+(module
+  (relationship_assignment
+    (identifier)
+    (prim_path)))
