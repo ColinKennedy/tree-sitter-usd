@@ -8,6 +8,7 @@ asset foo = @./path/to.jpg@
 
 (module
   (attribute_assignment
+    (attribute_type)
     (identifier)
     (asset_path)))
 
@@ -21,6 +22,7 @@ asset[] foo = [@./path/to.jpg@, @/blah.txt@]
 
 (module
   (attribute_assignment
+    (attribute_type)
     (identifier)
     (list
       (asset_path)
@@ -36,6 +38,7 @@ bool foo = 1
 
 (module
   (attribute_assignment
+    (attribute_type)
     (identifier)
     (digit)))
 
@@ -49,6 +52,7 @@ bool[] foo = [1, 0, 1]
 
 (module
   (attribute_assignment
+    (attribute_type)
     (identifier)
     (list
       (digit)
@@ -65,6 +69,7 @@ double foo = -123121.12313214
 
 (module
   (attribute_assignment
+    (attribute_type)
     (identifier)
     (digit)))
 
@@ -78,6 +83,7 @@ double foo = -0.0
 
 (module
   (attribute_assignment
+    (attribute_type)
     (identifier)
     (digit)))
 
@@ -91,6 +97,7 @@ double foo = 0.0
 
 (module
   (attribute_assignment
+    (attribute_type)
     (identifier)
     (digit)))
 
@@ -104,6 +111,7 @@ float foo = -0.0
 
 (module
   (attribute_assignment
+    (attribute_type)
     (identifier)
     (digit)))
 
@@ -117,6 +125,7 @@ float foo = 0.0
 
 (module
   (attribute_assignment
+    (attribute_type)
     (identifier)
     (digit)))
 
@@ -130,6 +139,7 @@ half foo = 2
 
 (module
   (attribute_assignment
+    (attribute_type)
     (identifier)
     (digit)))
 
@@ -143,6 +153,7 @@ half[] foo = [2, 1, 2]
 
 (module
   (attribute_assignment
+    (attribute_type)
     (identifier)
     (list
       (digit)
@@ -159,6 +170,7 @@ int foo = 2
 
 (module
   (attribute_assignment
+    (attribute_type)
     (identifier)
     (digit)))
 
@@ -172,6 +184,7 @@ int[] foo = [2, 1, 2]
 
 (module
   (attribute_assignment
+    (attribute_type)
     (identifier)
     (list
       (digit)
@@ -188,6 +201,7 @@ int64 foo = 2
 
 (module
   (attribute_assignment
+    (attribute_type)
     (identifier)
     (digit)))
 
@@ -201,6 +215,7 @@ int64[] foo = [2, 1, 2]
 
 (module
   (attribute_assignment
+    (attribute_type)
     (identifier)
     (list
       (digit)
@@ -217,6 +232,7 @@ string foo = "something"
 
 (module
   (attribute_assignment
+    (attribute_type)
     (identifier)
     (string_literal)))
 
@@ -230,6 +246,7 @@ string[] foo = ["something", "stuff", "", "123"]
 
 (module
   (attribute_assignment
+    (attribute_type)
     (identifier)
     (list
       (string_literal)
@@ -247,6 +264,7 @@ timecode time = 1.0
 
 (module
   (attribute_assignment
+    (attribute_type)
     (identifier)
     (digit)))
 
@@ -260,6 +278,7 @@ timecode[] time = [1.0, 10.0, -20.3]
 
 (module
   (attribute_assignment
+    (attribute_type)
     (identifier)
     (list
       (digit)
@@ -276,6 +295,7 @@ token purpose = "default"
 
 (module
   (attribute_assignment
+    (attribute_type)
     (identifier)
     (string_literal)))
 
@@ -289,6 +309,7 @@ token[] purpose = ["default", "render"]
 
 (module
   (attribute_assignment
+    (attribute_type)
     (identifier)
     (list
       (string_literal)
@@ -304,6 +325,7 @@ uchar foo = 2
 
 (module
   (attribute_assignment
+    (attribute_type)
     (identifier)
     (digit)))
 
@@ -317,6 +339,7 @@ uchar[] foo = [2, 1, 2]
 
 (module
   (attribute_assignment
+    (attribute_type)
     (identifier)
     (list
       (digit)
@@ -333,6 +356,7 @@ uint foo = 2
 
 (module
   (attribute_assignment
+    (attribute_type)
     (identifier)
     (digit)))
 
@@ -346,6 +370,7 @@ uint[] foo = [2, 1, 2]
 
 (module
   (attribute_assignment
+    (attribute_type)
     (identifier)
     (list
       (digit)
@@ -362,6 +387,7 @@ uint64 foo = 2
 
 (module
   (attribute_assignment
+    (attribute_type)
     (identifier)
     (digit)))
 
@@ -375,6 +401,7 @@ uint64[] foo = [2, 1, 2]
 
 (module
   (attribute_assignment
+    (attribute_type)
     (identifier)
     (list
       (digit)
@@ -393,6 +420,7 @@ custom float value = 10.31231424141
 (module
   (attribute_assignment
     (custom)
+    (attribute_type)
     (identifier)
     (digit)))
 
@@ -408,6 +436,7 @@ custom uniform float value = 10.31231424141
   (attribute_assignment
     (custom)
     (uniform)
+    (attribute_type)
     (identifier)
     (digit)))
 
@@ -422,6 +451,7 @@ uniform float value = 10.31231424141
 (module
   (attribute_assignment
     (uniform)
+    (attribute_type)
     (identifier)
     (digit)))
 
@@ -435,6 +465,7 @@ float value.timeSamples = {}
 
 (module
   (attribute_assignment
+    (attribute_type)
     (identifier)
     (timeSamples)))
 
@@ -450,6 +481,7 @@ float value.timeSamples = {
 
 (module
   (attribute_assignment
+    (attribute_type)
     (identifier)
     (timeSamples
       (digit)
@@ -469,6 +501,7 @@ float value.timeSamples = {
 
 (module
   (attribute_assignment
+    (attribute_type)
     (identifier)
     (timeSamples
       (digit)
@@ -499,6 +532,7 @@ def Scope "Prim"
     (string_literal)
     (block
       (attribute_assignment
+        (attribute_type)
         (identifier)
         (digit)))))
 
@@ -523,6 +557,7 @@ def Scope "Prim"
     (string_literal)
     (block
       (attribute_assignment
+        (attribute_type)
         (identifier)
         (prim_path)))))
 
@@ -547,5 +582,6 @@ def Scope "Prim"
     (string_literal)
     (block
       (attribute_assignment
+        (attribute_type)
         (identifier)
         (prim_path)))))

@@ -63,7 +63,7 @@ module.exports = grammar(
 
             dictionary: $ => seq(  // TODO: Finish, later
                 "{",
-                repeat(seq($._attribute_type, $.identifier, "=", $._attribute_value)),
+                repeat(seq($.attribute_type, $.identifier, "=", $._attribute_value)),
                 "}",
             ),
             digit: $ => /-*\d+[\.\d]*/,
@@ -127,7 +127,7 @@ module.exports = grammar(
                 seq(
                     optional($.custom),
                     optional($.uniform),
-                    $._attribute_type,
+                    $.attribute_type,
                     field("name", $.identifier),  // TODO: Check if identifier has to be ASCII. might be stricter than a regular identifier
                     optional(
                         seq(
@@ -178,7 +178,7 @@ module.exports = grammar(
             uniform: $ => "uniform",
 
             // Reference: https://openusd.org/release/api/sdf_page_front.html
-            _attribute_type: $ => choice(
+            attribute_type: $ => choice(
                 $._scalar_type,
                 $._dimensioned_type,
                 $._dictionary_type,

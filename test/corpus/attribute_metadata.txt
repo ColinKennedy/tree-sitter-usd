@@ -8,6 +8,7 @@ float value = 20 ()
 
 (module
   (attribute_assignment
+    (attribute_type)
     (identifier)
     (digit))
   (metadata))
@@ -24,6 +25,7 @@ float value = 20 (
 
 (module
   (attribute_assignment
+    (attribute_type)
     (identifier)
     (digit))
   (metadata
@@ -43,11 +45,13 @@ float value = 20 (
 
 (module
   (attribute_assignment
+    (attribute_type)
     (identifier)
     (digit))
   (metadata
     (metadata_assignment
       (identifier)
       (dictionary
+        (attribute_type)
         (identifier)
         (digit)))))

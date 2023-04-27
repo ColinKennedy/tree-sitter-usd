@@ -1,0 +1,27 @@
+==============================================================================
+customData - simple
+==============================================================================
+
+def Xform "World" (
+    customData = {
+        bool zUp = 1
+    }
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string_literal)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (dictionary
+          (attribute_type)
+          (identifier)
+          (digit))))
+    (block)))

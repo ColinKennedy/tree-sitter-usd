@@ -50,6 +50,7 @@ over "SomeSphere" (
       (metadata_assignment
         (identifier)
         (dictionary
+          (attribute_type)
           (identifier)
           (string_literal))))
     (block)))
@@ -93,10 +94,12 @@ over "SomeSphere" (
       (metadata_assignment
         (identifier)
         (dictionary
+          (attribute_type)
           (identifier)
           (string_literal))))
     (block
       (attribute_assignment
+        (attribute_type)
         (identifier)
         (digit))
       (variant_set_definition
@@ -112,6 +115,7 @@ over "SomeSphere" (
                 (asset_path))))
           (block
             (attribute_assignment
+              (attribute_type)
               (identifier)
               (list
                 (tuple
