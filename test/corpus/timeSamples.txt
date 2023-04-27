@@ -1,0 +1,216 @@
+==============================================================================
+timeSamples - empty
+==============================================================================
+
+def "foo"
+{
+    float3[] extent.timeSamples = {}
+}
+
+==============================================================================
+timeSamples - float3[]
+==============================================================================
+
+def "foo"
+{
+    float3[] extent.timeSamples = {
+        1: [(1, 1, 1), (1, 1, 1)],
+    }
+}
+
+------------------------------------------------------------------------------
+
+(block)
+
+==============================================================================
+timeSamples - single entry
+==============================================================================
+
+def "foo"
+{
+    double b.timeSamples = {
+         3: 3
+    }
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string_literal)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (timeSamples
+          (digit)
+          (digit))))))
+
+==============================================================================
+timeSamples - multiple entries
+==============================================================================
+
+def "foo"
+{
+    double z.timeSamples = {
+        0: 1.0,
+        1: 2.0
+    }
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string_literal)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (timeSamples
+          (digit)
+          (digit)
+          (digit)
+          (digit))))))
+
+==============================================================================
+timeSamples - multiple entries, trailing comma
+==============================================================================
+
+def "foo"
+{
+    double z.timeSamples = {
+        0: 1.0,
+        1: 2.0,
+    }
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string_literal)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (timeSamples
+          (digit)
+          (digit)
+          (digit)
+          (digit))))))
+
+==============================================================================
+timeSamples - asset[]
+==============================================================================
+
+def "foo"
+{
+    asset[] assetPathArray.timeSamples = {
+        0: [@./clip2.usda@]
+    }
+}
+
+------------------------------------------------------------------------------
+
+(block)
+
+==============================================================================
+timeSamples - double3
+==============================================================================
+
+def "foo"
+{
+    double3 xformOp:translate.timeSamples = {
+        0: (1.5, 1.5, 1.5),
+        1: (1.84254210369921, 1.84254210369921, 1.84254210369921),
+        2: (2.8180194846605358, 2.8180194846605358, 2.8180194846605358),
+        3: (4.277924554357093, 4.277924554357093, 4.277924554357093),
+        4: (6, 6, 6),
+    }
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string_literal)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (timeSamples
+          (digit)
+          (tuple
+            (digit)
+            (digit)
+            (digit))
+          (digit)
+          (tuple
+            (digit)
+            (digit)
+            (digit))
+          (digit)
+          (tuple
+            (digit)
+            (digit)
+            (digit))
+          (digit)
+          (tuple
+            (digit)
+            (digit)
+            (digit))
+          (digit)
+          (tuple
+            (digit)
+            (digit)
+            (digit)))))))
+
+==============================================================================
+timeSamples - matrix4d
+==============================================================================
+
+def "foo"
+{
+    matrix4d xformOp:transform.timeSamples = {
+        0: ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (2, 0, 0, 1) ),
+    }
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string_literal)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (timeSamples
+          (digit)
+          (tuple
+            (tuple
+              (digit)
+              (digit)
+              (digit)
+              (digit))
+            (tuple
+              (digit)
+              (digit)
+              (digit)
+              (digit))
+            (tuple
+              (digit)
+              (digit)
+              (digit)
+              (digit))
+            (tuple
+              (digit)
+              (digit)
+              (digit)
+              (digit))))))))
