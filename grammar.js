@@ -63,7 +63,7 @@ module.exports = grammar(
 
             dictionary: $ => seq(  // TODO: Finish, later
                 "{",
-                repeat(seq($._attribute_type, $.identifier, "=", $.string_literal)),
+                repeat(seq($._attribute_type, $.identifier, "=", $._attribute_value)),
                 "}",
             ),
             digit: $ => /-*\d+[\.\d]*/,

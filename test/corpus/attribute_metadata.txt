@@ -41,4 +41,13 @@ float value = 20 (
 
 ------------------------------------------------------------------------------
 
-(block)
+(module
+  (attribute_assignment
+    (identifier)
+    (digit))
+  (metadata
+    (metadata_assignment
+      (identifier)
+      (dictionary
+        (identifier)
+        (digit)))))
