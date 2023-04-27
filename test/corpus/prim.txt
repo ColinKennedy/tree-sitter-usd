@@ -90,8 +90,8 @@ def Scope "something" (
     (string_literal)
     (metadata
       (metadata_assignment
-	(identifier)
-	(string_literal)))
+        (identifier)
+        (string_literal)))
     (block)))
 
 ==============================================================================
@@ -114,10 +114,10 @@ def Scope "something" (
     (string_literal)
     (metadata
       (metadata_assignment
-	(identifier)
-	(string_literal)))
+        (identifier)
+        (string_literal)))
     (block
       (attribute_assignment
-	(custom)
-	(identifier)
-	(digit)))))
+        (custom)
+        (identifier)
+        (digit)))))

@@ -499,8 +499,8 @@ def Scope "Prim"
     (string_literal)
     (block
       (attribute_assignment
-	(identifier)
-	(digit)))))
+        (identifier)
+        (digit)))))
 
 ==============================================================================
 Attribute namespace - shader input
@@ -523,8 +523,8 @@ def Scope "Prim"
     (string_literal)
     (block
       (attribute_assignment
-	(identifier)
-	(prim_path)))))
+        (identifier)
+        (prim_path)))))
 
 ==============================================================================
 Attribute nested namespace
@@ -547,5 +547,5 @@ def Scope "Prim"
     (string_literal)
     (block
       (attribute_assignment
-	(identifier)
-	(prim_path)))))
+        (identifier)
+        (prim_path)))))

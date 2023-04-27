@@ -10,17 +10,18 @@ colorConfiguration
   (metadata
     (metadata_assignment
       (identifier)
-      (asset_path))))
+      (arc_path
+        (asset_path)))))
 
 ==============================================================================
 colorManagementSystem
 ==============================================================================
 
 (
-	colorManagementSystem = """asdfasdf
-	asdfasdf
+        colorManagementSystem = """asdfasdf
+        asdfasdf
 
-	"""
+        """
 )
 
 ------------------------------------------------------------------------------

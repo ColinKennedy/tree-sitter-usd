@@ -42,22 +42,25 @@ module.exports = grammar(
                 optional($.orderer),
                 $.identifier,
                 "=",
-                choice($.list, $._attribute_value),
+                choice($.list, $._metadata_value),
             ),
 
             orderer: $ => choice("add", "append", "delete", "prepend", "reorder"),
 
-            _attribute_value: $ => choice(
-                $.asset_path,
+            _base_value: $ => choice(
                 $.dictionary,
                 $.digit,
                 $.prim_path,
                 $.string_literal,
                 $.tuple,
             ),
+            _metadata_value: $ => choice($.arc_path, $._base_value),
+            _attribute_value: $ => choice($.asset_path, $._base_value),
+
             identifier: $ => /[a-zA-Z0-9_:\.]+/i,
-            // TODO: Check if any text is okay for ``asset_path``
-            asset_path: $ => seq("@", /[^@]+/, "@", optional($.prim_path)),
+            arc_path: $ => seq($.asset_path, optional($.prim_path), optional($.layer_offset)),
+            asset_path: $ => seq("@", /[^@]+/, "@"),
+
             dictionary: $ => seq(  // TODO: Finish, later
                 "{",
                 repeat(seq($._attribute_type, $.identifier, "=", $.string_literal)),
@@ -121,23 +124,20 @@ module.exports = grammar(
             //     $._pattern_list,
             // ),
             attribute_assignment: $ => seq(
-                prec.left(
-                    2,
-                    seq(
-                        optional($.custom),
-                        optional($.uniform),
-                        $._attribute_type,
-                        field("name", $.identifier),  // TODO: Check if identifier has to be ASCII. might be stricter than a regular identifier
-                        optional(
-                            seq(
-                                ".",
-                                choice(
-                                    field("timeSamples", "timeSamples"),
-                                    field("connect", "connect"),
-                                ),
+                seq(
+                    optional($.custom),
+                    optional($.uniform),
+                    $._attribute_type,
+                    field("name", $.identifier),  // TODO: Check if identifier has to be ASCII. might be stricter than a regular identifier
+                    optional(
+                        seq(
+                            ".",
+                            choice(
+                                field("timeSamples", "timeSamples"),
+                                field("connect", "connect"),
                             ),
                         ),
-                    )
+                    ),
                 ),
                 "=",
                 prec.left(

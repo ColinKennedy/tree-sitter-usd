@@ -18,7 +18,8 @@ def "root" (
       (metadata_assignment
         (orderer)
         (identifier)
-        (asset_path)))
+        (arc_path
+          (asset_path))))
     (block)))
 
 ==============================================================================
@@ -41,7 +42,8 @@ def "root" (
       (metadata_assignment
         (orderer)
         (identifier)
-        (asset_path)))
+        (arc_path
+          (asset_path))))
     (block)))
 
 ==============================================================================
@@ -64,7 +66,8 @@ def "root" (
       (metadata_assignment
         (orderer)
         (identifier)
-        (asset_path)))
+        (arc_path
+          (asset_path))))
     (block)))
 
 ==============================================================================
@@ -87,7 +90,8 @@ def "root" (
       (metadata_assignment
         (orderer)
         (identifier)
-        (asset_path)))
+        (arc_path
+          (asset_path))))
     (block)))
 
 ==============================================================================
@@ -110,7 +114,8 @@ def "root" (
       (metadata_assignment
         (orderer)
         (identifier)
-        (asset_path)))
+        (arc_path
+          (asset_path))))
     (block)))
 
 ==============================================================================
@@ -133,7 +138,8 @@ def "root" (
       (metadata_assignment
         (orderer)
         (identifier)
-        (asset_path
+        (arc_path
+          (asset_path)
           (prim_path))))
     (block)))
 
@@ -149,7 +155,23 @@ def "root" (
 
 ------------------------------------------------------------------------------
 
-(block)
+(module
+  (prim_definition
+    (prim_type)
+    (string_literal)
+    (metadata
+      (metadata_assignment
+        (orderer)
+        (identifier)
+        (arc_path
+          (asset_path)
+          (prim_path)
+          (layer_offset
+            (identifier)
+            (digit)
+            (identifier)
+            (digit)))))
+    (block)))
 
 ==============================================================================
 AssetPath - Layer offset 1
@@ -163,7 +185,22 @@ def "root" (
 
 ------------------------------------------------------------------------------
 
-(block)
+(module
+  (prim_definition
+    (prim_type)
+    (string_literal)
+    (metadata
+      (metadata_assignment
+        (orderer)
+        (identifier)
+        (arc_path
+          (asset_path)
+          (layer_offset
+            (identifier)
+            (digit)
+            (identifier)
+            (digit)))))
+    (block)))
 
 ==============================================================================
 AssetPath - Layer offset 2
@@ -177,7 +214,20 @@ def "root" (
 
 ------------------------------------------------------------------------------
 
-(block)
+(module
+  (prim_definition
+    (prim_type)
+    (string_literal)
+    (metadata
+      (metadata_assignment
+        (orderer)
+        (identifier)
+        (arc_path
+          (asset_path)
+          (layer_offset
+            (identifier)
+            (digit)))))
+    (block)))
 
 ==============================================================================
 AssetPath - empty Layer offset
@@ -191,4 +241,15 @@ def "root" (
 
 ------------------------------------------------------------------------------
 
-(block)
+(module
+  (prim_definition
+    (prim_type)
+    (string_literal)
+    (metadata
+      (metadata_assignment
+        (orderer)
+        (identifier)
+        (arc_path
+          (asset_path)
+          (layer_offset))))
+    (block)))
