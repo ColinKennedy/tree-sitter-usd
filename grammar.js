@@ -152,7 +152,7 @@ module.exports = grammar(
                     "]",
                 ),
             ),
-            tuple: $ => seq("(", comma_separated($.digit), optional(","), ")"),
+            tuple: $ => seq("(", comma_separated($._attribute_value), optional(","), ")"),
             string_literal: $ => choice($._string_literal, $._multiline_string_literal),
             _multiline_string_literal: $ => seq(
               '"""',
