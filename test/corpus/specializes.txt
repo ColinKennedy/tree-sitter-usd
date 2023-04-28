@@ -1,0 +1,111 @@
+==============================================================================
+specializes - absolute
+==============================================================================
+
+def "foo" (
+    specializes = </thing>
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string_literal)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (prim_path)))
+    (block)))
+
+==============================================================================
+specializes - relative, implicit
+==============================================================================
+
+def "foo" (
+    specializes = <parent/another/thing>
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string_literal)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (prim_path)))
+    (block)))
+
+==============================================================================
+specializes - relative, parent
+==============================================================================
+
+def "foo" (
+    specializes = <../../parent/another/thing>
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string_literal)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (prim_path)))
+    (block)))
+
+==============================================================================
+specializes - empty
+==============================================================================
+
+def "foo" (
+    specializes = []
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string_literal)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (list)))
+    (block)))
+
+==============================================================================
+specializes - multiple
+==============================================================================
+
+def "foo" (
+    specializes = [</foo>, </bar>, ]
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string_literal)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (list
+          (prim_path)
+          (prim_path))))
+    (block)))

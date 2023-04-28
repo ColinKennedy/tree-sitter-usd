@@ -260,10 +260,6 @@ function comma_separated(rule) {
   return optional(seq(rule, repeat(seq(",", rule))));
 }
 
-// function comma_separated1(rule) {
-//   return optional(seq(rule, repeat1(seq(",", rule))));
-// }
-
 function semicolon_separated(rule) {
   return optional(seq(rule, repeat(seq(";", rule))));
 }

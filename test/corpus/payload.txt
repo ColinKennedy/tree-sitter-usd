@@ -1,0 +1,76 @@
+==============================================================================
+payload - empty
+==============================================================================
+
+def "foo" (
+    add payload = []
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string_literal)
+    (metadata
+      (metadata_assignment
+        (orderer)
+        (identifier)
+        (list)))
+    (block)))
+
+==============================================================================
+payload - single item
+==============================================================================
+
+def "foo" (
+    add payload = @foo.usda@
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string_literal)
+    (metadata
+      (metadata_assignment
+        (orderer)
+        (identifier)
+        (arc_path
+          (asset_path))))
+    (block)))
+
+==============================================================================
+payload - multiple items
+==============================================================================
+
+def "foo" (
+    add payload = [
+        @foo.usda@,
+        @./another.usda@,
+        @./last.usda@,
+    ]
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string_literal)
+    (metadata
+      (metadata_assignment
+        (orderer)
+        (identifier)
+        (list
+          (asset_path)
+          (asset_path)
+          (asset_path))))
+    (block)))
