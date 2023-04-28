@@ -123,7 +123,7 @@ module.exports = grammar(
                 $._dictionary_type,
                 $._extra_type,
             ),
-            _base_value: $ => choice(
+            _base_value: $ => choice(  // Consider adding a $.list, to this or $._attribute_value
                 $.dictionary,
                 $.digit,
                 $.prim_path,
@@ -140,7 +140,18 @@ module.exports = grammar(
             digit: $ => /-*\d+[\.\d]*/,
             identifier: $ => /[a-zA-Z0-9_:\.]+/i,
             integer: $ => /\d+/,
-            list: $ => seq("[", comma_separated(choice($.tuple, $._attribute_value)), optional(","), "]"),
+            list: $ => prec(
+                2,
+                seq(
+                    "[",
+                    choice(
+                        comma_separated($.tuple),
+                        comma_separated($._attribute_value),
+                    ),
+                    optional(","),
+                    "]",
+                ),
+            ),
             tuple: $ => seq("(", comma_separated($.digit), optional(","), ")"),
             string_literal: $ => choice($._string_literal, $._multiline_string_literal),
             _multiline_string_literal: $ => seq(
@@ -234,7 +245,7 @@ module.exports = grammar(
                         seq(
                             field("left", $.digit),
                             ":",
-                            field("right", $._attribute_value),
+                            field("right", choice($.list, $._attribute_value)),
                             optional(",")
                         )
                     ),

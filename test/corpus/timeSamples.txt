@@ -20,7 +20,25 @@ def "foo"
 
 ------------------------------------------------------------------------------
 
-(block)
+(module
+  (prim_definition
+    (prim_type)
+    (string_literal)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (timeSamples
+          (digit)
+          (list
+            (tuple
+              (digit)
+              (digit)
+              (digit))
+            (tuple
+              (digit)
+              (digit)
+              (digit))))))))
 
 ==============================================================================
 timeSamples - single entry
@@ -116,7 +134,18 @@ def "foo"
 
 ------------------------------------------------------------------------------
 
-(block)
+(module
+  (prim_definition
+    (prim_type)
+    (string_literal)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (timeSamples
+          (digit)
+          (list
+            (asset_path)))))))
 
 ==============================================================================
 timeSamples - double3
