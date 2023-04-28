@@ -58,7 +58,16 @@ def "root" # tasdfasdfj aslkj2314
 
 ------------------------------------------------------------------------------
 
-(comment)
+(module
+  (comment)
+  (prim_definition
+    (prim_type)
+    (string_literal)
+    (comment)
+    (block
+      (comment)
+      (comment)))
+  (comment))
 
 ==============================================================================
 Comment - unicode
@@ -70,3 +79,49 @@ Comment - unicode
 
 (module
   (comment))
+
+==============================================================================
+Comment - block text
+==============================================================================
+
+def "Root" (
+    # Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+    # incididunt ut labore et dolore magna aliqua. Eu nisl nunc mi ipsum faucibus.
+    Blah = {
+        int stuff = 15
+        int perCycle = 36
+    }
+    # Volutpat odio facilisis mauris sit amet massa. Laoreet non curabitur
+    # gravida arcu ac tortor dignissim convallis. At consectetur lorem donec
+    # massa sapien faucibus et molestie. Faucibus vitae aliquet
+    payload = @anon:dummy:cubes.usddancingcubesexample@
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string_literal)
+    (metadata
+      (comment)
+      (comment)
+      (metadata_assignment
+        (identifier)
+        (dictionary
+          (attribute_type)
+          (identifier)
+          (digit)
+          (attribute_type)
+          (identifier)
+          (digit)))
+      (comment)
+      (comment)
+      (comment)
+      (metadata_assignment
+        (identifier)
+        (arc_path
+          (asset_path))))
+    (block)))

@@ -2,10 +2,10 @@ module.exports = grammar(
     {
         name: "usd",
 
-        // extras: $ => [
-        //   $.comment,
-        //   /[\s\f\uFEFF\u2060\u200B]|\\\r?\n/
-        // ],
+        extras: $ => [
+            $.comment,
+            /[\s\f\uFEFF\u2060\u200B]|\\\r?\n/
+        ],
 
         // precedences: $ => [
         //     [$.attribute_assignment],
