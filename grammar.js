@@ -137,9 +137,9 @@ module.exports = grammar(
                 repeat(seq($.attribute_type, $.identifier, "=", $._attribute_value)),
                 "}",
             ),
-            digit: $ => /-*\d+[\.\d]*/,
+            digit: $ => /-?\d+[\.\d]*(e[-]\d+[\.\d]*)?/,
             identifier: $ => /[a-zA-Z0-9_:\.]+/i,
-            integer: $ => /\d+/,
+            integer: $ => /-?\d+/,
             list: $ => prec(
                 2,
                 seq(

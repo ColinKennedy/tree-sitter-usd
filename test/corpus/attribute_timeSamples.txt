@@ -53,3 +53,41 @@ int foo.timeSamples = {
       (digit)
       (digit)
       (digit))))
+
+
+==============================================================================
+Attribute timeSamples - scientific notation
+==============================================================================
+
+def Cube "prim_1"
+{
+    double3 xformOp:translate = (-12, 0, -6)
+    double3 xformOp:translate.timeSamples = {
+        4: (-1, 5.5e-16, -5.9),
+    }
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string_literal)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (tuple
+          (digit)
+          (digit)
+          (digit)))
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (timeSamples
+          (digit)
+          (tuple
+            (digit)
+            (digit)
+            (digit)))))))
