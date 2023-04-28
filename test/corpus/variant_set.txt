@@ -23,7 +23,7 @@ over "SomeSphere" (
     (block)))
 
 ==============================================================================
-variantSet - variants
+variantSet - variants 1
 ==============================================================================
 
 over "SomeSphere" (
@@ -33,48 +33,12 @@ over "SomeSphere" (
     }
 )
 {
-}
-
-------------------------------------------------------------------------------
-
-(module
-  (prim_definition
-    (prim_type)
-    (string_literal)
-    (metadata
-      (metadata_assignment
-        (orderer)
-        (identifier)
-        (list
-          (string_literal)))
-      (metadata_assignment
-        (identifier)
-        (dictionary
-          (attribute_type)
-          (identifier)
-          (string_literal))))
-    (block)))
-
-==============================================================================
-variantSet - complex
-==============================================================================
-
-over "SomeSphere" (
-    prepend variantSets = ["some_variant_set"]
-    variants = {
-        string some_variant_set = "variant_name_1"
-    }
-)
-{
-    double radius = 20
-
     variantSet "some_variant_set" = {
         "variant_name_1" (
             "Some comment"
             add references = [@foo.usda@]
         )
         {
-            color3f[] primvars:displayColor = [(1, 0, 0)]
         }
     }
 }
@@ -98,10 +62,6 @@ over "SomeSphere" (
           (identifier)
           (string_literal))))
     (block
-      (attribute_assignment
-        (attribute_type)
-        (identifier)
-        (digit))
       (variant_set_definition
         (string_literal)
         (variant
@@ -113,12 +73,46 @@ over "SomeSphere" (
               (identifier)
               (list
                 (asset_path))))
-          (block
-            (attribute_assignment
-              (attribute_type)
-              (identifier)
-              (list
-                (tuple
-                  (digit)
-                  (digit)
-                  (digit))))))))))
+          (block))))))
+
+==============================================================================
+variantSet - complex
+==============================================================================
+
+over "SomeSphere" (
+    prepend variantSets = ["empty_one", "some_variant_set"]
+    variants = {
+        string empty_one = "blah"
+        string some_variant_set = "variant_name_1"
+    }
+)
+{
+    double radius = 20
+
+    variantSet "empty_one" = {}
+
+    variantSet "some_variant_set" = {
+        "variant_name_1" (
+            "Some comment"
+            add references = [@foo.usda@]
+        )
+        {
+            over "blah"
+            {
+                color3f[] primvars:displayColor = [(1, 0, 0)]
+            }
+        }
+
+        "variant_name_2"
+        {
+            over "thing"
+            {
+                color3f[] primvars:displayColor = [(1, 0, 0)]
+            }
+        }
+    }
+}
+
+------------------------------------------------------------------------------
+
+(block)

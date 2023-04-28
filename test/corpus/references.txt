@@ -1,0 +1,76 @@
+==============================================================================
+references - empty
+==============================================================================
+
+def "foo" (
+    add references = []
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string_literal)
+    (metadata
+      (metadata_assignment
+        (orderer)
+        (identifier)
+        (list)))
+    (block)))
+
+==============================================================================
+references - single item
+==============================================================================
+
+def "foo" (
+    add references = @foo.usda@
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string_literal)
+    (metadata
+      (metadata_assignment
+        (orderer)
+        (identifier)
+        (arc_path
+          (asset_path))))
+    (block)))
+
+==============================================================================
+references - multiple items
+==============================================================================
+
+def "foo" (
+    add references = [
+        @foo.usda@,
+        @./another.usda@,
+        @./last.usda@,
+    ]
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string_literal)
+    (metadata
+      (metadata_assignment
+        (orderer)
+        (identifier)
+        (list
+          (asset_path)
+          (asset_path)
+          (asset_path))))
+    (block)))

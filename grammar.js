@@ -105,7 +105,7 @@ module.exports = grammar(
                 $.string_literal,
                 "=",
                 "{",
-                $.variant,
+                repeat($.variant),
                 "}"
             ),
 
