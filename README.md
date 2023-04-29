@@ -1,7 +1,7 @@
 # tree-sitter-usd
 
 This library parses USD ASCII files using [tree-sitter](https://tree-sitter.github.io/tree-sitter)
-to produce a light-weight representation of the file.
+to produce a light-weight grammar of the file.
 
 
 ## Building + Using
@@ -49,6 +49,36 @@ require("nvim-treesitter.configs").setup {
     -- More stuff
 }
 ```
+
+## Testing
+### Unittests
+- Install the [tree-sitter-cli](https://www.npmjs.com/package/tree-sitter-cli)
+```sh
+cd {root}
+tree-sitter test
+```
+
+All tests should pass.
+
+
+### Actual USD Files
+The best way to test tree-sitter-usd is to parse USD files in-action.
+
+- The [USD repository](https://github.com/PixarAnimationStudios/USD) has over 800 production USD files
+- The Pixar [Kitchen set](https://openusd.org/release/dl_downloads.html#assets)
+- Animal Logic's [ALab scene](https://dpel.aswf.io/alab)
+
+The basic steps are
+
+- Download from any of the links above
+- Install the [tree-sitter-cli](https://www.npmjs.com/package/tree-sitter-cli)
+- Find + parse the files. e.g.
+
+```sh
+find /path/to/your/root/usd_files/folder -name "*.usda" -type f | xargs tree-sitter parse
+```
+
+tree-sitter-usd parses all of the files, everywhere. (TODO Not quite yet. But it's 90%+ working.)
 
 
 ## Why Tree-sitter?
@@ -161,3 +191,63 @@ Some other plug-ins that could be useful in the future
 - https://github.com/Olical/conjure
 
 And others
+
+
+
+## TODO
+Do this stuff
+
+
+// TODO: Add unittest where multi-line contains 1 or 2 " within
+// TODO: Make sure this works. Can prims be named with )@(*#$& special characters?
+// TODO: Double-check what is allowed as an identifier. Unicode? escaped \"s?
+
+- Make sure string can be empty
+- Make sure individual types behave as expected. e.g. parsing strings (can they escape \"? Does it parse? etc)
+  <!-- paths = [ -->
+  <!--     ("foo.sdf", -->
+  <!--      "foo.sdf", -->
+  <!--      {}), -->
+  <!--     ("foo.sdf1!@#$%^*()-_=+[{]}|;:',<.>", -->
+  <!--      "foo.sdf1!@#$%^*()-_=+[{]}|;:',<.>", -->
+  <!--      {}), -->
+  <!--     ("foo.sdf:SDF_FORMAT_ARGS:a=b&c=d", -->
+  <!--      "foo.sdf", -->
+  <!--      {"a":"b", "c":"d"}), -->
+  <!--     ("foo.sdf?otherargs&evenmoreargs:SDF_FORMAT_ARGS:a=b&c=d", -->
+  <!--      "foo.sdf?otherargs&evenmoreargs", -->
+  <!--      {"a":"b", "c":"d"}), -->
+  <!-- ] -->
+
+- Support @namespace        ; modules or namespaces for attributes like primvars:foo:bar
+- Get prim_path stuff to match. It isn't working yet
+- Make sure </prim/paths> get a proper syntax highlight group
+
+- Consider reverting the string_literal -> string change (and digit -> float)
+
+- Add highlighting unittests
+ - https://github.com/tree-sitter/tree-sitter-python/blob/master/test/highlight/keywords.py
+ - https://ahelwer.ca/post/2023-01-11-tree-sitter-tlaplus/
+ - https://github.com/nvim-treesitter/nvim-treesitter/blob/master/queries/python/highlights.scm
+
+
+## Tests to write
+### Attributes
+- gprim syntax?
+ - interpolation
+  - Special, known strings ("vertex", "constant", etc)?
+
+
+- fuzz testing
+ - asset paths
+ - prim paths
+ - identifier names (of variables and such)
+ - prim names
+
+
+- Do TODO notes in the grammar.js file and in this file
+- Add customlayerData unittests
+
+
+- Consider allowing asset_path to replace arc_path if both are an option (give asset_path a higher precedence)
+- Try removing some of the prec.left commands to see what is really needed
