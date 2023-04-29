@@ -11,7 +11,6 @@ module.exports = grammar(
             module: $ => repeat($._statement),
 
             _statement: $ => choice(
-                // TODO: Remove the non prim-definition / comment from this, later
                 $.prim_definition,
                 $.attribute_assignment,
                 $.attribute_declaration,
@@ -23,8 +22,6 @@ module.exports = grammar(
 
             comment: $ => token(seq("#", /.*/)),
 
-            // TODO: Add "list-of" support to ``metadata_assignment``. e.g. asset paths, prim paths
-            // Not sure if USD supports it. Double check
             prim_type: $ => choice("class", "def", "over"),
             prim_definition: $ => seq(
                 $.prim_type,
@@ -151,7 +148,6 @@ module.exports = grammar(
                 $.string_literal,
                 $.tuple,
             ),
-            // TODO: Possibly remove `_attribute_value` / `_metadata_value`
             _metadata_value: $ => choice(
                 $.arc_path,
                 $.dictionary,
