@@ -145,6 +145,7 @@ module.exports = grammar(
             // _attribute_value just become the same
             //
             _base_value: $ => choice(  // Consider adding a $.list, to this or $._attribute_value
+                $.None,
                 $.bool,
                 $.float,
                 $.prim_path,

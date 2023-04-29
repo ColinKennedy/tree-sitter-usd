@@ -243,3 +243,40 @@ def "foo"
               (float)
               (float)
               (float))))))))
+
+==============================================================================
+timeSamples - block
+==============================================================================
+
+def "foo"
+{
+    double3 xformOp:translate.timeSamples = {
+        0: (1.5, 1.5, 1.5),
+        1: None,
+        4: (6, 6, 6),
+    }
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (timeSamples
+          (float)
+          (tuple
+            (float)
+            (float)
+            (float))
+          (float)
+          (None)
+          (float)
+          (tuple
+            (float)
+            (float)
+            (float)))))))

@@ -5,59 +5,43 @@ tree-sitter generate
 export PATH=$PATH:./node_modules/.bin
 ```
 
-
-
-
-- Make sure highlighting works as expected
+- Make sure string is empty
 
 - Unittests
- - Add clips unittests
- - Add customData support
-  - Attributes
-  - Prims
-  - Anything else that I forgot
- - AssetInfo
- - Prim metadata
-  - Known keys
-   - assetInfo
-   - payload
-   - references
-   - inherits
-   - specializes
-   - variantSet / variantSets
-  - Extra keys
  - Make sure attributes can be ``blocked``
- - LIVRPS unittests
-  - Make sure ``add``, ``append``, ``delete``, ``reorder`` etc works
-- Make sure individual types behave as expected. e.g. parsing strings (can they escape \"? Does it parse? etc)
 
-- It'd be nice to remove all hard-coded types and just rely on a generic identifier
+- Support @namespace        ; modules or namespaces for attributes like primvars:foo:bar
+- Get prim_path stuff to match. It isn't working yet
+- Make sure </prim/paths> get a proper syntax highlight group
+
+- Consider reverting the string_literal -> string change (and digit -> float)
+
+- Questions How do I run the unittests for treesitter highlighting
+  - I saw this https://github.com/tree-sitter/tree-sitter-python/blob/master/test/highlight/keywords.py
+ - How does highlighting in treesitter make its way onto Neovim?
+  - tree-sitter-python has highlights at
+   -
+   - Eventually in Vim the highlight group for ``def foo():`` is pythonStatement | pythonFunction
+
+   - eventually "class Foo():", the Foo is
+    Treesitter
+      - @variable.python links to Identifier python
+      - @type.python links to Type python
+      - @type.python links to Type python
+
+
+ - Is there a simple item for handling string literals. Everybody seems to just mark as external and handle it in C
+
+- Make sure highlighting works as expected
+ - Allow a group so that I can
+ - https://github.com/tree-sitter/tree-sitter-python/blob/master/test/highlight/keywords.py
+
+- https://ahelwer.ca/post/2023-01-11-tree-sitter-tlaplus/
+
+- Make sure individual types behave as expected. e.g. parsing strings (can they escape \"? Does it parse? etc)
 
 
 ## TODO
-- Check if it's allowed to provide a single element instead of a list, for subLayers / anywhere else where a proxy is allowed
-- Also check if payloads can receive more than one value at once
-
-Fix this issue (found during /repositories/tree-sitter-usd$ tree-sitter generate && tree-sitter parse /home/selecaoone/temp/usd_tests/attribute.usda)
-
-```
-/home/selecaoone/temp/usd_tests/attribute.usda  0 ms    (MISSING identifie
-r [4, 28] - [4, 28])
-```
-
-Check if layer metadata "other" fields has stuff that is actually KNOWN, that I just missed
-layer metadata
-// customLayerData = {
-//     int foo = 8
-// }
-
-
-- reference / payload / sublayer with
- - asset path + prim path + offset
- - asset path + prim path
- - asset path + offset
- - prim path + offset(?)
-
 - Do fuzz testing for Prim names. Determine actual, allowed syntax
 
 - Ensure types.txt tests for strings (single string, multi-line, etc)
@@ -78,10 +62,18 @@ layer metadata
 <!-- ] -->
 
 
+https://github.com/nvim-treesitter/nvim-treesitter/tree/master/queries
+https://github.com/nvim-treesitter/nvim-treesitter/blob/master/CONTRIBUTING.md#highlights
+https://www.reddit.com/r/neovim/comments/qlp6xx/add_highlighting_to_nvimtreesitter/
+https://github.com/nvim-treesitter/nvim-treesitter/blob/master/queries/python/highlights.scm
+
+
 ## Tests to write
 ### Attributes
 - blocked (None) attributes (default or time sample)
 - gprim syntax?
+ - interpolation
+  - Special, known strings ("vertex", "constant", etc)?
 
 
 - fuzz testing
