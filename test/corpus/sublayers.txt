@@ -75,3 +75,29 @@ subLayers - multiple and trailing comma
           (asset_path))
         (arc_path
           (asset_path))))))
+
+
+==============================================================================
+subLayers with offsets
+==============================================================================
+
+#usda 1.0
+(
+    subLayers = [
+        @./model_sub.usda@ (offset = 1)
+    ]
+)
+
+------------------------------------------------------------------------------
+
+(module
+  (comment)
+  (metadata
+    (metadata_assignment
+      (identifier)
+      (list_proxy
+        (arc_path
+          (asset_path)
+          (layer_offset
+            (identifier)
+            (digit)))))))

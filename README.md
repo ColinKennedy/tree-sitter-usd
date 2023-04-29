@@ -5,58 +5,32 @@ tree-sitter generate
 export PATH=$PATH:./node_modules/.bin
 ```
 
-- Attribute.timeSamples = {}
-- Individual value tests
- - assetPath
-  - primPath + offset
-- Check if USD allows for "list or single element" syntax. e.g. ``references = @foo.usda@`` vs ``references = [@foo.usda@]``
-- Missing types?
-```
-color3d
-color3f inputs:diffuseColor.connect = </World/material/ColorMap.outputs:rgb>
-normal3f inputs:normal.connect = </World/material/NormalMap.outputs:rgb>
-texCoord2f[] primvars:st (
-    interpolation = "faceVarying"
-)
-timecode timeCode = 10
-timecode[] timeCodeArray = [10, 20]
-vector3d vector3d = (0, 0, 0)
-vector3d[] vector3dArray
-point3f
-texCoord2f
-vector3f vector3f = (0, 0, 0)
-vector3f[] vector3fArray
-vector3h vector3h = (0, 0, 0)
-vector3h[] vector3hArray
 
-Maybe just make the rule into an ASCII/number identifier
-```
 
-- Add customData support
- - Attributes
- - Prims
- - Anything else that I forgot
-
-- Prim metadata
- - Known keys
-  - assetInfo
-  - payload
-  - references
-  - inherits
-  - specializes
-  - variantSet / variantSets
- - Extra keys
-- Make sure attributes can be ``blocked``
-- LIVRPS unittests
- - Each of these composition arcs
- - Make sure ``add``, ``append``, ``delete``, ``reorder`` etc works
-- Variant Set stuff
-- Make sure individual types behave as expected. e.g. parsing strings (can they escape \"? Does it parse? etc)
-- Relationships
-- AssetInfo
-- Add reference / payload / (sublayer? ) offsets
 
 - Make sure highlighting works as expected
+
+- Unittests
+ - Add clips unittests
+ - Add customData support
+  - Attributes
+  - Prims
+  - Anything else that I forgot
+ - AssetInfo
+ - Prim metadata
+  - Known keys
+   - assetInfo
+   - payload
+   - references
+   - inherits
+   - specializes
+   - variantSet / variantSets
+  - Extra keys
+ - Make sure attributes can be ``blocked``
+ - LIVRPS unittests
+  - Make sure ``add``, ``append``, ``delete``, ``reorder`` etc works
+- Make sure individual types behave as expected. e.g. parsing strings (can they escape \"? Does it parse? etc)
+
 - It'd be nice to remove all hard-coded types and just rely on a generic identifier
 
 
@@ -106,23 +80,8 @@ layer metadata
 
 ## Tests to write
 ### Attributes
-- simple
-- time sample
-- .connect attribute code
-- attribute namespaces
-- clips?
 - blocked (None) attributes (default or time sample)
-- custom / uniform / varying
-- declaration / definition
-- literals
- - float
- - int
- - string
-- when type is foo[], you can use []s
 - gprim syntax?
-- attribute with namespace e.g. foo:bar:fizz:buzz
-- attributes with extra metadata
-- are relationships able to be "declared but not defined"?
 
 
 - fuzz testing
