@@ -13,14 +13,12 @@ module.exports = grammar(
             _statement: $ => choice(
                 // TODO: Remove the non prim-definition / comment from this, later
                 $.prim_definition,
-                // TODO: Add this
-                // $.attribute_declaration,
                 $.attribute_assignment,
+                $.attribute_declaration,
                 $.comment,
                 $.metadata,
                 $.relationship_assignment,
                 $.relationship_declaration,
-                // prec(3, $.attribute_assignment),
             ),
 
             comment: $ => token(seq("#", /.*/)),
@@ -46,9 +44,8 @@ module.exports = grammar(
                         $.relationship_assignment,
                         $.variant_set_definition,
 
-                        // TODO: Add these
                         // Useful for USD schema files
-                        // $.attribute_declaration,
+                        $.attribute_declaration,
                         $.relationship_declaration,
                     )
                 ),
@@ -57,13 +54,27 @@ module.exports = grammar(
 
             custom: $ => "custom",
             uniform: $ => "uniform",
-            // attribute_declaration: $ => $._attribute_declaration,
-            // TODO: Add support for this later
-            // _attribute_declaration: $ => seq(
-            //     optional($.custom),
-            //     optional($.uniform),
-            //     $._pattern_list,
-            // ),
+
+            attribute_declaration: $ => prec.left(
+                2,
+                seq(
+                    optional($.custom),
+                    optional($.uniform),
+                    $.attribute_type,
+                    field("name", $.identifier),  // TODO: Check if identifier has to be ASCII. might be stricter than a regular identifier
+                    optional(
+                        seq(
+                            ".",
+                            choice(
+                                field("timeSamples", "timeSamples"),
+                                field("connect", "connect"),
+                            ),
+                        ),
+                    ),
+                    optional($.metadata),
+                ),
+            ),
+
             attribute_assignment: $ => seq(
                 seq(
                     optional($.custom),
@@ -84,7 +95,7 @@ module.exports = grammar(
                 prec.left(
                     1,
                     seq(
-                        choice($.list, $._attribute_value, $.timeSamples),
+                        choice($.list, $._attribute_value, $.timeSamples, $.None),
                         optional($.metadata),
                     ),
                 )
@@ -103,7 +114,7 @@ module.exports = grammar(
                     "rel",
                     $.identifier,
                     "=",
-                    choice($.prim_paths, $.prim_path),
+                    choice($.prim_paths, $.prim_path, $.None),
                     optional($.metadata),
                 ),
             ),
@@ -152,6 +163,7 @@ module.exports = grammar(
                     "}",
                 )
             ),
+            None: $ => "None",
             digit: $ => /-?(\d*\.)?\d+(e[-]\d+[\.\d]*)?/,
             identifier: $ => /[a-zA-Z0-9_:\.]+/i,
             integer: $ => /-?\d+/,
