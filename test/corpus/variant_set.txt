@@ -140,7 +140,7 @@ over "SomeSphere" (
       (attribute_assignment
         (attribute_type)
         (identifier)
-        (digit))
+        (float))
       (variant_set_definition
         (string_literal))
       (variant_set_definition
@@ -165,9 +165,9 @@ over "SomeSphere" (
                   (identifier)
                   (list
                     (tuple
-                      (digit)
-                      (digit)
-                      (digit))))))))
+                      (float)
+                      (float)
+                      (float))))))))
         (variant
           (string_literal)
           (block
@@ -180,6 +180,6 @@ over "SomeSphere" (
                   (identifier)
                   (list
                     (tuple
-                      (digit)
-                      (digit)
-                      (digit))))))))))))
+                      (float)
+                      (float)
+                      (float))))))))))))

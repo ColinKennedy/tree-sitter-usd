@@ -23,5 +23,5 @@ def Xform "World" (
         (dictionary
           (attribute_type)
           (identifier)
-          (digit))))
+          (float))))
     (block)))

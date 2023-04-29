@@ -168,9 +168,9 @@ def "root" (
           (prim_path)
           (layer_offset
             (identifier)
-            (digit)
+            (float)
             (identifier)
-            (digit)))))
+            (float)))))
     (block)))
 
 ==============================================================================
@@ -197,9 +197,9 @@ def "root" (
           (asset_path)
           (layer_offset
             (identifier)
-            (digit)
+            (float)
             (identifier)
-            (digit)))))
+            (float)))))
     (block)))
 
 ==============================================================================
@@ -226,7 +226,7 @@ def "root" (
           (asset_path)
           (layer_offset
             (identifier)
-            (digit)))))
+            (float)))))
     (block)))
 
 ==============================================================================

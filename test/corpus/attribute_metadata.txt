@@ -10,7 +10,7 @@ float value = 20 ()
   (attribute_assignment
     (attribute_type)
     (identifier)
-    (digit))
+    (float))
   (metadata))
 
 ==============================================================================
@@ -27,7 +27,7 @@ float value = 20 (
   (attribute_assignment
     (attribute_type)
     (identifier)
-    (digit))
+    (float))
   (metadata
     (string_literal)))
 
@@ -47,11 +47,11 @@ float value = 20 (
   (attribute_assignment
     (attribute_type)
     (identifier)
-    (digit))
+    (float))
   (metadata
     (metadata_assignment
       (identifier)
       (dictionary
         (attribute_type)
         (identifier)
-        (digit)))))
+        (float)))))

@@ -29,16 +29,16 @@ def "foo"
         (attribute_type)
         (identifier)
         (timeSamples
-          (digit)
+          (float)
           (list
             (tuple
-              (digit)
-              (digit)
-              (digit))
+              (float)
+              (float)
+              (float))
             (tuple
-              (digit)
-              (digit)
-              (digit))))))))
+              (float)
+              (float)
+              (float))))))))
 
 ==============================================================================
 timeSamples - single entry
@@ -62,8 +62,8 @@ def "foo"
         (attribute_type)
         (identifier)
         (timeSamples
-          (digit)
-          (digit))))))
+          (float)
+          (float))))))
 
 ==============================================================================
 timeSamples - multiple entries
@@ -88,10 +88,10 @@ def "foo"
         (attribute_type)
         (identifier)
         (timeSamples
-          (digit)
-          (digit)
-          (digit)
-          (digit))))))
+          (float)
+          (float)
+          (float)
+          (float))))))
 
 ==============================================================================
 timeSamples - multiple entries, trailing comma
@@ -116,10 +116,10 @@ def "foo"
         (attribute_type)
         (identifier)
         (timeSamples
-          (digit)
-          (digit)
-          (digit)
-          (digit))))))
+          (float)
+          (float)
+          (float)
+          (float))))))
 
 ==============================================================================
 timeSamples - asset[]
@@ -143,7 +143,7 @@ def "foo"
         (attribute_type)
         (identifier)
         (timeSamples
-          (digit)
+          (float)
           (list
             (asset_path)))))))
 
@@ -173,31 +173,31 @@ def "foo"
         (attribute_type)
         (identifier)
         (timeSamples
-          (digit)
+          (float)
           (tuple
-            (digit)
-            (digit)
-            (digit))
-          (digit)
+            (float)
+            (float)
+            (float))
+          (float)
           (tuple
-            (digit)
-            (digit)
-            (digit))
-          (digit)
+            (float)
+            (float)
+            (float))
+          (float)
           (tuple
-            (digit)
-            (digit)
-            (digit))
-          (digit)
+            (float)
+            (float)
+            (float))
+          (float)
           (tuple
-            (digit)
-            (digit)
-            (digit))
-          (digit)
+            (float)
+            (float)
+            (float))
+          (float)
           (tuple
-            (digit)
-            (digit)
-            (digit)))))))
+            (float)
+            (float)
+            (float)))))))
 
 ==============================================================================
 timeSamples - matrix4d
@@ -221,25 +221,25 @@ def "foo"
         (attribute_type)
         (identifier)
         (timeSamples
-          (digit)
+          (float)
           (tuple
             (tuple
-              (digit)
-              (digit)
-              (digit)
-              (digit))
+              (float)
+              (float)
+              (float)
+              (float))
             (tuple
-              (digit)
-              (digit)
-              (digit)
-              (digit))
+              (float)
+              (float)
+              (float)
+              (float))
             (tuple
-              (digit)
-              (digit)
-              (digit)
-              (digit))
+              (float)
+              (float)
+              (float)
+              (float))
             (tuple
-              (digit)
-              (digit)
-              (digit)
-              (digit))))))))
+              (float)
+              (float)
+              (float)
+              (float))))))))

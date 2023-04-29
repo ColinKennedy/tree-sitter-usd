@@ -27,8 +27,8 @@ int foo.timeSamples = {
     (attribute_type)
     (identifier)
     (timeSamples
-      (digit)
-      (digit))))
+      (float)
+      (float))))
 
 ==============================================================================
 Attribute multiple timeSamples
@@ -47,12 +47,12 @@ int foo.timeSamples = {
     (attribute_type)
     (identifier)
     (timeSamples
-      (digit)
-      (digit)
-      (digit)
-      (digit)
-      (digit)
-      (digit))))
+      (float)
+      (float)
+      (float)
+      (float)
+      (float)
+      (float))))
 
 ==============================================================================
 Attribute - timeSamples empty
@@ -83,8 +83,8 @@ float value.timeSamples = {
     (attribute_type)
     (identifier)
     (timeSamples
-      (digit)
-      (digit))))
+      (float)
+      (float))))
 
 ==============================================================================
 Attribute - timeSamples multiple
@@ -103,12 +103,12 @@ float value.timeSamples = {
     (attribute_type)
     (identifier)
     (timeSamples
-      (digit)
-      (digit)
-      (digit)
-      (digit)
-      (digit)
-      (digit))))
+      (float)
+      (float)
+      (float)
+      (float)
+      (float)
+      (float))))
 
 ==============================================================================
 Attribute timeSamples - scientific notation
@@ -134,15 +134,15 @@ def Cube "prim_1"
         (attribute_type)
         (identifier)
         (tuple
-          (digit)
-          (digit)
-          (digit)))
+          (float)
+          (float)
+          (float)))
       (attribute_assignment
         (attribute_type)
         (identifier)
         (timeSamples
-          (digit)
+          (float)
           (tuple
-            (digit)
-            (digit)
-            (digit)))))))
+            (float)
+            (float)
+            (float)))))))

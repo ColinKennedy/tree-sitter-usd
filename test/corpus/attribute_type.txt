@@ -40,7 +40,7 @@ bool foo = 1
   (attribute_assignment
     (attribute_type)
     (identifier)
-    (digit)))
+    (float)))
 
 ==============================================================================
 Attribute - bool[]
@@ -55,9 +55,9 @@ bool[] foo = [1, 0, 1]
     (attribute_type)
     (identifier)
     (list
-      (digit)
-      (digit)
-      (digit))))
+      (float)
+      (float)
+      (float))))
 
 ==============================================================================
 Attribute - double, negative
@@ -71,7 +71,7 @@ double foo = -123121.12313214
   (attribute_assignment
     (attribute_type)
     (identifier)
-    (digit)))
+    (float)))
 
 ==============================================================================
 Attribute - double zero, negative
@@ -85,7 +85,7 @@ double foo = -0.0
   (attribute_assignment
     (attribute_type)
     (identifier)
-    (digit)))
+    (float)))
 
 ==============================================================================
 Attribute - double zero, positive
@@ -99,7 +99,7 @@ double foo = 0.0
   (attribute_assignment
     (attribute_type)
     (identifier)
-    (digit)))
+    (float)))
 
 ==============================================================================
 Attribute - float zero, negative
@@ -113,7 +113,7 @@ float foo = -0.0
   (attribute_assignment
     (attribute_type)
     (identifier)
-    (digit)))
+    (float)))
 
 ==============================================================================
 Attribute - float zero, positive
@@ -127,7 +127,7 @@ float foo = 0.0
   (attribute_assignment
     (attribute_type)
     (identifier)
-    (digit)))
+    (float)))
 
 ==============================================================================
 Attribute - half
@@ -141,7 +141,7 @@ half foo = 2
   (attribute_assignment
     (attribute_type)
     (identifier)
-    (digit)))
+    (float)))
 
 ==============================================================================
 Attribute - half[]
@@ -156,9 +156,9 @@ half[] foo = [2, 1, 2]
     (attribute_type)
     (identifier)
     (list
-      (digit)
-      (digit)
-      (digit))))
+      (float)
+      (float)
+      (float))))
 
 ==============================================================================
 Attribute - int
@@ -172,7 +172,7 @@ int foo = 2
   (attribute_assignment
     (attribute_type)
     (identifier)
-    (digit)))
+    (float)))
 
 ==============================================================================
 Attribute - int[]
@@ -187,9 +187,9 @@ int[] foo = [2, 1, 2]
     (attribute_type)
     (identifier)
     (list
-      (digit)
-      (digit)
-      (digit))))
+      (float)
+      (float)
+      (float))))
 
 ==============================================================================
 Attribute - int64
@@ -203,7 +203,7 @@ int64 foo = 2
   (attribute_assignment
     (attribute_type)
     (identifier)
-    (digit)))
+    (float)))
 
 ==============================================================================
 Attribute - int64[]
@@ -218,9 +218,9 @@ int64[] foo = [2, 1, 2]
     (attribute_type)
     (identifier)
     (list
-      (digit)
-      (digit)
-      (digit))))
+      (float)
+      (float)
+      (float))))
 
 ==============================================================================
 Attribute - string
@@ -266,7 +266,7 @@ timecode time = 1.0
   (attribute_assignment
     (attribute_type)
     (identifier)
-    (digit)))
+    (float)))
 
 ==============================================================================
 Attribute - timecode[]
@@ -281,9 +281,9 @@ timecode[] time = [1.0, 10.0, -20.3]
     (attribute_type)
     (identifier)
     (list
-      (digit)
-      (digit)
-      (digit))))
+      (float)
+      (float)
+      (float))))
 
 ==============================================================================
 Attribute - token
@@ -327,7 +327,7 @@ uchar foo = 2
   (attribute_assignment
     (attribute_type)
     (identifier)
-    (digit)))
+    (float)))
 
 ==============================================================================
 Attribute - uchar[]
@@ -342,9 +342,9 @@ uchar[] foo = [2, 1, 2]
     (attribute_type)
     (identifier)
     (list
-      (digit)
-      (digit)
-      (digit))))
+      (float)
+      (float)
+      (float))))
 
 ==============================================================================
 Attribute - uint
@@ -358,7 +358,7 @@ uint foo = 2
   (attribute_assignment
     (attribute_type)
     (identifier)
-    (digit)))
+    (float)))
 
 ==============================================================================
 Attribute - uint[]
@@ -373,9 +373,9 @@ uint[] foo = [2, 1, 2]
     (attribute_type)
     (identifier)
     (list
-      (digit)
-      (digit)
-      (digit))))
+      (float)
+      (float)
+      (float))))
 
 ==============================================================================
 Attribute - uint64
@@ -389,7 +389,7 @@ uint64 foo = 2
   (attribute_assignment
     (attribute_type)
     (identifier)
-    (digit)))
+    (float)))
 
 ==============================================================================
 Attribute - uint64[]
@@ -404,6 +404,6 @@ uint64[] foo = [2, 1, 2]
     (attribute_type)
     (identifier)
     (list
-      (digit)
-      (digit)
-      (digit))))
+      (float)
+      (float)
+      (float))))

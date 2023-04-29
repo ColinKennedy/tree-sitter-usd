@@ -100,4 +100,4 @@ subLayers with offsets
           (asset_path)
           (layer_offset
             (identifier)
-            (digit)))))))
+            (float)))))))

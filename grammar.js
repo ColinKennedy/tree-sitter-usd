@@ -143,7 +143,7 @@ module.exports = grammar(
 
             _base_value: $ => choice(  // Consider adding a $.list, to this or $._attribute_value
                 $.bool,
-                $.digit,
+                $.float,
                 $.prim_path,
                 $.string_literal,
                 $.tuple,
@@ -170,7 +170,7 @@ module.exports = grammar(
             ),
             None: $ => "None",
             bool: $ => choice("false", "true"),
-            digit: $ => /-?(\d*\.)?\d+(e[-]\d+[\.\d]*)?/,
+            float: $ => /-?(\d*\.)?\d+(e[-]\d+[\.\d]*)?/,
             _identifier: $ => /[a-zA-Z0-9_:\.]+/i,
             identifier: $ => $._identifier,  // TODO: Is expanded unicode allowed?
             integer: $ => /-?\d+/,
@@ -210,7 +210,7 @@ module.exports = grammar(
             // Various syntax components
             layer_offset: $ => seq(
                 "(",
-                semicolon_separated(seq($.identifier, "=", $.digit)),
+                semicolon_separated(seq($.identifier, "=", $.float)),
                 ")",
             ),
             orderer: $ => choice("add", "append", "delete", "prepend", "reorder"),
@@ -220,7 +220,7 @@ module.exports = grammar(
                     "{",
                     repeat(
                         seq(
-                            field("left", choice($.digit, $.integer)),
+                            field("left", choice($.float, $.integer)),
                             ":",
                             field("right", choice($.list, $._attribute_value)),
                             optional(",")

@@ -113,10 +113,10 @@ def "Root" (
         (dictionary
           (attribute_type)
           (identifier)
-          (digit)
+          (float)
           (attribute_type)
           (identifier)
-          (digit)))
+          (float)))
       (comment)
       (comment)
       (comment)

@@ -37,13 +37,13 @@ def "Params" (
       (comment)
       (metadata_assignment
         (identifier)
-        (digit))
+        (float))
       (metadata_assignment
         (identifier)
-        (digit))
+        (float))
       (metadata_assignment
         (identifier)
-        (digit))
+        (float))
       (comment)
       (comment)
       (comment)
@@ -54,14 +54,14 @@ def "Params" (
         (dictionary
           (attribute_type)
           (identifier)
-          (digit)
+          (float)
           (attribute_type)
           (identifier)
-          (digit))
+          (float))
         (comment)
         (string_literal)
         (dictionary
           (attribute_type)
           (identifier)
-          (digit))))
+          (float))))
     (block)))

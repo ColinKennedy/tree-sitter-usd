@@ -138,7 +138,7 @@ def Scope "something" (
         (custom)
         (attribute_type)
         (identifier)
-        (digit)))))
+        (float)))))
 
 ==============================================================================
 Attribute - custom attribute
@@ -153,7 +153,7 @@ custom float value = 10.31231424141
     (custom)
     (attribute_type)
     (identifier)
-    (digit)))
+    (float)))
 
 ==============================================================================
 Attribute - custom uniform attribute
@@ -169,7 +169,7 @@ custom uniform float value = 10.31231424141
     (uniform)
     (attribute_type)
     (identifier)
-    (digit)))
+    (float)))
 
 ==============================================================================
 Attribute - uniform attribute
@@ -184,7 +184,7 @@ uniform float value = 10.31231424141
     (uniform)
     (attribute_type)
     (identifier)
-    (digit)))
+    (float)))
 
 ==============================================================================
 Simple Attribute definition
@@ -209,7 +209,7 @@ def Scope "Prim"
       (attribute_assignment
         (attribute_type)
         (identifier)
-        (digit)))))
+        (float)))))
 
 ==============================================================================
 Attribute namespace - shader input
@@ -283,7 +283,7 @@ def "foo"
         (attribute_type)
         (identifier)
         (list
-          (digit))
+          (float))
         (metadata
           (metadata_assignment
             (identifier)
@@ -292,7 +292,7 @@ def "foo"
         (attribute_type)
         (identifier)
         (list
-          (digit))
+          (float))
         (metadata
           (metadata_assignment
             (identifier)
@@ -320,44 +320,44 @@ def "root"
         (identifier)
         (list
           (tuple
-            (digit)
-            (digit)
-            (digit))
+            (float)
+            (float)
+            (float))
           (tuple
-            (digit)
-            (digit)
-            (digit))
+            (float)
+            (float)
+            (float))
           (tuple
-            (digit)
-            (digit)
-            (digit))
+            (float)
+            (float)
+            (float))
           (tuple
-            (digit)
-            (digit)
-            (digit))
+            (float)
+            (float)
+            (float))
           (tuple
-            (digit)
-            (digit)
-            (digit))
+            (float)
+            (float)
+            (float))
           (tuple
-            (digit)
-            (digit)
-            (digit))
+            (float)
+            (float)
+            (float))
           (tuple
-            (digit)
-            (digit)
-            (digit))))
+            (float)
+            (float)
+            (float))))
       (attribute_assignment
         (attribute_type)
         (identifier)
         (list
-          (digit)
-          (digit)
-          (digit)
-          (digit)
-          (digit)
-          (digit)
-          (digit))
+          (float)
+          (float)
+          (float)
+          (float)
+          (float)
+          (float)
+          (float))
         (metadata
           (metadata_assignment
             (identifier)

@@ -72,7 +72,7 @@ endTimeCode
   (metadata
     (metadata_assignment
       (identifier)
-      (digit))))
+      (float))))
 
 ==============================================================================
 framesPerSecond
@@ -86,7 +86,7 @@ framesPerSecond
   (metadata
     (metadata_assignment
       (identifier)
-      (digit))))
+      (float))))
 
 
 ==============================================================================
@@ -115,4 +115,4 @@ startTimeCode
   (metadata
     (metadata_assignment
       (identifier)
-      (digit))))
+      (float))))
