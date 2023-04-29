@@ -128,7 +128,7 @@ def Cube "prim_1"
   (prim_definition
     (prim_type)
     (identifier)
-    (string_literal)
+    (string)
     (block
       (attribute_assignment
         (attribute_type)

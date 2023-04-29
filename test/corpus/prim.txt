@@ -9,7 +9,7 @@ def "root" {}
 (module
   (prim_definition
     (prim_type)
-    (string_literal)
+    (string)
     (block)))
 
 ==============================================================================
@@ -24,7 +24,7 @@ def Scope "root" {}
   (prim_definition
     (prim_type)
     (identifier)
-    (string_literal)
+    (string)
     (block)))
 
 ==============================================================================
@@ -39,5 +39,5 @@ class Scope "thing" {}
   (prim_definition
     (prim_type)
     (identifier)
-    (string_literal)
+    (string)
     (block)))

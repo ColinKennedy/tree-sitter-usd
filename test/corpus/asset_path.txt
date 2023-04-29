@@ -13,7 +13,7 @@ def "root" (
 (module
   (prim_definition
     (prim_type)
-    (string_literal)
+    (string)
     (metadata
       (metadata_assignment
         (orderer)
@@ -37,7 +37,7 @@ def "root" (
 (module
   (prim_definition
     (prim_type)
-    (string_literal)
+    (string)
     (metadata
       (metadata_assignment
         (orderer)
@@ -61,7 +61,7 @@ def "root" (
 (module
   (prim_definition
     (prim_type)
-    (string_literal)
+    (string)
     (metadata
       (metadata_assignment
         (orderer)
@@ -85,7 +85,7 @@ def "root" (
 (module
   (prim_definition
     (prim_type)
-    (string_literal)
+    (string)
     (metadata
       (metadata_assignment
         (orderer)
@@ -109,7 +109,7 @@ def "root" (
 (module
   (prim_definition
     (prim_type)
-    (string_literal)
+    (string)
     (metadata
       (metadata_assignment
         (orderer)
@@ -133,7 +133,7 @@ def "root" (
 (module
   (prim_definition
     (prim_type)
-    (string_literal)
+    (string)
     (metadata
       (metadata_assignment
         (orderer)
@@ -158,7 +158,7 @@ def "root" (
 (module
   (prim_definition
     (prim_type)
-    (string_literal)
+    (string)
     (metadata
       (metadata_assignment
         (orderer)
@@ -188,7 +188,7 @@ def "root" (
 (module
   (prim_definition
     (prim_type)
-    (string_literal)
+    (string)
     (metadata
       (metadata_assignment
         (orderer)
@@ -217,7 +217,7 @@ def "root" (
 (module
   (prim_definition
     (prim_type)
-    (string_literal)
+    (string)
     (metadata
       (metadata_assignment
         (orderer)
@@ -244,7 +244,7 @@ def "root" (
 (module
   (prim_definition
     (prim_type)
-    (string_literal)
+    (string)
     (metadata
       (metadata_assignment
         (orderer)

@@ -13,13 +13,13 @@ over "SomeSphere" (
 (module
   (prim_definition
     (prim_type)
-    (string_literal)
+    (string)
     (metadata
       (metadata_assignment
         (orderer)
         (identifier)
         (list
-          (string_literal))))
+          (string))))
     (block)))
 
 ==============================================================================
@@ -48,26 +48,26 @@ over "SomeSphere" (
 (module
   (prim_definition
     (prim_type)
-    (string_literal)
+    (string)
     (metadata
       (metadata_assignment
         (orderer)
         (identifier)
         (list
-          (string_literal)))
+          (string)))
       (metadata_assignment
         (identifier)
         (dictionary
           (attribute_type)
           (identifier)
-          (string_literal))))
+          (string))))
     (block
       (variant_set_definition
-        (string_literal)
+        (string)
         (variant
-          (string_literal)
+          (string)
           (metadata
-            (string_literal)
+            (string)
             (metadata_assignment
               (orderer)
               (identifier)
@@ -119,36 +119,36 @@ over "SomeSphere" (
 (module
   (prim_definition
     (prim_type)
-    (string_literal)
+    (string)
     (metadata
       (metadata_assignment
         (orderer)
         (identifier)
         (list
-          (string_literal)
-          (string_literal)))
+          (string)
+          (string)))
       (metadata_assignment
         (identifier)
         (dictionary
           (attribute_type)
           (identifier)
-          (string_literal)
+          (string)
           (attribute_type)
           (identifier)
-          (string_literal))))
+          (string))))
     (block
       (attribute_assignment
         (attribute_type)
         (identifier)
         (float))
       (variant_set_definition
-        (string_literal))
+        (string))
       (variant_set_definition
-        (string_literal)
+        (string)
         (variant
-          (string_literal)
+          (string)
           (metadata
-            (string_literal)
+            (string)
             (metadata_assignment
               (orderer)
               (identifier)
@@ -158,7 +158,7 @@ over "SomeSphere" (
           (block
             (prim_definition
               (prim_type)
-              (string_literal)
+              (string)
               (block
                 (attribute_assignment
                   (attribute_type)
@@ -169,11 +169,11 @@ over "SomeSphere" (
                       (float)
                       (float))))))))
         (variant
-          (string_literal)
+          (string)
           (block
             (prim_definition
               (prim_type)
-              (string_literal)
+              (string)
               (block
                 (attribute_assignment
                   (attribute_type)

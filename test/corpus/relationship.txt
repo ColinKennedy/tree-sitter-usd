@@ -23,7 +23,7 @@ rel material:binding:collection:Erasers (doc="asdfasdf")
   (metadata
     (metadata_assignment
       (identifier)
-      (string_literal))))
+      (string))))
 
 ==============================================================================
 Relationship - None

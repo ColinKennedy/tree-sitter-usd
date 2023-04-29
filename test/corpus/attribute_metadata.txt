@@ -29,7 +29,7 @@ float value = 20 (
     (identifier)
     (float))
   (metadata
-    (string_literal)))
+    (string)))
 
 ==============================================================================
 Attribute - customData

@@ -30,7 +30,7 @@ colorManagementSystem
   (metadata
     (metadata_assignment
       (identifier)
-      (string_literal))))
+      (string))))
 
 ==============================================================================
 defaultPrim
@@ -44,7 +44,7 @@ defaultPrim
   (metadata
     (metadata_assignment
       (identifier)
-      (string_literal))))
+      (string))))
 
 ==============================================================================
 doc
@@ -58,7 +58,7 @@ doc
   (metadata
     (metadata_assignment
       (identifier)
-      (string_literal))))
+      (string))))
 
 ==============================================================================
 endTimeCode
@@ -101,7 +101,7 @@ owner
   (metadata
     (metadata_assignment
       (identifier)
-      (string_literal))))
+      (string))))
 
 ==============================================================================
 startTimeCode

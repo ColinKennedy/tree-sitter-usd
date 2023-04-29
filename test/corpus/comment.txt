@@ -62,7 +62,7 @@ def "root" # tasdfasdfj aslkj2314
   (comment)
   (prim_definition
     (prim_type)
-    (string_literal)
+    (string)
     (comment)
     (block
       (comment)
@@ -104,7 +104,7 @@ def "Root" (
 (module
   (prim_definition
     (prim_type)
-    (string_literal)
+    (string)
     (metadata
       (comment)
       (comment)

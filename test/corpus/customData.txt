@@ -16,7 +16,7 @@ def Xform "World" (
   (prim_definition
     (prim_type)
     (identifier)
-    (string_literal)
+    (string)
     (metadata
       (metadata_assignment
         (identifier)

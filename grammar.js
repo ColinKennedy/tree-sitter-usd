@@ -26,7 +26,7 @@ module.exports = grammar(
             prim_definition: $ => seq(
                 $.prim_type,
                 optional($.identifier),
-                $.string_literal,
+                $.string,
                 optional($.metadata),
                 $.block,
             ),
@@ -109,7 +109,7 @@ module.exports = grammar(
 
             variant_set_definition: $ => seq(
                 "variantSet",
-                $.string_literal,
+                $.string,
                 "=",
                 "{",
                 repeat($.variant),
@@ -117,7 +117,7 @@ module.exports = grammar(
             ),
 
             variant: $ => seq(
-                $.string_literal,
+                $.string,
                 optional($.metadata),
                 $.block,
             ),
@@ -125,7 +125,7 @@ module.exports = grammar(
             metadata: $ => seq(
                 "(",
                 // Note: In USD, SdfLayer::SetComment is written as a raw, string literal
-                repeat(choice($.metadata_assignment, $.string_literal)),
+                repeat(choice($.metadata_assignment, $.string)),
                 ")",
             ),
             metadata_assignment: $ => seq(
@@ -145,7 +145,7 @@ module.exports = grammar(
                 $.bool,
                 $.float,
                 $.prim_path,
-                $.string_literal,
+                $.string,
                 $.tuple,
             ),
             _metadata_value: $ => choice(
@@ -157,7 +157,7 @@ module.exports = grammar(
             _attribute_value: $ => choice($.asset_path, $._base_value),
             _dictionary_assignment: $ => seq(
                 "{",
-                repeat(seq($._dictionary_type, choice($.identifier, $.string_literal), "=", $.dictionary)),
+                repeat(seq($._dictionary_type, choice($.identifier, $.string), "=", $.dictionary)),
                 "}",
             ),
             dictionary: $ => prec(
@@ -188,13 +188,13 @@ module.exports = grammar(
                 ),
             ),
             tuple: $ => seq("(", comma_separated($._attribute_value), optional(","), ")"),
-            string_literal: $ => choice($._string_literal, $._multiline_string_literal),
-            _multiline_string_literal: $ => seq(
+            string: $ => choice($._string, $._multiline_string),
+            _multiline_string: $ => seq(
               '"""',
               repeat(/[^"]/),
               '"""'
             ),
-            _string_literal: $ => seq(
+            _string: $ => seq(
               '"',
               repeat(/[^"]/),
               '"'

@@ -234,7 +234,7 @@ string foo = "something"
   (attribute_assignment
     (attribute_type)
     (identifier)
-    (string_literal)))
+    (string)))
 
 ==============================================================================
 Attribute - string[]
@@ -249,10 +249,10 @@ string[] foo = ["something", "stuff", "", "123"]
     (attribute_type)
     (identifier)
     (list
-      (string_literal)
-      (string_literal)
-      (string_literal)
-      (string_literal))))
+      (string)
+      (string)
+      (string)
+      (string))))
 
 ==============================================================================
 Attribute - timecode
@@ -297,7 +297,7 @@ token purpose = "default"
   (attribute_assignment
     (attribute_type)
     (identifier)
-    (string_literal)))
+    (string)))
 
 ==============================================================================
 Attribute - token[]
@@ -312,8 +312,8 @@ token[] purpose = ["default", "render"]
     (attribute_type)
     (identifier)
     (list
-      (string_literal)
-      (string_literal))))
+      (string)
+      (string))))
 
 ==============================================================================
 Attribute - uchar

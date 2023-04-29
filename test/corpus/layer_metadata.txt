@@ -30,32 +30,32 @@ Layer metadata
 (module
   (comment)
   (metadata
-    (string_literal)
+    (string)
     (metadata_assignment
       (identifier)
       (arc_path
         (asset_path)))
     (metadata_assignment
       (identifier)
-      (string_literal))
+      (string))
     (metadata_assignment
       (identifier)
       (dictionary))
     (metadata_assignment
       (identifier)
-      (string_literal))
+      (string))
     (metadata_assignment
       (identifier)
-      (string_literal))
-    (metadata_assignment
-      (identifier)
-      (float))
+      (string))
     (metadata_assignment
       (identifier)
       (float))
     (metadata_assignment
       (identifier)
-      (string_literal))
+      (float))
+    (metadata_assignment
+      (identifier)
+      (string))
     (metadata_assignment
       (identifier)
       (float))

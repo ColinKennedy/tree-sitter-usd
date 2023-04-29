@@ -32,7 +32,7 @@ def "Params" (
   (comment)
   (prim_definition
     (prim_type)
-    (string_literal)
+    (string)
     (metadata
       (comment)
       (metadata_assignment
@@ -50,7 +50,7 @@ def "Params" (
       (metadata_assignment
         (identifier)
         (comment)
-        (string_literal)
+        (string)
         (dictionary
           (attribute_type)
           (identifier)
@@ -59,7 +59,7 @@ def "Params" (
           (identifier)
           (float))
         (comment)
-        (string_literal)
+        (string)
         (dictionary
           (attribute_type)
           (identifier)
