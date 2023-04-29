@@ -4,12 +4,51 @@ This library parses USD ASCII files using [tree-sitter](https://tree-sitter.gith
 to produce a light-weight representation of the file.
 
 
-## Building
-TODO
+## Building + Using
 
+TODO Coming soon, hopefully. This repository is work in progress so it's not in a super "consumable for others" state yet. But if you'd like to try it out, the basic steps are
 
-## Using
-TODO
+- Clone this repository
+- Follow the steps from https://github.com/nvim-treesitter/nvim-treesitter#adding-parsers
+
+e.g. My lazy.nvim setup looks like this:
+
+```lua
+{
+    -- Useful from the documentation:
+    --
+    --     A parser can also be loaded manually using a full path: >
+    --         vim.treesitter.require_language("python", "/path/to/python.so")
+    --
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    config = function()
+        -- TODO: Remove this WIP code, later
+        local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+        parser_config.usd = {
+            install_info = {
+                files = {"src/parser.c"},
+                generate_requires_npm = false,
+                requires_generate_from_grammar = true,
+                url = "~/XXX/where/you/cloned/tree-sitter-usd",  -- XXX: Replace this line
+            },
+        }
+    end,
+    lazy = true,
+},
+```
+
+And later in the setup...
+
+```lua
+require("nvim-treesitter.configs").setup {
+    ensure_installed = {"usd"},
+    parser_install_dir = installation_directory,
+    highlight = { enable = true },
+
+    -- More stuff
+}
+```
 
 
 ## Why Tree-sitter?
@@ -49,14 +88,21 @@ Tree-sitter is an incremental parser. That means
 - Making edits to the file doesn't require a full re-parse of the file
 - WIP files with syntax errors still parse
 
-TODO, add image
+![usd_treesitter_syntax_highlighting](https://user-images.githubusercontent.com/10103049/235325800-0ef86ffc-a557-46a5-af7f-3753850c142a.png)
+
+And the results are pretty good. My Neovim theme is
+[hybrid2.nvim](https://github.com/ColinKennedy/hybrid2.nvim). If you desire
+even more colors (e.g. coloring ``uniform`` as blue, instead of white), there's
+already an out-of-box highlight group for that over at
+[nvim-treesitter-highlights-usd](https://github.com/ColinKennedy/nvim-treesitter-highlights-usd).
+In the future, this might get upstreamed to
+[nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter), maybe.
 
 
 ### Maintain The Current Prim Context
-https://www.reddit.com/r/neovim/comments/pk1gpi/treesitter_statusline_show_code_context/
-https://github.com/nvim-treesitter/nvim-treesitter-context
+https://user-images.githubusercontent.com/10103049/235326266-93c8e868-ed7f-47a7-bda9-238f02979e82.mp4
 
-TODO GIF
+[nvim-treesitter-context](https://github.com/nvim-treesitter/nvim-treesitter-context)
 
 Have you ever been viewing a huge USD file and, in the middle of viewing some
 Prim, forget the name / tree of the Prim that you're viewing? This fun plug-in
@@ -64,24 +110,27 @@ keeps the Prim name pinned as you scroll so you never lose your place.
 
 
 ### Prim Statusline
-https://github.com/SmiteshP/nvim-gps
-https://www.reddit.com/r/neovim/comments/pk1gpi/treesitter_statusline_show_code_context/
-TODO
+[nvim-gps](https://github.com/SmiteshP/nvim-gps) + [winbar.nvim](https://github.com/fgheng/winbar.nvim)
+
+https://user-images.githubusercontent.com/10103049/235326401-64be269b-5e96-4483-b6ee-995392603ef9.mp4
+
+The top bar tracks your location in the file.
 
 
-### Auto-Indentation
-https://github.com/nvim-treesitter/nvim-treesitter#folding
-TODO
+### Auto-Folding
+https://user-images.githubusercontent.com/10103049/235326728-076f14d8-63fc-4c0c-b3c8-e29065bb2917.mp4
+
+[nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter#folding)
 
 
 ### Text Objects
-https://github.com/nvim-treesitter/nvim-treesitter#incremental-selection
-TODO
+[nvim-treesitter-textobjects](https://github.com/nvim-treesitter/nvim-treesitter-textobjects)
 
+Select, move, delete, comment, edit anything easily, using whatever mappings you desire.
 
-### Performance Profiling
-https://github.com/t-troebst/perfanno.nvim
-TODO
+In truth, most people don't have much need to edit USD files directly. But it's
+a testiment to tree-sitter that the same mappings do as you expect across all
+languages.
 
 
 ### Need A Parser? Look No Further
@@ -104,78 +153,11 @@ may come out that further expands upon the list of reasons above.
 
 Some other plug-ins that could be useful in the future
 
-https://github.com/nvim-treesitter/nvim-treesitter-refactor
-https://github.com/ThePrimeagen/refactoring.nvim
-https://github.com/bennypowers/nvim-regexplainer/
-https://github.com/ray-x/navigator.lua
-https://github.com/Olical/conjure
+- https://github.com/nvim-treesitter/nvim-treesitter-refactor
+- https://github.com/t-troebst/perfanno.nvim
+- https://github.com/ThePrimeagen/refactoring.nvim
+- https://github.com/bennypowers/nvim-regexplainer/
+- https://github.com/ray-x/navigator.lua
+- https://github.com/Olical/conjure
 
 And others
-
-
-## Bootstrap
-```sh
-export PATH=$PATH:./node_modules/.bin
-```
-
-
-
-
-
-
-
-
-
-// TODO: Add unittest where multi-line contains 1 or 2 " within
-// TODO: Make sure this works. Can prims be named with )@(*#$& special characters?
-// TODO: Double-check what is allowed as an identifier. Unicode? escaped \"s?
-
-- Make sure string can be empty
-- Make sure individual types behave as expected. e.g. parsing strings (can they escape \"? Does it parse? etc)
-  <!-- paths = [ -->
-  <!--     ("foo.sdf", -->
-  <!--      "foo.sdf", -->
-  <!--      {}), -->
-  <!--     ("foo.sdf1!@#$%^*()-_=+[{]}|;:',<.>", -->
-  <!--      "foo.sdf1!@#$%^*()-_=+[{]}|;:',<.>", -->
-  <!--      {}), -->
-  <!--     ("foo.sdf:SDF_FORMAT_ARGS:a=b&c=d", -->
-  <!--      "foo.sdf", -->
-  <!--      {"a":"b", "c":"d"}), -->
-  <!--     ("foo.sdf?otherargs&evenmoreargs:SDF_FORMAT_ARGS:a=b&c=d", -->
-  <!--      "foo.sdf?otherargs&evenmoreargs", -->
-  <!--      {"a":"b", "c":"d"}), -->
-  <!-- ] -->
-
-- Support @namespace        ; modules or namespaces for attributes like primvars:foo:bar
-- Get prim_path stuff to match. It isn't working yet
-- Make sure </prim/paths> get a proper syntax highlight group
-
-- Consider reverting the string_literal -> string change (and digit -> float)
-
-- Add highlighting unittests
- - https://github.com/tree-sitter/tree-sitter-python/blob/master/test/highlight/keywords.py
- - https://ahelwer.ca/post/2023-01-11-tree-sitter-tlaplus/
- - https://github.com/nvim-treesitter/nvim-treesitter/blob/master/queries/python/highlights.scm
-
-
-## Tests to write
-### Attributes
-- gprim syntax?
- - interpolation
-  - Special, known strings ("vertex", "constant", etc)?
-
-
-- fuzz testing
- - asset paths
- - prim paths
- - identifier names (of variables and such)
- - prim names
-
-
-- Do TODO notes in the grammar.js file
-- Add customlayerData unittests
-
-
-- Consider allowing asset_path to replace arc_path if both are an option (give asset_path a higher precedence)
-- Try removing some of the prec.left commands to see what is really needed
