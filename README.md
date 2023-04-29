@@ -26,9 +26,20 @@ plug-ins showing off what you can do using this USD parser.
 
 
 ### Neovim
-#### aerial.nvim - Navigate USD files effortlessly
+#### aerial.nvim - Navigate USD Files Effortlessly
 [aerial.nvim](https://github.com/stevearc/aerial.nvim)
-TODO, GIFs
+
+##### Display And Move Through A Prim Tree
+Effortlessly move in, out, or around any USD Prim, no matter how large it is.
+
+TODO GIF
+
+
+##### Prim Tree Based On Your Current Position
+Many times I find myself thinking "I'm in a nested Prim but I actually need to
+go one down, and over". This aerial.nvim view is super good at moving around.
+
+TODO GIF
 
 
 #### Syntax Highlighting
