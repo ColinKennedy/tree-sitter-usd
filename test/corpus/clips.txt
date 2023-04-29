@@ -1,0 +1,85 @@
+==============================================================================
+clips - empty
+==============================================================================
+
+def "World"
+{
+    over "points" (
+        clips = {}
+    )
+    {
+    }
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (block
+      (prim_definition
+        (prim_type)
+        (string)
+        (metadata
+          (metadata_assignment
+            (identifier)
+            (dictionary)))
+        (block)))))
+
+==============================================================================
+clips - full
+==============================================================================
+
+def "World"
+{
+    over "points" (
+        clips = {
+            dictionary default = {
+                asset manifestAssetPath = @./clip_manifest.usda@
+                asset[] assetPaths = [@./clip.usda@]
+                double templateEndTime   = 3
+                double templateStartTime = 1
+                double templateStride    = 1
+                double2[] active = [(0, 0)]
+                double2[] times = [(101, 101), (102, 102)],
+                string primPath = "/points"
+                string templateAssetPath = "./p.###.usda"
+            }
+        }
+    )
+    {
+    }
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (block
+      (prim_definition
+        (prim_type)
+        (string)
+        (metadata
+          (metadata_assignment
+            (identifier)
+            (identifier)
+            (dictionary
+              (attribute_type)
+              (identifier)
+              (string)
+              (attribute_type)
+              (identifier)
+              (float)
+              (attribute_type)
+              (identifier)
+              (float)
+              (attribute_type)
+              (identifier)
+              (float)
+              (attribute_type)
+              (identifier)
+              (string))))
+        (block)))))
