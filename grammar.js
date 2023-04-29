@@ -55,42 +55,32 @@ module.exports = grammar(
             custom: $ => "custom",
             uniform: $ => "uniform",
 
+            _attribute_left_side: $ => seq(
+                optional($.custom),
+                optional($.uniform),
+                $.attribute_type,
+                field("name", $.identifier),  // TODO: Check if identifier has to be ASCII. might be stricter than a regular identifier
+                optional(
+                    seq(
+                        ".",
+                        choice(
+                            field("timeSamples", "timeSamples"),
+                            field("connect", "connect"),
+                        ),
+                    ),
+                ),
+            ),
+
             attribute_declaration: $ => prec.left(
                 2,
                 seq(
-                    optional($.custom),
-                    optional($.uniform),
-                    $.attribute_type,
-                    field("name", $.identifier),  // TODO: Check if identifier has to be ASCII. might be stricter than a regular identifier
-                    optional(
-                        seq(
-                            ".",
-                            choice(
-                                field("timeSamples", "timeSamples"),
-                                field("connect", "connect"),
-                            ),
-                        ),
-                    ),
+                    $._attribute_left_side,
                     optional($.metadata),
                 ),
             ),
 
             attribute_assignment: $ => seq(
-                seq(
-                    optional($.custom),
-                    optional($.uniform),
-                    $.attribute_type,
-                    field("name", $.identifier),  // TODO: Check if identifier has to be ASCII. might be stricter than a regular identifier
-                    optional(
-                        seq(
-                            ".",
-                            choice(
-                                field("timeSamples", "timeSamples"),
-                                field("connect", "connect"),
-                            ),
-                        ),
-                    ),
-                ),
+                $._attribute_left_side,
                 "=",
                 prec.left(
                     1,
@@ -104,7 +94,8 @@ module.exports = grammar(
             relationship_declaration: $ => prec.left(
                 2,
                 seq(
-                    "rel", $.identifier,
+                    "rel",
+                    $.identifier,
                     optional($.metadata),
                 )
             ),
@@ -134,14 +125,25 @@ module.exports = grammar(
                 $.block,
             ),
 
-            // Literal types
-            // Reference: https://openusd.org/release/api/sdf_page_front.html
-            attribute_type: $ => choice(
-                $._scalar_type,
-                $._dimensioned_type,
-                $._extra_type,
-                $._deprecated_types,
+            metadata: $ => seq(
+                "(",
+                // Note: In USD, SdfLayer::SetComment is written as a raw, string literal
+                repeat(choice($.metadata_assignment, $.string_literal)),
+                ")",
             ),
+            metadata_assignment: $ => seq(
+                optional($.orderer),
+                $.identifier,
+                "=",
+                choice($.list_proxy, $.list, $._metadata_value),
+            ),
+
+            // Reference: https://openusd.org/release/api/sdf_page_front.html
+            //
+            // Allows ``foo` and ``foo[]`` as a syntax.
+            //
+            attribute_type: $ => choice(seq($._identifier, "[]"), $._identifier),
+
             _base_value: $ => choice(  // Consider adding a $.list, to this or $._attribute_value
                 $.bool,
                 $.digit,
@@ -153,10 +155,15 @@ module.exports = grammar(
             _metadata_value: $ => choice(
                 $.arc_path,
                 $.dictionary,
-                seq("{", repeat(seq($._dictionary_type, choice($.identifier, $.string_literal), "=", $.dictionary)), "}"),
+                $._dictionary_assignment,
                 $._base_value,
             ),
             _attribute_value: $ => choice($.asset_path, $._base_value),
+            _dictionary_assignment: $ => seq(
+                "{",
+                repeat(seq($._dictionary_type, choice($.identifier, $.string_literal), "=", $.dictionary)),
+                "}",
+            ),
             dictionary: $ => prec(
                 3,
                 seq(
@@ -168,7 +175,8 @@ module.exports = grammar(
             None: $ => "None",
             bool: $ => choice("false", "true"),
             digit: $ => /-?(\d*\.)?\d+(e[-]\d+[\.\d]*)?/,
-            identifier: $ => /[a-zA-Z0-9_:\.]+/i,
+            _identifier: $ => /[a-zA-Z0-9_:\.]+/i,
+            identifier: $ => $._identifier,  // TODO: Is expanded unicode allowed?
             integer: $ => /-?\d+/,
             list_proxy: $ => seq("[", comma_separated($.arc_path), optional(","), "]"),
             list: $ => prec(
@@ -197,90 +205,16 @@ module.exports = grammar(
             ),
 
             // Special types
+            _dictionary_type: $ => "dictionary",
             arc_path: $ => prec(3, seq($.asset_path, optional($.prim_path), optional($.layer_offset))),
             asset_path: $ => seq("@", /[^@]+/, "@"),
             prim_path: $ => seq("<", /[^<>]+/, ">"),
             prim_paths: $ => seq("[", repeat(seq($.prim_path, optional(","))), "]"),
 
-            // TODO : Check if I can remove all of these hard-coded values and
-            // just use a regular choice(foo, foo[]).
-            //
-            // USD type names
-            //
-            _scalar_type: $ => choice(
-                "asset", "asset[]",
-                "bool", "bool[]",
-                "double", "double[]",
-                "float", "float[]",
-                "half", "half[]",
-                "int", "int[]",
-                "int64", "int64[]",
-                "string", "string[]",
-                "timecode", "timecode[]",
-                "token", "token[]",
-                "uchar", "uchar[]",
-                "uint", "uint[]",
-                "uint64", "uint64[]",
-            ),
-
-            _dictionary_type: $ => "dictionary",
-
-            _dimensioned_type: $ => choice(
-                "double2", "double2[]",
-                "double3", "double3[]",
-                "double4", "double4[]",
-                "float2", "float2[]",
-                "float3", "float3[]",
-                "float4", "float4[]",
-                "half2", "half2[]",
-                "half3", "half3[]",
-                "half4", "half4[]",
-                "int2", "int2[]",
-                "int3", "int3[]",
-                "int4", "int4[]",
-                "matrix2d", "matrix2d[]",
-                "matrix3d", "matrix3d[]",
-                "matrix4d", "matrix4d[]",
-                "quatd", "quatd[]",
-                "quatf", "quatf[]",
-                "quath", "quath[]",
-            ),
-            _extra_type: $ => choice(
-                "color3f", "color3f[]",
-                "normal3f", "normal3f[]",
-                "point3f", "point3f[]",
-                "texCoord2f", "texCoord2f[]",
-                "vector3d", "vector3d[]",
-                "vector3f", "vector3f[]",
-                "vector3h", "vector3h[]",
-            ),
-
-            _deprecated_types: $ => choice(
-                "EdgeIndex", "EdgeIndex[]",
-                "FaceIndex", "FaceIndex[]",
-                "Matrix4d", "Matrix4d[]",
-                "PointIndex", "PointIndex[]",
-                "PointFloat", "PointFloat[]",
-                "Transform", "Transform[]",
-                "Vec3f", "Vec3f[]",
-            ),
-
             // Various syntax components
             layer_offset: $ => seq(
                 "(",
                 semicolon_separated(seq($.identifier, "=", $.digit)),
-                ")",
-            ),
-            metadata_assignment: $ => seq(
-                optional($.orderer),
-                $.identifier,
-                "=",
-                choice($.list_proxy, $.list, $._metadata_value),
-            ),
-            metadata: $ => seq(
-                "(",
-                // Note: In USD, SdfLayer::SetComment is written as a raw, string literal
-                repeat(choice($.metadata_assignment, $.string_literal)),
                 ")",
             ),
             orderer: $ => choice("add", "append", "delete", "prepend", "reorder"),
