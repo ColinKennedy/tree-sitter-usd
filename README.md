@@ -22,6 +22,8 @@ timecode timeCode = 10
 timecode[] timeCodeArray = [10, 20]
 vector3d vector3d = (0, 0, 0)
 vector3d[] vector3dArray
+point3f
+texCoord2f
 vector3f vector3f = (0, 0, 0)
 vector3f[] vector3fArray
 vector3h vector3h = (0, 0, 0)
@@ -35,7 +37,6 @@ Maybe just make the rule into an ASCII/number identifier
  - Prims
  - Anything else that I forgot
 
-- subLayers
 - Prim metadata
  - Known keys
   - assetInfo
@@ -152,7 +153,11 @@ layer metadata
 - Add customlayerData unittests
 
 
+- Check if I can make "asset_path" consistent in attribute assigment and "arc_path" in metadata_assignment
+- Consider allowing asset_path to replace arc_path if both are an option (give asset_path a higher precedence)
+- Check if I can remove attribute_type. Because it can probably just be $.identifier
 - Try removing some of the prec.left commands to see what is really needed
+- Wondering if I should add fields for the left / right side of the timeSamples stuff
 
 - Make sure that the type of { string foo = "asdfasdf" } and attributes is queriable
 Add a "Complex everything" test, with everything at once
