@@ -12,6 +12,7 @@ rel material:binding:collection:Erasers
 ==============================================================================
 Relationship declaration with metadata
 ==============================================================================
+
 rel material:binding:collection:Erasers (doc="asdfasdf")
 
 ------------------------------------------------------------------------------
@@ -25,8 +26,22 @@ rel material:binding:collection:Erasers (doc="asdfasdf")
       (string_literal))))
 
 ==============================================================================
+Relationship - None
+==============================================================================
+
+rel material:binding:collection:Erasers = None
+
+------------------------------------------------------------------------------
+
+(module
+  (relationship_assignment
+    (identifier)
+    (None)))
+
+==============================================================================
 Relationship nested material namespace
 ==============================================================================
+
 rel material:binding:collection:Erasers = [
     </foo/child>,
     <../relative_1/thing>,

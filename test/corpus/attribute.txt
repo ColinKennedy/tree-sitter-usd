@@ -16,7 +16,47 @@ class "ParamsAPI"
 
 ------------------------------------------------------------------------------
 
-(block)
+(module
+  (prim_definition
+    (prim_type)
+    (string_literal)
+    (block
+      (attribute_declaration
+        (attribute_type)
+        (identifier)
+        (metadata
+          (metadata_assignment
+            (identifier)
+            (string_literal))))
+      (attribute_declaration
+        (attribute_type)
+        (identifier)
+        (metadata
+          (metadata_assignment
+            (identifier)
+            (string_literal))))
+      (attribute_declaration
+        (attribute_type)
+        (identifier)
+        (metadata
+          (metadata_assignment
+            (identifier)
+            (string_literal)))))))
+
+==============================================================================
+Attribute - None
+==============================================================================
+
+float thing = None
+
+------------------------------------------------------------------------------
+
+(module
+  (attribute_assignment
+    (attribute_type)
+    (identifier)
+    (None)))
+
 
 ==============================================================================
 Prim - over - empty
