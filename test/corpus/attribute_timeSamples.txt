@@ -54,6 +54,61 @@ int foo.timeSamples = {
       (digit)
       (digit))))
 
+==============================================================================
+Attribute - timeSamples empty
+==============================================================================
+
+float value.timeSamples = {}
+
+------------------------------------------------------------------------------
+
+(module
+  (attribute_assignment
+    (attribute_type)
+    (identifier)
+    (timeSamples)))
+
+==============================================================================
+Attribute - timeSamples single
+==============================================================================
+
+float value.timeSamples = {
+  10: 201,
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (attribute_assignment
+    (attribute_type)
+    (identifier)
+    (timeSamples
+      (digit)
+      (digit))))
+
+==============================================================================
+Attribute - timeSamples multiple
+==============================================================================
+
+float value.timeSamples = {
+  -414: 14.4
+  10: 201.0,
+  10.123: 201.0123,
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (attribute_assignment
+    (attribute_type)
+    (identifier)
+    (timeSamples
+      (digit)
+      (digit)
+      (digit)
+      (digit)
+      (digit)
+      (digit))))
 
 ==============================================================================
 Attribute timeSamples - scientific notation

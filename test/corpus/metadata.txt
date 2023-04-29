@@ -116,3 +116,24 @@ startTimeCode
     (metadata_assignment
       (identifier)
       (digit))))
+
+==============================================================================
+Metadata - list type
+==============================================================================
+
+class "TestNestedCycle1API" (
+    apiSchemas = ["TestNestedCycle2API"]
+    doc = "Test nested single apply API schema with a cycle #1"
+)
+{
+    uniform token cycle1:token_attr = "cycle1" (
+        doc = "Token attribute"
+    )
+    uniform int cycle:int_attr = 1 (
+        doc = "Int attribute"
+    )
+}
+
+------------------------------------------------------------------------------
+
+(block)

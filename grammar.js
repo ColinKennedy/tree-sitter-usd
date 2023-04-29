@@ -140,8 +140,10 @@ module.exports = grammar(
                 $._scalar_type,
                 $._dimensioned_type,
                 $._extra_type,
+                $._deprecated_types,
             ),
             _base_value: $ => choice(  // Consider adding a $.list, to this or $._attribute_value
+                $.bool,
                 $.digit,
                 $.prim_path,
                 $.string_literal,
@@ -164,6 +166,7 @@ module.exports = grammar(
                 )
             ),
             None: $ => "None",
+            bool: $ => choice("false", "true"),
             digit: $ => /-?(\d*\.)?\d+(e[-]\d+[\.\d]*)?/,
             identifier: $ => /[a-zA-Z0-9_:\.]+/i,
             integer: $ => /-?\d+/,
@@ -250,6 +253,16 @@ module.exports = grammar(
                 "vector3d", "vector3d[]",
                 "vector3f", "vector3f[]",
                 "vector3h", "vector3h[]",
+            ),
+
+            _deprecated_types: $ => choice(
+                "EdgeIndex", "EdgeIndex[]",
+                "FaceIndex", "FaceIndex[]",
+                "Matrix4d", "Matrix4d[]",
+                "PointIndex", "PointIndex[]",
+                "PointFloat", "PointFloat[]",
+                "Transform", "Transform[]",
+                "Vec3f", "Vec3f[]",
             ),
 
             // Various syntax components
