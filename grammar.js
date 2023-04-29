@@ -113,7 +113,6 @@ module.exports = grammar(
             attribute_type: $ => choice(
                 $._scalar_type,
                 $._dimensioned_type,
-                $._dictionary_type,
                 $._extra_type,
             ),
             _base_value: $ => choice(  // Consider adding a $.list, to this or $._attribute_value
@@ -126,7 +125,7 @@ module.exports = grammar(
             _metadata_value: $ => choice(
                 $.arc_path,
                 $.dictionary,
-                seq("{", repeat(seq($._dictionary_type, $.string_literal, "=", $.dictionary)), "}"),
+                seq("{", repeat(seq($._dictionary_type, choice($.identifier, $.string_literal), "=", $.dictionary)), "}"),
                 $._base_value,
             ),
             _attribute_value: $ => choice($.asset_path, $._base_value),
@@ -138,7 +137,7 @@ module.exports = grammar(
                     "}",
                 )
             ),
-            digit: $ => /-?\d+[\.\d]*(e[-]\d+[\.\d]*)?/,
+            digit: $ => /-?(\d*\.)?\d+(e[-]\d+[\.\d]*)?/,
             identifier: $ => /[a-zA-Z0-9_:\.]+/i,
             integer: $ => /-?\d+/,
             list_proxy: $ => seq("[", comma_separated($.arc_path), optional(","), "]"),
@@ -218,6 +217,12 @@ module.exports = grammar(
             ),
             _extra_type: $ => choice(
                 "color3f", "color3f[]",
+                "normal3f", "normal3f[]",
+                "point3f", "point3f[]",
+                "texCoord2f", "texCoord2f[]",
+                "vector3d", "vector3d[]",
+                "vector3f", "vector3f[]",
+                "vector3h", "vector3h[]",
             ),
 
             // Various syntax components
@@ -245,7 +250,7 @@ module.exports = grammar(
                     "{",
                     repeat(
                         seq(
-                            field("left", $.digit),
+                            field("left", choice($.digit, $.integer)),
                             ":",
                             field("right", choice($.list, $._attribute_value)),
                             optional(",")

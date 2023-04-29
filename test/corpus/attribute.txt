@@ -585,3 +585,105 @@ def Scope "Prim"
         (attribute_type)
         (identifier)
         (prim_path)))))
+
+
+==============================================================================
+Attribute - interpolation metadata
+==============================================================================
+
+def "foo"
+{
+    float[] widths1 = [.5] (interpolation = "constant")
+    float[] widths2 = [-.5] (interpolation = "vertex")
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string_literal)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (list
+          (digit))
+        (metadata
+          (metadata_assignment
+            (identifier)
+            (string_literal))))
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (list
+          (digit))
+        (metadata
+          (metadata_assignment
+            (identifier)
+            (string_literal)))))))
+
+==============================================================================
+Attribute - float bug fix
+==============================================================================
+
+def "root"
+{
+    point3f[] points = [(0, 0, 0), (1, 1, 0), (1, 2, 0), (0, 3, 0), (-1, 4, 0), (-1, 5, 0), (0, 6, 0)]
+    float[] widths = [0, .5, .5, .8, .5, .5, 0] (interpolation = "varying")
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string_literal)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (list
+          (tuple
+            (digit)
+            (digit)
+            (digit))
+          (tuple
+            (digit)
+            (digit)
+            (digit))
+          (tuple
+            (digit)
+            (digit)
+            (digit))
+          (tuple
+            (digit)
+            (digit)
+            (digit))
+          (tuple
+            (digit)
+            (digit)
+            (digit))
+          (tuple
+            (digit)
+            (digit)
+            (digit))
+          (tuple
+            (digit)
+            (digit)
+            (digit))))
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (list
+          (digit)
+          (digit)
+          (digit)
+          (digit)
+          (digit)
+          (digit)
+          (digit))
+        (metadata
+          (metadata_assignment
+            (identifier)
+            (string_literal)))))))
