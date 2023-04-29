@@ -52,3 +52,58 @@ def Xform "World" (
           (identifier)
           (float))))
     (block)))
+
+==============================================================================
+customData - schema 001
+==============================================================================
+
+class UsdShadeTestPlugConfiguredType "UsdShadeTestPlugConfiguredType" (
+    inherits = </NodeGraph>
+    customData = {
+        string className = "UsdShadeTestPlugConfiguredType"
+        dictionary extraPlugInfo = {
+            bool providesUsdShadeConnectableAPIBehavior = 1
+            # Notice these are opposite of NodeGraph Default, for ease of
+            # testing
+            bool isUsdShadeContainer = 0
+            bool requiresUsdShadeEncapsulation = 0
+        }
+    }
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(block)
+
+==============================================================================
+customData - schema
+==============================================================================
+
+class UsdShadeTestPlugConfiguredType "UsdShadeTestPlugConfiguredType" (
+    inherits = </NodeGraph>
+    customData = {
+        string className = "UsdShadeTestPlugConfiguredType"
+        dictionary extraPlugInfo = {
+            bool providesUsdShadeConnectableAPIBehavior = 1
+            # Notice these are opposite of NodeGraph Default, for ease of
+            # testing
+            bool isUsdShadeContainer = 0
+            bool requiresUsdShadeEncapsulation = 0
+        }
+        token[] apiSchemaAutoApplyTo = [
+            "UsdShadeMaterial",
+            "UsdShadeTestTypedHasAutoApplyRequiresEncapsulation"
+        ]
+        token[] apiSchemaOverridePropertyNames = ["overrideBaseTrueDerivedTrue"]
+        string libraryName      = "testUsdShadeConnectableAPIBehaviorClearing"
+        bool skipCodeGeneration = true
+    }
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(block)
