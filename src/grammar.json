@@ -95,7 +95,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "string_literal"
+          "name": "string"
         },
         {
           "type": "CHOICE",
@@ -415,7 +415,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "string_literal"
+          "name": "string"
         },
         {
           "type": "STRING",
@@ -443,7 +443,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "string_literal"
+          "name": "string"
         },
         {
           "type": "CHOICE",
@@ -481,7 +481,7 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "string_literal"
+                "name": "string"
               }
             ]
           }
@@ -565,7 +565,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "digit"
+          "name": "float"
         },
         {
           "type": "SYMBOL",
@@ -573,7 +573,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "string_literal"
+          "name": "string"
         },
         {
           "type": "SYMBOL",
@@ -640,7 +640,7 @@
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "string_literal"
+                    "name": "string"
                   }
                 ]
               },
@@ -719,7 +719,7 @@
         }
       ]
     },
-    "digit": {
+    "float": {
       "type": "PATTERN",
       "value": "-?(\\d*\\.)?\\d+(e[-]\\d+[\\.\\d]*)?"
     },
@@ -951,20 +951,20 @@
         }
       ]
     },
-    "string_literal": {
+    "string": {
       "type": "CHOICE",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "_string_literal"
+          "name": "_string"
         },
         {
           "type": "SYMBOL",
-          "name": "_multiline_string_literal"
+          "name": "_multiline_string"
         }
       ]
     },
-    "_multiline_string_literal": {
+    "_multiline_string": {
       "type": "SEQ",
       "members": [
         {
@@ -984,7 +984,7 @@
         }
       ]
     },
-    "_string_literal": {
+    "_string": {
       "type": "SEQ",
       "members": [
         {
@@ -1142,7 +1142,7 @@
                     },
                     {
                       "type": "SYMBOL",
-                      "name": "digit"
+                      "name": "float"
                     }
                   ]
                 },
@@ -1168,7 +1168,7 @@
                           },
                           {
                             "type": "SYMBOL",
-                            "name": "digit"
+                            "name": "float"
                           }
                         ]
                       }
@@ -1236,7 +1236,7 @@
                     "members": [
                       {
                         "type": "SYMBOL",
-                        "name": "digit"
+                        "name": "float"
                       },
                       {
                         "type": "SYMBOL",

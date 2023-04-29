@@ -87,7 +87,7 @@
           "named": true
         },
         {
-          "type": "digit",
+          "type": "float",
           "named": true
         },
         {
@@ -103,7 +103,7 @@
           "named": true
         },
         {
-          "type": "string_literal",
+          "type": "string",
           "named": true
         },
         {
@@ -245,7 +245,7 @@
           "named": true
         },
         {
-          "type": "digit",
+          "type": "float",
           "named": true
         },
         {
@@ -257,7 +257,7 @@
           "named": true
         },
         {
-          "type": "string_literal",
+          "type": "string",
           "named": true
         },
         {
@@ -281,7 +281,7 @@
       "required": false,
       "types": [
         {
-          "type": "digit",
+          "type": "float",
           "named": true
         },
         {
@@ -308,7 +308,7 @@
           "named": true
         },
         {
-          "type": "digit",
+          "type": "float",
           "named": true
         },
         {
@@ -316,7 +316,7 @@
           "named": true
         },
         {
-          "type": "string_literal",
+          "type": "string",
           "named": true
         },
         {
@@ -354,7 +354,7 @@
           "named": true
         },
         {
-          "type": "string_literal",
+          "type": "string",
           "named": true
         }
       ]
@@ -381,7 +381,7 @@
           "named": true
         },
         {
-          "type": "digit",
+          "type": "float",
           "named": true
         },
         {
@@ -405,7 +405,7 @@
           "named": true
         },
         {
-          "type": "string_literal",
+          "type": "string",
           "named": true
         },
         {
@@ -484,7 +484,7 @@
           "named": true
         },
         {
-          "type": "string_literal",
+          "type": "string",
           "named": true
         }
       ]
@@ -566,7 +566,7 @@
     }
   },
   {
-    "type": "string_literal",
+    "type": "string",
     "named": true,
     "fields": {}
   },
@@ -579,7 +579,7 @@
         "required": false,
         "types": [
           {
-            "type": "digit",
+            "type": "float",
             "named": true
           },
           {
@@ -601,7 +601,7 @@
             "named": true
           },
           {
-            "type": "digit",
+            "type": "float",
             "named": true
           },
           {
@@ -613,7 +613,7 @@
             "named": true
           },
           {
-            "type": "string_literal",
+            "type": "string",
             "named": true
           },
           {
@@ -641,7 +641,7 @@
           "named": true
         },
         {
-          "type": "digit",
+          "type": "float",
           "named": true
         },
         {
@@ -649,7 +649,7 @@
           "named": true
         },
         {
-          "type": "string_literal",
+          "type": "string",
           "named": true
         },
         {
@@ -676,7 +676,7 @@
           "named": true
         },
         {
-          "type": "string_literal",
+          "type": "string",
           "named": true
         }
       ]
@@ -691,7 +691,7 @@
       "required": true,
       "types": [
         {
-          "type": "string_literal",
+          "type": "string",
           "named": true
         },
         {
@@ -798,12 +798,12 @@
     "named": false
   },
   {
-    "type": "digit",
-    "named": true
-  },
-  {
     "type": "false",
     "named": false
+  },
+  {
+    "type": "float",
+    "named": true
   },
   {
     "type": "integer",
