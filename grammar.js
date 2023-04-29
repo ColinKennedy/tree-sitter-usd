@@ -141,6 +141,9 @@ module.exports = grammar(
             //
             attribute_type: $ => choice(seq($._identifier, "[]"), $._identifier),
 
+            // TODO: See if I can simplify values so that _metadata_value and
+            // _attribute_value just become the same
+            //
             _base_value: $ => choice(  // Consider adding a $.list, to this or $._attribute_value
                 $.bool,
                 $.float,
@@ -151,20 +154,19 @@ module.exports = grammar(
             _metadata_value: $ => choice(
                 $.arc_path,
                 $.dictionary,
-                $._dictionary_assignment,
                 $._base_value,
             ),
             _attribute_value: $ => choice($.asset_path, $._base_value),
-            _dictionary_assignment: $ => seq(
-                "{",
-                repeat(seq($._dictionary_type, choice($.identifier, $.string), "=", $.dictionary)),
-                "}",
-            ),
             dictionary: $ => prec(
                 3,
                 seq(
                     "{",
-                    repeat(seq($.attribute_type, $.identifier, "=", $._attribute_value)),
+                    repeat(
+                        choice(
+                            $._inner_dictionary_assignment,
+                            $._inner_attribute_assignment,
+                        ),
+                    ),
                     "}",
                 )
             ),
@@ -208,6 +210,19 @@ module.exports = grammar(
             prim_paths: $ => seq("[", repeat(seq($.prim_path, optional(","))), "]"),
 
             // Various syntax components
+            _inner_attribute_assignment: $ => seq(
+                $.attribute_type,
+                $.identifier,
+                "=",
+                choice($.list, $._attribute_value),
+            ),
+            _inner_dictionary_assignment: $ => seq(
+                $._dictionary_type,
+                choice($.identifier, $.string),  // ``$.string`` seems to be uncommon
+                "=",
+                $.dictionary,
+            ),
+
             layer_offset: $ => seq(
                 "(",
                 semicolon_separated(seq($.identifier, "=", $.float)),
