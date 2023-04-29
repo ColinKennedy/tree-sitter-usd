@@ -32,14 +32,14 @@ plug-ins showing off what you can do using this USD parser.
 ##### Display And Move Through A Prim Tree
 Effortlessly move in, out, or around any USD Prim, no matter how large it is.
 
-TODO GIF
+https://user-images.githubusercontent.com/10103049/235325105-1490fb62-4c95-46bf-a170-50df4c7409ff.mp4
 
 
 ##### Prim Tree Based On Your Current Position
 Many times I find myself thinking "I'm in a nested Prim but I actually need to
 go one down, and over". This aerial.nvim view is super good at moving around.
 
-TODO GIF
+https://user-images.githubusercontent.com/10103049/235325115-a74d68c6-8f2d-40dd-a7ff-d58240f9b1cd.mp4
 
 
 #### Syntax Highlighting
