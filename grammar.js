@@ -11,11 +11,11 @@ module.exports = grammar(
             module: $ => repeat($._statement),
 
             _statement: $ => choice(
-                $.prim_definition,
                 $.attribute_assignment,
                 $.attribute_declaration,
                 $.comment,
                 $.metadata,
+                $.prim_definition,
                 $.relationship_assignment,
                 $.relationship_declaration,
             ),
