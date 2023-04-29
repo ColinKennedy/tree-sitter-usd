@@ -233,6 +233,10 @@
       "required": false,
       "types": [
         {
+          "type": "None",
+          "named": true
+        },
+        {
           "type": "asset_path",
           "named": true
         },
@@ -245,11 +249,19 @@
           "named": true
         },
         {
+          "type": "dictionary",
+          "named": true
+        },
+        {
           "type": "float",
           "named": true
         },
         {
           "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "list",
           "named": true
         },
         {
@@ -299,6 +311,10 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "None",
+          "named": true
+        },
         {
           "type": "asset_path",
           "named": true
@@ -368,6 +384,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "None",
+          "named": true
+        },
         {
           "type": "arc_path",
           "named": true
@@ -593,6 +613,10 @@
         "required": false,
         "types": [
           {
+            "type": "None",
+            "named": true
+          },
+          {
             "type": "asset_path",
             "named": true
           },
@@ -632,6 +656,10 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "None",
+          "named": true
+        },
         {
           "type": "asset_path",
           "named": true
