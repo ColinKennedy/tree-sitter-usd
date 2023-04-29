@@ -69,10 +69,13 @@ def "foo" (
       (metadata_assignment
         (orderer)
         (identifier)
-        (list
-          (asset_path)
-          (asset_path)
-          (asset_path))))
+        (list_proxy
+          (arc_path
+            (asset_path))
+          (arc_path
+            (asset_path))
+          (arc_path
+            (asset_path)))))
     (block)))
 
 
@@ -109,7 +112,7 @@ def "RootMulti" (
     (metadata
       (metadata_assignment
         (identifier)
-        (list
+        (list_proxy
           (arc_path
             (asset_path)
             (prim_path))

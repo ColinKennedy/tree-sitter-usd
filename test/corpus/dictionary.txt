@@ -1,0 +1,67 @@
+==============================================================================
+dictionary within dictionary
+==============================================================================
+
+# Example parameters metadata
+def "Params" (
+    # These are the parameters that affect any payload that composes them.
+    UsdExample_depth = 5
+    UsdExample_num = 3
+    UsdExample_radius = 50.0
+    # This is an example of the dictionary value for overriding particular
+    # parameters on a payload with a matching payloadId in its file format
+    # arguments.
+    UsdExample_argDict = {
+        # Overrides for the specifically named Foo payload
+        dictionary "Foo" = {
+            int UsdExample_depth = 5
+            int UsdExample_num = 4
+        }
+        # Overrides for the specifically named Bar payload
+        dictionary "Bar" = {
+            double UsdExample_height = 5
+        }
+    }
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (comment)
+  (prim_definition
+    (prim_type)
+    (string_literal)
+    (metadata
+      (comment)
+      (metadata_assignment
+        (identifier)
+        (digit))
+      (metadata_assignment
+        (identifier)
+        (digit))
+      (metadata_assignment
+        (identifier)
+        (digit))
+      (comment)
+      (comment)
+      (comment)
+      (metadata_assignment
+        (identifier)
+        (comment)
+        (string_literal)
+        (dictionary
+          (attribute_type)
+          (identifier)
+          (digit)
+          (attribute_type)
+          (identifier)
+          (digit))
+        (comment)
+        (string_literal)
+        (dictionary
+          (attribute_type)
+          (identifier)
+          (digit))))
+    (block)))

@@ -61,8 +61,12 @@ Layer metadata
       (digit))
     (metadata_assignment
       (identifier)
-      (list
-        (asset_path)
-        (asset_path)
-        (asset_path)
-        (asset_path)))))
+      (list_proxy
+        (arc_path
+          (asset_path))
+        (arc_path
+          (asset_path))
+        (arc_path
+          (asset_path))
+        (arc_path
+          (asset_path))))))

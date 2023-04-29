@@ -71,8 +71,9 @@ over "SomeSphere" (
             (metadata_assignment
               (orderer)
               (identifier)
-              (list
-                (asset_path))))
+              (list_proxy
+                (arc_path
+                  (asset_path)))))
           (block))))))
 
 ==============================================================================
@@ -151,8 +152,9 @@ over "SomeSphere" (
             (metadata_assignment
               (orderer)
               (identifier)
-              (list
-                (asset_path))))
+              (list_proxy
+                (arc_path
+                  (asset_path)))))
           (block
             (prim_definition
               (prim_type)

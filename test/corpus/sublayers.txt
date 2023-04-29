@@ -28,8 +28,9 @@ subLayers - single
   (metadata
     (metadata_assignment
       (identifier)
-      (list
-        (asset_path)))))
+      (list_proxy
+        (arc_path
+          (asset_path))))))
 
 ==============================================================================
 subLayers - multiple
@@ -45,10 +46,13 @@ subLayers - multiple
   (metadata
     (metadata_assignment
       (identifier)
-      (list
-        (asset_path)
-        (asset_path)
-        (asset_path)))))
+      (list_proxy
+        (arc_path
+          (asset_path))
+        (arc_path
+          (asset_path))
+        (arc_path
+          (asset_path))))))
 
 ==============================================================================
 subLayers - multiple and trailing comma
@@ -64,7 +68,10 @@ subLayers - multiple and trailing comma
   (metadata
     (metadata_assignment
       (identifier)
-      (list
-        (asset_path)
-        (asset_path)
-        (asset_path)))))
+      (list_proxy
+        (arc_path
+          (asset_path))
+        (arc_path
+          (asset_path))
+        (arc_path
+          (asset_path))))))

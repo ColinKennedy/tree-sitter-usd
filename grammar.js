@@ -7,13 +7,6 @@ module.exports = grammar(
             /[\s\f\uFEFF\u2060\u200B]|\\\r?\n/
         ],
 
-        // precedences: $ => [
-        //     [$.attribute_assignment],
-        //     // [$._attribute_value
-        //     // [$.asset_paths, $.prim_paths],
-        //     // // [$.attribute_assignment, $.attribute_declaration],
-        // ],
-
         rules: {
             module: $ => repeat($._statement),
 
@@ -124,22 +117,31 @@ module.exports = grammar(
                 $._extra_type,
             ),
             _base_value: $ => choice(  // Consider adding a $.list, to this or $._attribute_value
-                $.dictionary,
                 $.digit,
                 $.prim_path,
                 $.string_literal,
                 $.tuple,
             ),
-            _metadata_value: $ => choice($.arc_path, $._base_value),
+            // TODO: Possibly remove `_attribute_value` / `_metadata_value`
+            _metadata_value: $ => choice(
+                $.arc_path,
+                $.dictionary,
+                seq("{", repeat(seq($._dictionary_type, $.string_literal, "=", $.dictionary)), "}"),
+                $._base_value,
+            ),
             _attribute_value: $ => choice($.asset_path, $._base_value),
-            dictionary: $ => seq(  // TODO: Finish, later
-                "{",
-                repeat(seq($.attribute_type, $.identifier, "=", $._attribute_value)),
-                "}",
+            dictionary: $ => prec(
+                3,
+                seq(
+                    "{",
+                    repeat(seq($.attribute_type, $.identifier, "=", $._attribute_value)),
+                    "}",
+                )
             ),
             digit: $ => /-?\d+[\.\d]*(e[-]\d+[\.\d]*)?/,
             identifier: $ => /[a-zA-Z0-9_:\.]+/i,
             integer: $ => /-?\d+/,
+            list_proxy: $ => seq("[", comma_separated($.arc_path), optional(","), "]"),
             list: $ => prec(
                 2,
                 seq(
@@ -166,7 +168,7 @@ module.exports = grammar(
             ),
 
             // Special types
-            arc_path: $ => seq($.asset_path, optional($.prim_path), optional($.layer_offset)),
+            arc_path: $ => prec(3, seq($.asset_path, optional($.prim_path), optional($.layer_offset))),
             asset_path: $ => seq("@", /[^@]+/, "@"),
             prim_path: $ => seq("<", /[^<>]+/, ">"),
             prim_paths: $ => seq("[", repeat(seq($.prim_path, optional(","))), "]"),
@@ -228,7 +230,7 @@ module.exports = grammar(
                 optional($.orderer),
                 $.identifier,
                 "=",
-                choice($.list, $._metadata_value),
+                choice($.list_proxy, $.list, $._metadata_value),
             ),
             metadata: $ => seq(
                 "(",
