@@ -1,4 +1,30 @@
 ==============================================================================
+Relationship declaration
+==============================================================================
+rel material:binding:collection:Erasers
+
+------------------------------------------------------------------------------
+
+(module
+  (relationship_declaration
+    (identifier)))
+
+==============================================================================
+Relationship declaration with metadata
+==============================================================================
+rel material:binding:collection:Erasers (doc="asdfasdf")
+
+------------------------------------------------------------------------------
+
+(module
+  (relationship_declaration
+    (identifier))
+  (metadata
+    (metadata_assignment
+      (identifier)
+      (string_literal))))
+
+==============================================================================
 Relationship nested material namespace
 ==============================================================================
 rel material:binding:collection:Erasers = [

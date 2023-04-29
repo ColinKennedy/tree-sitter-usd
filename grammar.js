@@ -13,12 +13,13 @@ module.exports = grammar(
             _statement: $ => choice(
                 // TODO: Remove the non prim-definition / comment from this, later
                 $.prim_definition,
+                // TODO: Add this
+                // $.attribute_declaration,
                 $.attribute_assignment,
-                $.relationship_assignment,
-                $.metadata,
                 $.comment,
-                // TODO: Add this later, maybe
-                // prec(2, $.attribute_declaration),
+                $.metadata,
+                $.relationship_assignment,
+                $.relationship_declaration,
                 // prec(3, $.attribute_assignment),
             ),
 
@@ -40,12 +41,15 @@ module.exports = grammar(
                     choice(
                         $.prim_definition,
 
+                        // Most USD files use these
+                        $.attribute_assignment,
                         $.relationship_assignment,
-
-                        // $.attribute_declaration,  // Useful for USD schema files TODO Add
-                        $.attribute_assignment,  // Most USD files prefer this
-
                         $.variant_set_definition,
+
+                        // TODO: Add these
+                        // Useful for USD schema files
+                        // $.attribute_declaration,
+                        $.relationship_declaration,
                     )
                 ),
                 "}",
@@ -86,11 +90,22 @@ module.exports = grammar(
                 )
             ),
 
-            relationship_assignment: $ => seq(
-                "rel",
-                $.identifier,
-                "=",
-                choice($.prim_paths, $.prim_path),
+            relationship_declaration: $ => prec.left(
+                2,
+                seq(
+                    "rel", $.identifier,
+                    optional($.metadata),
+                )
+            ),
+
+            relationship_assignment: $ => prec.left(2,
+                seq(
+                    "rel",
+                    $.identifier,
+                    "=",
+                    choice($.prim_paths, $.prim_path),
+                    optional($.metadata),
+                ),
             ),
 
             variant_set_definition: $ => seq(

@@ -1,4 +1,104 @@
 ==============================================================================
+Attribute declarations
+==============================================================================
+class "ParamsAPI"
+{
+    double params:mass (
+        doc = "Double value denoting mass"
+    )
+    double params:velocity (
+        doc = "Double value denoting velocity"
+    )
+    double params:volume (
+        doc = "Double value denoting volume"
+    )
+}
+
+------------------------------------------------------------------------------
+
+(block)
+
+==============================================================================
+Prim - over - empty
+==============================================================================
+
+over "thing" {}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string_literal)
+    (block)))
+
+==============================================================================
+Prim - over - empty, with a schema
+==============================================================================
+
+over Scope "thing" {}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string_literal)
+    (block)))
+
+==============================================================================
+Prim with metadata
+==============================================================================
+
+def Scope "something" (
+    kind = "component"
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string_literal)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (string_literal)))
+    (block)))
+
+==============================================================================
+Prim with block + metadata
+==============================================================================
+
+def Scope "something" (
+    kind = "component"
+)
+{
+    custom int value = 8
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string_literal)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (string_literal)))
+    (block
+      (attribute_assignment
+        (custom)
+        (attribute_type)
+        (identifier)
+        (digit)))))
+==============================================================================
 Attribute - asset
 ==============================================================================
 
