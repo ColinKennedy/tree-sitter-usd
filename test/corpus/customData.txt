@@ -1,4 +1,31 @@
 ==============================================================================
+customData - empty
+==============================================================================
+
+class UsdShadeTestPlugConfiguredType "UsdShadeTestPlugConfiguredType" (
+    inherits = </NodeGraph>
+    customData = {}
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (prim_path))
+      (metadata_assignment
+        (identifier)
+        (dictionary)))
+    (block)))
+
+==============================================================================
 customData - simple
 ==============================================================================
 
