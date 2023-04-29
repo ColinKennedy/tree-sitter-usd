@@ -13,10 +13,6 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "prim_definition"
-        },
-        {
-          "type": "SYMBOL",
           "name": "attribute_assignment"
         },
         {
@@ -30,6 +26,10 @@
         {
           "type": "SYMBOL",
           "name": "metadata"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "prim_definition"
         },
         {
           "type": "SYMBOL",
@@ -561,15 +561,15 @@
       "members": [
         {
           "type": "SYMBOL",
+          "name": "None"
+        },
+        {
+          "type": "SYMBOL",
           "name": "bool"
         },
         {
           "type": "SYMBOL",
           "name": "float"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "None"
         },
         {
           "type": "SYMBOL",
