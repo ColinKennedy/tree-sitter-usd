@@ -194,19 +194,27 @@ module.exports = grammar(
             string: $ => choice($._string, $._multiline_string),
             _multiline_string: $ => seq(
               '"""',
-              repeat(/[^"]/),
+              repeat(choice($._string_character_content, $._escaped_string_character)),
               '"""'
             ),
+            _asset_character_content: $ => /[^@\\]+/,
+            _escaped_asset_character: $ => seq("\\", /[^@]/),
+            _string_character_content: $ => /[^"\\]+/,
+            _escaped_string_character: $ => seq("\\", /[^\"]/),
             _string: $ => seq(
               '"',
-              repeat(/[^"]/),
+              repeat(choice($._string_character_content, $._escaped_string_character)),
               '"'
             ),
 
             // Special types
             _dictionary_type: $ => "dictionary",
             arc_path: $ => prec(3, seq($.asset_path, optional($.prim_path), optional($.layer_offset))),
-            asset_path: $ => seq("@", /[^@]+/, "@"),
+            asset_path: $ => seq(
+                "@",
+                repeat(choice($._asset_character_content, $._escaped_asset_character)),
+                "@",
+            ),
             prim_path: $ => seq("<", /[^<>]+/, ">"),
             prim_paths: $ => seq("[", repeat(seq($.prim_path, optional(","))), "]"),
 

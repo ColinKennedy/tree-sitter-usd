@@ -42,7 +42,7 @@ def "World"
                 double templateStartTime = 1
                 double templateStride    = 1
                 double2[] active = [(0, 0)]
-                double2[] times = [(101, 101), (102, 102)],
+                double2[] times = [(101, 101), (102, 102)]
                 string primPath = "/points"
                 string templateAssetPath = "./p.###.usda"
             }
@@ -65,21 +65,44 @@ def "World"
         (metadata
           (metadata_assignment
             (identifier)
-            (identifier)
             (dictionary
-              (attribute_type)
               (identifier)
-              (string)
-              (attribute_type)
-              (identifier)
-              (float)
-              (attribute_type)
-              (identifier)
-              (float)
-              (attribute_type)
-              (identifier)
-              (float)
-              (attribute_type)
-              (identifier)
-              (string))))
+              (dictionary
+                (attribute_type)
+                (identifier)
+                (asset_path)
+                (attribute_type)
+                (identifier)
+                (list
+                  (asset_path))
+                (attribute_type)
+                (identifier)
+                (float)
+                (attribute_type)
+                (identifier)
+                (float)
+                (attribute_type)
+                (identifier)
+                (float)
+                (attribute_type)
+                (identifier)
+                (list
+                  (tuple
+                    (float)
+                    (float)))
+                (attribute_type)
+                (identifier)
+                (list
+                  (tuple
+                    (float)
+                    (float))
+                  (tuple
+                    (float)
+                    (float)))
+                (attribute_type)
+                (identifier)
+                (string)
+                (attribute_type)
+                (identifier)
+                (string)))))
         (block)))))

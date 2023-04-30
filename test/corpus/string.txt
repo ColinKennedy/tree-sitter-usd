@@ -10,4 +10,12 @@ def "foo" (
 
 ------------------------------------------------------------------------------
 
-(block)
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (string)))
+    (block)))
