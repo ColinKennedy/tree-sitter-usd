@@ -118,7 +118,15 @@ class "Base" (
 
 ------------------------------------------------------------------------------
 
-(block)
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (string)))
+    (block)))
 
 ==============================================================================
 String - escaped double multi-delimiter quotes
@@ -132,7 +140,15 @@ class "Base" (
 
 ------------------------------------------------------------------------------
 
-(block)
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (string)))
+    (block)))
 
 ==============================================================================
 String - escaped single quotes
@@ -146,7 +162,15 @@ class "Base" (
 
 ------------------------------------------------------------------------------
 
-(block)
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (string)))
+    (block)))
 
 ==============================================================================
 String - escaped single multi-delimiter quotes
@@ -160,4 +184,12 @@ class "Base" (
 
 ------------------------------------------------------------------------------
 
-(block)
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (string)))
+    (block)))

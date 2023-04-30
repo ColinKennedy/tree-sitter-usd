@@ -202,22 +202,22 @@ module.exports = grammar(
             ),
             _double_multi_delimiter_string: $ => seq(
               '"""',
-              repeat(choice(/[^"\\]+/, seq("\\", /[^\"]/))),
+              repeat(choice(/[^"\\]+/, '\\"')),
               '"""',
             ),
             _double_quote_string: $ => seq(
               '"',
-              repeat(choice(/[^"\\]+/, seq("\\", /[^\"]/))),
+              repeat(choice(/[^"\\]+/, '\\"')),
               '"',
             ),
             _single_multi_delimiter_string: $ => seq(
               "'''",
-              repeat(choice(/[^'\\]+/, seq("\\", /[^\']/))),
+              repeat(choice(/[^'\\]+/, "\\'")),
               "'''",
             ),
             _single_quote_string: $ => seq(
               "'",
-              repeat(choice(/[^'\\]+/, seq("\\", /[^\']/))),
+              repeat(choice(/[^'\\]+/, "\\'")),
               "'",
             ),
 
