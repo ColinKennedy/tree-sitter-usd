@@ -427,3 +427,49 @@ def Xform "World" (
             (attribute_type)
             (identifier)
             (string)))))))
+
+
+==============================================================================
+Attribute - bool
+==============================================================================
+
+def "foo"
+{
+    bool value1 = False
+    bool value2 = false
+    bool value3 = True
+    bool value4 = true
+    bool value5 = 1
+    bool value6 = 0
+}
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (bool))
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (bool))
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (bool))
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (bool))
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (float))
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (float)))))

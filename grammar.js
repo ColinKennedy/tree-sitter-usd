@@ -172,7 +172,8 @@ module.exports = grammar(
                 )
             ),
             None: $ => "None",
-            bool: $ => choice("false", "true"),
+            // Both capital and undercase ``bool`` are accepted
+            bool: $ => choice("False", "True", "false", "true"),
             float: $ => /-?(\d*\.)?\d+(e[-+]\d+[\.\d]*)?/,
             _identifier: $ => /[a-zA-Z0-9_:\.]+/i,
             identifier: $ => $._identifier,  // TODO: Is expanded unicode allowed?
@@ -233,19 +234,6 @@ module.exports = grammar(
             prim_paths: $ => seq("[", repeat(seq($.prim_path, optional(","))), "]"),
 
             // Various syntax components
-            _inner_attribute_assignment: $ => seq(
-                $.attribute_type,
-                $.identifier,
-                "=",
-                choice($.list, $._attribute_value),
-            ),
-            _inner_dictionary_assignment: $ => seq(
-                $._dictionary_type,
-                choice($.identifier, $.string),  // ``$.string`` seems to be uncommon
-                "=",
-                $.dictionary,
-            ),
-
             layer_offset: $ => seq(
                 "(",
                 semicolon_separated(seq($.identifier, "=", $.float)),
@@ -267,6 +255,40 @@ module.exports = grammar(
                     "}",
                 )
             ),
+
+            _inner_attribute_assignment: $ => seq(
+                $.attribute_type,
+                choice(
+                    $.identifier,
+                    // It's rare but it's valid for a dict to contain string identifiers
+                    // e.g.
+                    //
+                    //     #usda 1.0
+                    //
+                    //     def Scope "root" (
+                    //         customData = {
+                    //             string "foo" = "bar"
+                    //         }
+                    //         kind = "group"
+                    //     )
+                    //     {
+                    //     }
+                    //
+                    // The ``"foo"`` is valid and USD auto-converts it to
+                    // ``foo`` at the earliest opportunity.
+                    //
+                    $.string,
+                ),
+                "=",
+                choice($.list, $._attribute_value),
+            ),
+            _inner_dictionary_assignment: $ => seq(
+                $._dictionary_type,
+                choice($.identifier, $.string),  // ``$.string`` seems to be uncommon
+                "=",
+                $.dictionary,
+            ),
+
         }
     }
 )
