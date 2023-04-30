@@ -299,7 +299,7 @@ def "foo"
             (string)))))))
 
 ==============================================================================
-Attribute - float bug fix
+Attribute - digit without prefix
 ==============================================================================
 
 def "root"
@@ -360,5 +360,70 @@ def "root"
           (float))
         (metadata
           (metadata_assignment
+            (identifier)
+            (string)))))))
+
+==============================================================================
+Attribute - scientific notation with e+123
+==============================================================================
+
+def Xform "World" (
+    kind = "group"
+)
+{
+    def Xform "Lights" (
+        kind = "model"
+    )
+    {
+        float3[] extentsHint.timeSamples = {
+            1: [(3.40282e+38, 3.40282e+38, 3.40282e+38), (-3.40282e+38, -3.40282e+38, -3.40282e+38)],
+        }
+        uniform bool important = 0
+        string ri:attributes:user:ModelInstance = "Lights"
+    }
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (string)))
+    (block
+      (prim_definition
+        (prim_type)
+        (identifier)
+        (string)
+        (metadata
+          (metadata_assignment
+            (identifier)
+            (string)))
+        (block
+          (attribute_assignment
+            (attribute_type)
+            (identifier)
+            (timeSamples
+              (float)
+              (list
+                (tuple
+                  (float)
+                  (float)
+                  (float))
+                (tuple
+                  (float)
+                  (float)
+                  (float)))))
+          (attribute_assignment
+            (uniform)
+            (attribute_type)
+            (identifier)
+            (float))
+          (attribute_assignment
+            (attribute_type)
             (identifier)
             (string)))))))

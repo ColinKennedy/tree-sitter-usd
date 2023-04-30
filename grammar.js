@@ -173,7 +173,7 @@ module.exports = grammar(
             ),
             None: $ => "None",
             bool: $ => choice("false", "true"),
-            float: $ => /-?(\d*\.)?\d+(e[-]\d+[\.\d]*)?/,
+            float: $ => /-?(\d*\.)?\d+(e[-+]\d+[\.\d]*)?/,
             _identifier: $ => /[a-zA-Z0-9_:\.]+/i,
             identifier: $ => $._identifier,  // TODO: Is expanded unicode allowed?
             integer: $ => /-?\d+/,
@@ -191,28 +191,42 @@ module.exports = grammar(
                 ),
             ),
             tuple: $ => seq("(", comma_separated($._attribute_value), optional(","), ")"),
-            string: $ => choice($._string, $._multiline_string),
-            _multiline_string: $ => seq(
+
+            // String related types and components
+            string: $ => choice(
+                $._double_quote_string,
+                $._double_multi_delimiter_string,
+                $._single_quote_string,
+                $._single_multi_delimiter_string,
+            ),
+            _double_multi_delimiter_string: $ => seq(
               '"""',
-              repeat(choice($._string_character_content, $._escaped_string_character)),
-              '"""'
+              repeat(choice(/[^"\\]+/, seq("\\", /[^\"]/))),
+              '"""',
             ),
-            _asset_character_content: $ => /[^@\\]+/,
-            _escaped_asset_character: $ => seq("\\", /[^@]/),
-            _string_character_content: $ => /[^"\\]+/,
-            _escaped_string_character: $ => seq("\\", /[^\"]/),
-            _string: $ => seq(
+            _double_quote_string: $ => seq(
               '"',
-              repeat(choice($._string_character_content, $._escaped_string_character)),
-              '"'
+              repeat(choice(/[^"\\]+/, seq("\\", /[^\"]/))),
+              '"',
             ),
+            _single_multi_delimiter_string: $ => seq(
+              "'''",
+              repeat(choice(/[^'\\]+/, seq("\\", /[^\']/))),
+              "'''",
+            ),
+            _single_quote_string: $ => seq(
+              "'",
+              repeat(choice(/[^'\\]+/, seq("\\", /[^\']/))),
+              "'",
+            ),
+
 
             // Special types
             _dictionary_type: $ => "dictionary",
             arc_path: $ => prec(3, seq($.asset_path, optional($.prim_path), optional($.layer_offset))),
             asset_path: $ => seq(
                 "@",
-                repeat(choice($._asset_character_content, $._escaped_asset_character)),
+                repeat(choice(/[^@\\]+/, seq("\\", /[^@]/))),
                 "@",
             ),
             prim_path: $ => seq("<", /[^<>]+/, ">"),

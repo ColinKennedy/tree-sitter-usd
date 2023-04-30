@@ -19,3 +19,54 @@ def "foo" (
         (identifier)
         (string)))
     (block)))
+
+
+==============================================================================
+String with single quotes
+==============================================================================
+
+#usda 1.0
+
+def Scope "root"
+{
+    string foo = 'blah'
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (comment)
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (string)))))
+
+==============================================================================
+String with multi-delimiter single quotes
+==============================================================================
+
+#usda 1.0
+
+def Scope "root"
+{
+    string foo = '''blah'''
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (comment)
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (string)))))
