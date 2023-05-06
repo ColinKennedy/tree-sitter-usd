@@ -1,0 +1,29 @@
+def "foo"
+{
+    float value.timeSamples = {
+    # <- type
+    #     ^ variable
+    #           ^ property
+      -414: 14.4
+      # <- number
+      #     ^ float
+      10: 201.0,
+      # <- number
+      #   ^ float
+      10.123: 201.0123,
+      # <- float
+      #       ^ float
+    }
+}
+
+def "foo"
+{
+    float3[] extent.timeSamples = {
+    # <- type
+    #        ^ variable
+    #               ^ property
+        1: [(1, 1, 1), (1, 1, 1)],
+        # <- number
+        #    ^ number
+    }
+}

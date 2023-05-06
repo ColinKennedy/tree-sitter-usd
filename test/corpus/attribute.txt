@@ -1,0 +1,751 @@
+==============================================================================
+Attribute declarations
+==============================================================================
+
+class "ParamsAPI"
+{
+    double params:mass (
+        doc = "Double value denoting mass"
+    )
+    double params:velocity (
+        doc = "Double value denoting velocity"
+    )
+    double params:volume (
+        doc = "Double value denoting volume"
+    )
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (block
+      (attribute_declaration
+        (attribute_type)
+        (qualified_identifier
+          (namespace_identifier)
+          (identifier))
+        (metadata
+          (metadata_assignment
+            (identifier)
+            (string))))
+      (attribute_declaration
+        (attribute_type)
+        (qualified_identifier
+          (namespace_identifier)
+          (identifier))
+        (metadata
+          (metadata_assignment
+            (identifier)
+            (string))))
+      (attribute_declaration
+        (attribute_type)
+        (qualified_identifier
+          (namespace_identifier)
+          (identifier))
+        (metadata
+          (metadata_assignment
+            (identifier)
+            (string)))))))
+
+==============================================================================
+Attribute - None
+==============================================================================
+
+float thing = None
+
+------------------------------------------------------------------------------
+
+(module
+  (attribute_assignment
+    (attribute_type)
+    (identifier)
+    (None)))
+
+
+==============================================================================
+Prim - over - empty
+==============================================================================
+
+over "thing" {}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (block)))
+
+==============================================================================
+Prim - over - empty, with a schema
+==============================================================================
+
+over Scope "thing" {}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (block)))
+
+==============================================================================
+Prim with metadata
+==============================================================================
+
+def Scope "something" (
+    kind = "component"
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (string)))
+    (block)))
+
+==============================================================================
+Prim with block + metadata
+==============================================================================
+
+def Scope "something" (
+    kind = "component"
+)
+{
+    custom int value = 8
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (string)))
+    (block
+      (attribute_assignment
+        (custom)
+        (attribute_type)
+        (identifier)
+        (integer)))))
+
+==============================================================================
+Attribute - custom attribute
+==============================================================================
+
+custom float value = 10.31231424141
+
+------------------------------------------------------------------------------
+
+(module
+  (attribute_assignment
+    (custom)
+    (attribute_type)
+    (identifier)
+    (float)))
+
+==============================================================================
+Attribute - custom uniform attribute
+==============================================================================
+
+custom uniform float value = 10.31231424141
+
+------------------------------------------------------------------------------
+
+(module
+  (attribute_assignment
+    (custom)
+    (uniform)
+    (attribute_type)
+    (identifier)
+    (float)))
+
+==============================================================================
+Attribute - uniform attribute
+==============================================================================
+
+uniform float value = 10.31231424141
+
+------------------------------------------------------------------------------
+
+(module
+  (attribute_assignment
+    (uniform)
+    (attribute_type)
+    (identifier)
+    (float)))
+
+==============================================================================
+Simple Attribute definition
+==============================================================================
+
+#usda 1.0
+
+def Scope "Prim"
+{
+    int value = 8
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (comment)
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (integer)))))
+
+==============================================================================
+Attribute namespace - shader input
+==============================================================================
+
+#usda 1.0
+
+def Scope "Prim"
+{
+    color3f input:value.connect = </some/prim>
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (comment)
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (qualified_identifier
+          (namespace_identifier)
+          (identifier))
+        (attribute_property)
+        (prim_path)))))
+
+==============================================================================
+Attribute nested namespace
+==============================================================================
+
+#usda 1.0
+
+def Scope "Prim"
+{
+    color3f foo:bar:value.connect = </some/prim>
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (comment)
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (qualified_identifier
+          (namespace_identifier
+            (namespace_identifier)
+            (identifier))
+          (identifier))
+        (attribute_property)
+        (prim_path)))))
+
+==============================================================================
+Attribute - interpolation metadata
+==============================================================================
+
+def "foo"
+{
+    float[] widths1 = [.5] (interpolation = "constant")
+    float[] widths2 = [-.5] (interpolation = "vertex")
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (list
+          (float))
+        (metadata
+          (metadata_assignment
+            (identifier)
+            (string))))
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (list
+          (float))
+        (metadata
+          (metadata_assignment
+            (identifier)
+            (string)))))))
+
+==============================================================================
+Attribute - digit without prefix
+==============================================================================
+
+def "root"
+{
+    point3f[] points = [(0, 0, 0), (1, 1, 0), (1, 2, 0), (0, 3, 0), (-1, 4, 0), (-1, 5, 0), (0, 6, 0)]
+    float[] widths = [0, .5, .5, .8, .5, .5, 0] (interpolation = "varying")
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (list
+          (tuple
+            (integer)
+            (integer)
+            (integer))
+          (tuple
+            (integer)
+            (integer)
+            (integer))
+          (tuple
+            (integer)
+            (integer)
+            (integer))
+          (tuple
+            (integer)
+            (integer)
+            (integer))
+          (tuple
+            (integer)
+            (integer)
+            (integer))
+          (tuple
+            (integer)
+            (integer)
+            (integer))
+          (tuple
+            (integer)
+            (integer)
+            (integer))))
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (list
+          (integer)
+          (float)
+          (float)
+          (float)
+          (float)
+          (float)
+          (integer))
+        (metadata
+          (metadata_assignment
+            (identifier)
+            (string)))))))
+
+==============================================================================
+Attribute - scientific notation with e+123
+==============================================================================
+
+def Xform "World" (
+    kind = "group"
+)
+{
+    def Xform "Lights" (
+        kind = "model"
+    )
+    {
+        float3[] extentsHint.timeSamples = {
+            1: [(3.40282e+38, 3.40282e+38, 3.40282e+38), (-3.40282e+38, -3.40282e+38, -3.40282e+38)],
+        }
+        uniform bool important = 0
+        string ri:attributes:user:ModelInstance = "Lights"
+    }
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (string)))
+    (block
+      (prim_definition
+        (prim_type)
+        (identifier)
+        (string)
+        (metadata
+          (metadata_assignment
+            (identifier)
+            (string)))
+        (block
+          (attribute_assignment
+            (attribute_type)
+            (identifier)
+            (attribute_property)
+            (timeSamples
+              (integer)
+              (list
+                (tuple
+                  (float)
+                  (float)
+                  (float))
+                (tuple
+                  (float)
+                  (float)
+                  (float)))))
+          (attribute_assignment
+            (uniform)
+            (attribute_type)
+            (identifier)
+            (integer))
+          (attribute_assignment
+            (attribute_type)
+            (qualified_identifier
+              (namespace_identifier
+                (namespace_identifier
+                  (namespace_identifier)
+                  (identifier))
+                (identifier))
+              (identifier))
+            (string)))))))
+
+==============================================================================
+Attribute - float with no decimal
+==============================================================================
+
+def "foo"
+{
+    point3f[] points.timeSamples = {
+        1: [
+            # first curve
+            ( 4.9 , 0,  3.1 ),
+            (17.6 , 0,  3.65),
+            (21.1 , 0,  6.8 ),
+            (18.55, 0,  4.25),
+            (22.45, 0,  7.  ),
+        ]
+    }
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (attribute_property)
+        (timeSamples
+          (integer)
+          (list
+            (comment)
+            (tuple
+              (float)
+              (integer)
+              (float))
+            (tuple
+              (float)
+              (integer)
+              (float))
+            (tuple
+              (float)
+              (integer)
+              (float))
+            (tuple
+              (float)
+              (integer)
+              (float))
+            (tuple
+              (float)
+              (integer)
+              (float))))))))
+
+==============================================================================
+Attribute - float - all permutations
+==============================================================================
+
+def "foo"
+{
+    float value01 = 0.5
+    float value02 = -0.5
+    float value03 = -.5
+    float value04 = .5
+    float value05 = -5.
+    float value06 = 5.
+    float value07 = 5.1e+10
+    float value08 = 5.1e-10
+    float value09 = -5.1e+10
+    float value10 = -5.1e-10
+    float value11 = inf
+    float value12 = -inf
+    float value13 = 1e30
+    float value14 = -1e30
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (float))
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (float))
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (float))
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (float))
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (float))
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (float))
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (float))
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (float))
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (float))
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (float))
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (float))
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (float))
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (float))
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (float)))))
+
+==============================================================================
+Attribute - bool
+==============================================================================
+
+def "foo"
+{
+    bool value1 = False
+    bool value2 = false
+    bool value3 = True
+    bool value4 = true
+    bool value5 = 1
+    bool value6 = 0
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (bool))
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (bool))
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (bool))
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (bool))
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (integer))
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (integer)))))
+
+==============================================================================
+Attribute declaration - optional ; delimiter
+==============================================================================
+
+def Shader "PbrPreview"
+{
+    float inputs:opacity (doc="foo");
+    float inputs:roughness = 1
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (block
+      (attribute_declaration
+        (attribute_type)
+        (qualified_identifier
+          (namespace_identifier)
+          (identifier))
+        (metadata
+          (metadata_assignment
+            (identifier)
+            (string))))
+      (attribute_assignment
+        (attribute_type)
+        (qualified_identifier
+          (namespace_identifier)
+          (identifier))
+        (integer)))))
+
+==============================================================================
+Attribute definition - optional ; delimiter
+==============================================================================
+
+def Shader "PbrPreview"
+{
+    float inputs:opacity = 1 (doc="foo");
+    float inputs:roughness = 1
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (qualified_identifier
+          (namespace_identifier)
+          (identifier))
+        (integer)
+        (metadata
+          (metadata_assignment
+            (identifier)
+            (string))))
+      (attribute_assignment
+        (attribute_type)
+        (qualified_identifier
+          (namespace_identifier)
+          (identifier))
+        (integer)))))
+
+==============================================================================
+Attribute - add shader
+==============================================================================
+
+def Shader "foo"
+{
+    add uniform float3 inputs:diffuseColor.connect = </Parent/Materials/UvMat/Tex.outputs:color>
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (block
+      (attribute_assignment
+        (orderer)
+        (uniform)
+        (attribute_type)
+        (qualified_identifier
+          (namespace_identifier)
+          (identifier))
+        (attribute_property)
+        (prim_path)))))
+
+==============================================================================
+Attribute - namespaces
+==============================================================================
+
+int foo:bar:fizz:buzz = 10
+
+------------------------------------------------------------------------------
+
+(module
+  (attribute_assignment
+    (attribute_type)
+    (qualified_identifier
+      (namespace_identifier
+        (namespace_identifier
+          (namespace_identifier)
+          (identifier))
+        (identifier))
+      (identifier))
+    (integer)))

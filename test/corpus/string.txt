@@ -1,0 +1,307 @@
+==============================================================================
+String - empty
+==============================================================================
+
+def "foo" (
+    doc = ""
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (string)))
+    (block)))
+
+==============================================================================
+String - Non-ASCII characters
+==============================================================================
+
+def "foo" (
+    doc = "Test nested single apply API schema with a cycle #1"
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (string)))
+    (block)))
+
+==============================================================================
+String with single quotes
+==============================================================================
+
+#usda 1.0
+
+def Scope "root"
+{
+    string foo = 'blah'
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (comment)
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (string)))))
+
+==============================================================================
+String with multi-delimiter single quotes
+==============================================================================
+
+#usda 1.0
+
+def Scope "root"
+{
+    string foo = '''blah'''
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (comment)
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (string)))))
+
+==============================================================================
+String as an identifier
+==============================================================================
+
+#usda 1.0
+
+def Scope "root" (
+    customData = {
+        string "foo" = "bar"
+    }
+    kind = "group"
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (comment)
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (dictionary
+          (attribute_type)
+          (string)
+          (string)))
+      (metadata_assignment
+        (identifier)
+        (string)))
+    (block)))
+
+==============================================================================
+String - escaped double quotes
+==============================================================================
+
+class "Base" (
+    doc = "This doc should only exist on the \"Base\" class."
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (string)))
+    (block)))
+
+==============================================================================
+String - escaped double multi-delimiter quotes
+==============================================================================
+
+class "Base" (
+    doc = """This doc should only exist on the \"Base\" class."""
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (string)))
+    (block)))
+
+==============================================================================
+String - escaped single quotes
+==============================================================================
+
+class "Base" (
+    doc = 'This doc should only exist on the \'Base\' class.'
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (string)))
+    (block)))
+
+==============================================================================
+String - escaped single multi-delimiter quotes
+==============================================================================
+
+class "Base" (
+    doc = '''This doc should only exist on the \'Base\' class.'''
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (string)))
+    (block)))
+
+==============================================================================
+String - backslash characters in a double-quote string
+==============================================================================
+
+class SkelRoot "SkelRoot" (
+    doc = "foo bar \\ref thing."
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (string)))
+    (block)))
+
+==============================================================================
+String - double multi-delimiter #include statements
+==============================================================================
+
+class "PhysicsRigidBodyAPI"
+(
+    customData = {
+        string className = "RigidBodyAPI"
+        string extraIncludes = """
+#include "pxr/base/gf/matrix3f.h"
+#include "pxr/base/gf/quatf.h" """
+    }
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (dictionary
+          (attribute_type)
+          (identifier)
+          (string)
+          (attribute_type)
+          (identifier)
+          (string))))
+    (block)))
+
+==============================================================================
+String - single multi-delimiter #include statements
+==============================================================================
+
+class "PhysicsRigidBodyAPI"
+(
+    customData = {
+        string className = "RigidBodyAPI"
+        string extraIncludes = '''
+#include 'pxr/base/gf/matrix3f.h'
+#include 'pxr/base/gf/quatf.h' '''
+    }
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (dictionary
+          (attribute_type)
+          (identifier)
+          (string)
+          (attribute_type)
+          (identifier)
+          (string))))
+    (block)))

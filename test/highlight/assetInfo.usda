@@ -1,0 +1,21 @@
+def Xform "cube" (
+    assetInfo = {
+    # <- keyword
+
+        # Known keys
+        # <- comment
+        asset identifier = @./Cube.txt@
+        # <- type
+        #     ^ keyword
+        #                  ^ string.special.asset
+        asset[] payloadAssetDependencies = [@fizz.usd@, @buzz.usd@]
+        # <- type
+        #       ^ keyword
+        #                                   ^ string.special.asset
+        #                                               ^ string.special.asset
+        string version = "v1"
+        int foo = 8
+    }
+)
+{
+}

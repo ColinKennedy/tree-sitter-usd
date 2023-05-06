@@ -1,0 +1,19 @@
+def Scope "root"
+{
+    string foo01 = 'blah'
+    # <- type
+    #      ^ variable
+    #              ^ string
+    string foo02 = "blah"
+    # <- type
+    #      ^ variable
+    #              ^ string
+    string foo03 = '''blah'''
+    # <- type
+    #      ^ variable
+    #              ^ string
+    string foo04 = """blah"""
+    # <- type
+    #      ^ variable
+    #              ^ string
+}

@@ -1,0 +1,188 @@
+==============================================================================
+Comment - empty
+==============================================================================
+
+#
+
+------------------------------------------------------------------------------
+
+(module
+  (comment))
+
+==============================================================================
+Comment - single
+==============================================================================
+
+# t
+
+------------------------------------------------------------------------------
+
+(module
+  (comment))
+
+==============================================================================
+Comment - multiple text
+==============================================================================
+
+# tasdfasdfj aslkj2314
+
+------------------------------------------------------------------------------
+
+(module
+  (comment))
+
+==============================================================================
+Comment - multiple lines
+==============================================================================
+
+# something
+# another thing here
+#
+
+------------------------------------------------------------------------------
+
+(module
+  (comment)
+  (comment)
+  (comment))
+
+==============================================================================
+Comment - inline
+==============================================================================
+
+# stop
+def "root" # tasdfasdfj aslkj2314
+{ # more comments
+# thing
+} # last
+
+------------------------------------------------------------------------------
+
+(module
+  (comment)
+  (prim_definition
+    (prim_type)
+    (string)
+    (comment)
+    (block
+      (comment)
+      (comment)))
+  (comment))
+
+==============================================================================
+Comment - unicode
+==============================================================================
+
+# tasdfasdfj aslkj2314
+
+------------------------------------------------------------------------------
+
+(module
+  (comment))
+
+==============================================================================
+Comment - block text
+==============================================================================
+
+def "Root" (
+    # Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+    # incididunt ut labore et dolore magna aliqua. Eu nisl nunc mi ipsum faucibus.
+    Blah = {
+        int stuff = 15
+        int perCycle = 36
+    }
+    # Volutpat odio facilisis mauris sit amet massa. Laoreet non curabitur
+    # gravida arcu ac tortor dignissim convallis. At consectetur lorem donec
+    # massa sapien faucibus et molestie. Faucibus vitae aliquet
+    payload = @anon:dummy:cubes.usddancingcubesexample@
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (metadata
+      (comment)
+      (comment)
+      (metadata_assignment
+        (identifier)
+        (dictionary
+          (attribute_type)
+          (identifier)
+          (integer)
+          (attribute_type)
+          (identifier)
+          (integer)))
+      (comment)
+      (comment)
+      (comment)
+      (metadata_assignment
+        (identifier)
+        (arc_path
+          (asset_path))))
+    (block)))
+
+==============================================================================
+Comment - double forward-slash style
+==============================================================================
+
+def Xform "torch_2" (
+    payload = @./torch.usda@
+    kind = "model"
+)
+{
+    // Pre-published light list
+    rel lightList = [ <light> ]
+    token lightList:cacheBehavior = "consumeAndContinue"
+
+    double3 xformOp:translate = (1, 0, 0.5)
+    uniform token[] xformOpOrder = ["xformOp:translate"]
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (arc_path
+          (asset_path)))
+      (metadata_assignment
+        (identifier)
+        (string)))
+    (block
+      (comment)
+      (relationship_assignment
+        (relationship_type)
+        (identifier)
+        (prim_paths
+          (prim_path)))
+      (attribute_assignment
+        (attribute_type)
+        (qualified_identifier
+          (namespace_identifier)
+          (identifier))
+        (string))
+      (attribute_assignment
+        (attribute_type)
+        (qualified_identifier
+          (namespace_identifier)
+          (identifier))
+        (tuple
+          (integer)
+          (integer)
+          (float)))
+      (attribute_assignment
+        (uniform)
+        (attribute_type)
+        (identifier)
+        (list
+          (string))))))

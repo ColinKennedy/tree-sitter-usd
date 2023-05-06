@@ -1,0 +1,131 @@
+==============================================================================
+customData - empty
+==============================================================================
+
+class UsdShadeTestPlugConfiguredType "UsdShadeTestPlugConfiguredType" (
+    inherits = </NodeGraph>
+    customData = {}
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (arc_path
+          (prim_path)))
+      (metadata_assignment
+        (identifier)
+        (dictionary)))
+    (block)))
+
+==============================================================================
+customData - simple
+==============================================================================
+
+def Xform "World" (
+    customData = {
+        bool zUp = 1
+    }
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (dictionary
+          (attribute_type)
+          (identifier)
+          (integer))))
+    (block)))
+
+==============================================================================
+customData - schema
+==============================================================================
+
+class UsdShadeTestPlugConfiguredType "UsdShadeTestPlugConfiguredType" (
+    inherits = </NodeGraph>
+    customData = {
+        string className = "UsdShadeTestPlugConfiguredType"
+        dictionary extraPlugInfo = {
+            bool providesUsdShadeConnectableAPIBehavior = 1
+            # Notice these are opposite of NodeGraph Default, for ease of
+            # testing
+            bool isUsdShadeContainer = 0
+            bool requiresUsdShadeEncapsulation = 0
+        }
+        token[] apiSchemaAutoApplyTo = [
+            "UsdShadeMaterial",
+            "UsdShadeTestTypedHasAutoApplyRequiresEncapsulation"
+        ]
+        token[] apiSchemaOverridePropertyNames = ["overrideBaseTrueDerivedTrue"]
+        string libraryName      = "testUsdShadeConnectableAPIBehaviorClearing"
+        bool skipCodeGeneration = true
+    }
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (arc_path
+          (prim_path)))
+      (metadata_assignment
+        (identifier)
+        (dictionary
+          (attribute_type)
+          (identifier)
+          (string)
+          (attribute_type)
+          (identifier)
+          (dictionary
+            (attribute_type)
+            (identifier)
+            (integer)
+            (comment)
+            (comment)
+            (attribute_type)
+            (identifier)
+            (integer)
+            (attribute_type)
+            (identifier)
+            (integer))
+          (attribute_type)
+          (identifier)
+          (list
+            (string)
+            (string))
+          (attribute_type)
+          (identifier)
+          (list
+            (string))
+          (attribute_type)
+          (identifier)
+          (string)
+          (attribute_type)
+          (identifier)
+          (bool))))
+    (block)))

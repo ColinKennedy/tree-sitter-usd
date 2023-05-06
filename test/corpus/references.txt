@@ -1,0 +1,165 @@
+==============================================================================
+references - empty
+==============================================================================
+
+def "foo" (
+    add references = []
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (metadata
+      (metadata_assignment
+        (orderer)
+        (identifier)
+        (list)))
+    (block)))
+
+==============================================================================
+references - single item
+==============================================================================
+
+def "foo" (
+    add references = @foo.usda@
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (metadata
+      (metadata_assignment
+        (orderer)
+        (identifier)
+        (arc_path
+          (asset_path))))
+    (block)))
+
+==============================================================================
+references - multiple items
+==============================================================================
+
+def "foo" (
+    add references = [
+        @foo.usda@,
+        @./another.usda@,
+        @./last.usda@,
+    ]
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (metadata
+      (metadata_assignment
+        (orderer)
+        (identifier)
+        (list_proxy
+          (arc_path
+            (asset_path))
+          (arc_path
+            (asset_path))
+          (arc_path
+            (asset_path)))))
+    (block)))
+
+
+==============================================================================
+references - asset path + prim path
+==============================================================================
+
+#usda 1.0
+
+# Prim that demonstrates how dynamic file formate arguments can be composed from fields
+# that have been composed. The params reference brings in opinions about the metadata fields
+# the affect our dynamic payloads. The payload refence brings in a list of payloads that
+# refer to dynamic file format types. The fields composed from the params reference will
+# affect the layer content in the payloads.
+def "RootMulti" (
+    references = [@./params.usda@</Params>,
+                  @./payload.usda@</PayloadRoot>]
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (comment)
+  (comment)
+  (comment)
+  (comment)
+  (comment)
+  (comment)
+  (prim_definition
+    (prim_type)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (list_proxy
+          (arc_path
+            (asset_path)
+            (prim_path))
+          (arc_path
+            (asset_path)
+            (prim_path)))))
+    (block)))
+
+
+==============================================================================
+AssetPath - mixed primPath and assetPaths
+==============================================================================
+
+#usda 1.0
+(
+    subLayers = [@./sub1.usda@, @./sub2.usda@]
+)
+
+over "Parent" (
+    prepend references = [</InternalRef>, @./ref.usda@</RefParent>]
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (comment)
+  (metadata
+    (metadata_assignment
+      (identifier)
+      (list_proxy
+        (arc_path
+          (asset_path))
+        (arc_path
+          (asset_path)))))
+  (prim_definition
+    (prim_type)
+    (string)
+    (metadata
+      (metadata_assignment
+        (orderer)
+        (identifier)
+        (list_proxy
+          (arc_path
+            (prim_path))
+          (arc_path
+            (asset_path)
+            (prim_path)))))
+    (block)))
