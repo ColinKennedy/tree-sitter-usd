@@ -1,0 +1,63 @@
+over "SomeSphere" (
+    prepend variantSets = ["empty_one", "some_variant_set"]
+    # <- function.call
+    #       ^ keyword
+    #                      ^ string
+    variants = {
+    # <- keyword
+        string empty_one = "blah"
+        # <- type
+        #      ^ variable
+        #                  ^ string
+        string some_variant_set = "variant_name_1"
+        # <- type
+        #      ^ variable
+        #                         ^ string
+    }
+)
+{
+    double radius = 20
+
+    variantSet "empty_one" = {}
+    # <- keyword
+    #          ^ string
+
+    variantSet "some_variant_set" = {
+    # <- keyword
+    #          ^ string
+        "variant_name_1" (
+        # <- string
+            "Some comment"
+            # <- comment.documentation
+            add references = [@foo.usda@]
+            # <- function.call
+            #   ^ keyword
+            #                 ^ string.special.asset
+        )
+        {
+            over "blah"
+            # <- keyword.function
+            #    ^ string
+            {
+                color3f[] primvars:displayColor = [(1, 0, 0)]
+                # <- type
+                #         ^ namespace
+                #                                   ^ number
+            }
+        }
+
+        "variant_name_2"
+        # <- string
+        {
+            over "thing"
+            # <- keyword.function
+            #    ^ string
+            {
+                color3f[] primvars:displayColor = [(1, 0, 0)]
+                # <- type
+                #         ^ namespace
+                #                                   ^ number
+            }
+        }
+    }
+}

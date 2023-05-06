@@ -1,0 +1,69 @@
+==============================================================================
+customLayerData - empty
+==============================================================================
+
+#usda 1.0
+(
+    customLayerData = {}
+)
+
+------------------------------------------------------------------------------
+
+(module
+  (comment)
+  (metadata
+    (metadata_assignment
+      (identifier)
+      (dictionary))))
+
+==============================================================================
+customLayerData - simple
+==============================================================================
+
+#usda 1.0
+(
+    subLayers = [
+        @./root_sub.usda@
+    ]
+    customLayerData = {
+        timecode timeCode = 10.0
+        timecode[] timeCodeArray = [10.0, 20.0]
+        dictionary subDict = {
+            timecode timeCode = 10.0
+            timecode[] timeCodeArray = [10.0, 20.0]
+        }
+    }
+)
+
+------------------------------------------------------------------------------
+
+(module
+  (comment)
+  (metadata
+    (metadata_assignment
+      (identifier)
+      (list_proxy
+        (arc_path
+          (asset_path))))
+    (metadata_assignment
+      (identifier)
+      (dictionary
+        (attribute_type)
+        (identifier)
+        (float)
+        (attribute_type)
+        (identifier)
+        (list
+          (float)
+          (float))
+        (attribute_type)
+        (identifier)
+        (dictionary
+          (attribute_type)
+          (identifier)
+          (float)
+          (attribute_type)
+          (identifier)
+          (list
+            (float)
+            (float)))))))

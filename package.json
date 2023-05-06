@@ -1,23 +1,41 @@
 {
-  "name": "tree-sitter-usd",
-  "version": "1.0.0",
-  "description": "Parse Pixar's USD files, using tree-sitter ",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ColinKennedy/tree-sitter-usd.git"
-  },
-  "keywords": [
-    "usd",
-    "tree-sitter"
-  ],
-  "author": "Colin Kennedy",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ColinKennedy/tree-sitter-usd/issues"
-  },
-  "homepage": "https://github.com/ColinKennedy/tree-sitter-usd#readme"
+    "author": "Colin Kennedy",
+    "bugs": {
+        "url": "https://github.com/ColinKennedy/tree-sitter-usd/issues"
+    },
+    "dependencies": {
+        "nan": "^2.17.0"
+    },
+    "description": "Parse Pixar's USD files, using tree-sitter ",
+    "devDependencies": {
+        "tree-sitter-cli": "^0.20.8"
+    },
+    "homepage": "https://github.com/ColinKennedy/tree-sitter-usd#readme",
+    "keywords": [
+        "usd",
+        "tree-sitter"
+    ],
+    "license": "MIT",
+    "main": "bindings/node",
+    "name": "tree-sitter-usd",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ColinKennedy/tree-sitter-usd.git"
+    },
+    "scripts": {
+        "test": "tree-sitter test",
+        "test-windows": "tree-sitter test"
+    },
+    "tree-sitter": [
+        {
+            "file-types": [
+                "usd",
+                "usda",
+                "usdc"
+            ],
+            "injection-regex": "usd",
+            "scope": "source.usd"
+        }
+    ],
+    "version": "0.1.0"
 }

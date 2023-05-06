@@ -1,0 +1,309 @@
+==============================================================================
+timeSamples - empty
+==============================================================================
+
+def "foo"
+{
+    float3[] extent.timeSamples = {}
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (attribute_property)
+        (timeSamples)))))
+
+==============================================================================
+timeSamples - float3[]
+==============================================================================
+
+def "foo"
+{
+    float3[] extent.timeSamples = {
+        1: [(1, 1, 1), (1, 1, 1)],
+    }
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (attribute_property)
+        (timeSamples
+          (integer)
+          (list
+            (tuple
+              (integer)
+              (integer)
+              (integer))
+            (tuple
+              (integer)
+              (integer)
+              (integer))))))))
+
+==============================================================================
+timeSamples - single entry
+==============================================================================
+
+def "foo"
+{
+    double b.timeSamples = {
+         3: 3
+    }
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (attribute_property)
+        (timeSamples
+          (integer)
+          (integer))))))
+
+==============================================================================
+timeSamples - multiple entries
+==============================================================================
+
+def "foo"
+{
+    double z.timeSamples = {
+        0: 1.0,
+        1: 2.0
+    }
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (attribute_property)
+        (timeSamples
+          (integer)
+          (float)
+          (integer)
+          (float))))))
+
+==============================================================================
+timeSamples - multiple entries, trailing comma
+==============================================================================
+
+def "foo"
+{
+    double z.timeSamples = {
+        0: 1.0,
+        1: 2.0,
+    }
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (attribute_property)
+        (timeSamples
+          (integer)
+          (float)
+          (integer)
+          (float))))))
+
+==============================================================================
+timeSamples - asset[]
+==============================================================================
+
+def "foo"
+{
+    asset[] assetPathArray.timeSamples = {
+        0: [@./clip2.usda@]
+    }
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (attribute_property)
+        (timeSamples
+          (integer)
+          (list
+            (asset_path)))))))
+
+==============================================================================
+timeSamples - double3
+==============================================================================
+
+def "foo"
+{
+    double3 xformOp:translate.timeSamples = {
+        0: (1.5, 1.5, 1.5),
+        1: (1.84254210369921, 1.84254210369921, 1.84254210369921),
+        2: (2.8180194846605358, 2.8180194846605358, 2.8180194846605358),
+        3: (4.277924554357093, 4.277924554357093, 4.277924554357093),
+        4: (6, 6, 6),
+    }
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (qualified_identifier
+          (namespace_identifier)
+          (identifier))
+        (attribute_property)
+        (timeSamples
+          (integer)
+          (tuple
+            (float)
+            (float)
+            (float))
+          (integer)
+          (tuple
+            (float)
+            (float)
+            (float))
+          (integer)
+          (tuple
+            (float)
+            (float)
+            (float))
+          (integer)
+          (tuple
+            (float)
+            (float)
+            (float))
+          (integer)
+          (tuple
+            (integer)
+            (integer)
+            (integer)))))))
+
+==============================================================================
+timeSamples - matrix4d
+==============================================================================
+
+def "foo"
+{
+    matrix4d xformOp:transform.timeSamples = {
+        0: ( (1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0), (2, 0, 0, 1) ),
+    }
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (qualified_identifier
+          (namespace_identifier)
+          (identifier))
+        (attribute_property)
+        (timeSamples
+          (integer)
+          (tuple
+            (tuple
+              (integer)
+              (integer)
+              (integer)
+              (integer))
+            (tuple
+              (integer)
+              (integer)
+              (integer)
+              (integer))
+            (tuple
+              (integer)
+              (integer)
+              (integer)
+              (integer))
+            (tuple
+              (integer)
+              (integer)
+              (integer)
+              (integer))))))))
+
+==============================================================================
+timeSamples - block
+==============================================================================
+
+def "foo"
+{
+    double3 xformOp:translate.timeSamples = {
+        0: (1.5, 1.5, 1.5),
+        1: None,
+        4: (6, 6, 6),
+    }
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (qualified_identifier
+          (namespace_identifier)
+          (identifier))
+        (attribute_property)
+        (timeSamples
+          (integer)
+          (tuple
+            (float)
+            (float)
+            (float))
+          (integer)
+          (None)
+          (integer)
+          (tuple
+            (integer)
+            (integer)
+            (integer)))))))

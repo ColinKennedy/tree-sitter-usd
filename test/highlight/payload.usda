@@ -1,0 +1,9 @@
+def "foo" (
+    add payload = @foo.usda@</foo>
+    # <- function.call
+    #   ^ keyword
+    #             ^ string.special.asset
+    #                       ^ string.special.prim
+)
+{
+}

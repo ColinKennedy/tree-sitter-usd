@@ -1,0 +1,33 @@
+def "Root" (
+    # Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+    # incididunt ut labore et dolore magna aliqua. Eu nisl nunc mi ipsum faucibus.
+    # <- comment
+    Blah = {
+        int stuff = 15
+        int perCycle = 36
+    }
+    # Volutpat odio facilisis mauris sit amet massa. Laoreet non curabitur
+    # gravida arcu ac tortor dignissim convallis. At consectetur lorem donec
+    # massa sapien faucibus et molestie. Faucibus vitae aliquet
+    # <- comment
+    payload = @anon:dummy:cubes.usddancingcubesexample@
+)
+{
+}
+
+
+def Xform "torch_2" (
+    payload = @./torch.usda@
+    kind = "model"
+)
+{
+    // Pre-published light list
+    # <- comment
+    rel lightList = [ <light> ]  # inline comment
+    #                            ^ comment
+    token lightList:cacheBehavior = "consumeAndContinue"
+
+    double3 xformOp:translate = (1, 0, 0.5)
+    uniform token[] xformOpOrder = ["xformOp:translate"]
+}
+

@@ -1,0 +1,68 @@
+==============================================================================
+inherits - absolute
+==============================================================================
+
+def "foo" (
+    inherits = </thing>
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (arc_path
+          (prim_path))))
+    (block)))
+
+==============================================================================
+inherits - relative, implicit
+==============================================================================
+
+def "foo" (
+    inherits = <parent/another/thing>
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (arc_path
+          (prim_path))))
+    (block)))
+
+==============================================================================
+inherits - relative, parent
+==============================================================================
+
+def "foo" (
+    inherits = <../../parent/another/thing>
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (arc_path
+          (prim_path))))
+    (block)))

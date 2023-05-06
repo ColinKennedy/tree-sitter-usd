@@ -1,0 +1,15 @@
+def "foo" (
+    specializes = <../../parent/another/thing>
+    # <- keyword
+    #             ^ string.special.prim
+)
+{
+}
+
+def "foo" (
+    specializes = [</foo>, </bar>, ]
+    # <- keyword
+    #              ^ string.special.prim
+)
+{
+}

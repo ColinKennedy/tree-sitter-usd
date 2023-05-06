@@ -1,0 +1,23 @@
+#usda 1.0
+(
+    customLayerData = {
+    # <- keyword
+        timecode timeCode = 10.0
+        # <- type
+        #        ^ variable
+        #                   ^ float
+        timecode[] timeCodeArray = [10.0, 20.0]
+        # <- type
+        #          ^ variable
+        dictionary subDict = {
+        # <- type
+        #          ^ variable
+            timecode timeCode = 10.0
+            # <- type
+            #        ^ variable
+            timecode[] timeCodeArray = [10.0, 20.0]
+            # <- type
+            #          ^ variable
+        }
+    }
+)

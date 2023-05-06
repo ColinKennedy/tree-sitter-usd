@@ -1,0 +1,12 @@
+def "root" (
+    add references = @foo.usda@</Model> (offset = 1; scale = 2.0)
+                      # <- string.special.asset
+                      #        ^ string.special.prim
+                      #                  ^ keyword
+                      #                           ^ number
+                      #                            ^ punctuation.delimiter
+                      #                              ^ keyword
+                      #                                      ^ float
+)
+{
+}

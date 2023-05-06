@@ -1,0 +1,57 @@
+==============================================================================
+Attribute - empty metadata
+==============================================================================
+
+float value = 20 ()
+
+------------------------------------------------------------------------------
+
+(module
+  (attribute_assignment
+    (attribute_type)
+    (identifier)
+    (integer))
+  (metadata))
+
+==============================================================================
+Attribute - single metadata
+==============================================================================
+
+float value = 20 (
+    "Some comment with information"
+)
+
+------------------------------------------------------------------------------
+
+(module
+  (attribute_assignment
+    (attribute_type)
+    (identifier)
+    (integer))
+  (metadata
+    (string)))
+
+==============================================================================
+Attribute - customData
+==============================================================================
+
+float value = 20 (
+    customData = {
+        int arbitrary_name = 123
+    }
+)
+
+------------------------------------------------------------------------------
+
+(module
+  (attribute_assignment
+    (attribute_type)
+    (identifier)
+    (integer))
+  (metadata
+    (metadata_assignment
+      (identifier)
+      (dictionary
+        (attribute_type)
+        (identifier)
+        (integer)))))

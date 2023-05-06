@@ -1,0 +1,94 @@
+#usda 1.0
+
+def Scope "Prim"
+{
+    color3f foo:bar:value.connect = </some/prim>
+    # <- type
+    #       ^ namespace
+    #           ^ namespace
+    #               ^ variable
+    #                     ^ property
+    #                               ^ string.special.prim
+}
+
+
+def "foo"
+{
+    float value01 = 0.5
+    # <- type
+    #     ^ variable
+    #               ^ float
+    float value02 = -0.5
+    # <- type
+    #     ^ variable
+    #               ^ float
+    float value03 = -.5
+    # <- type
+    #     ^ variable
+    #               ^ float
+    float value04 = .5
+    # <- type
+    #     ^ variable
+    #               ^ float
+    float value05 = -5.
+    # <- type
+    #     ^ variable
+    #               ^ float
+    float value06 = 5.
+    # <- type
+    #     ^ variable
+    #               ^ float
+    float value07 = 5.1e+10
+    # <- type
+    #     ^ variable
+    #               ^ float
+    float value08 = 5.1e-10
+    # <- type
+    #     ^ variable
+    #               ^ float
+    float value09 = -5.1e+10
+    # <- type
+    #     ^ variable
+    #               ^ float
+    float value10 = -5.1e-10
+    # <- type
+    #     ^ variable
+    #               ^ float
+    float value11 = inf
+    # <- type
+    #     ^ variable
+    #               ^ float
+    float value12 = -inf
+    # <- type
+    #     ^ variable
+    #               ^ float
+    float value13 = 1e30
+    # <- type
+    #     ^ variable
+    #               ^ float
+    float value14 = -1e30
+    # <- type
+    #     ^ variable
+    #               ^ float
+}
+
+def Shader "PbrPreview"
+{
+    float foo (doc="foo");
+    # <- type
+    #     ^ variable
+    float bar = 1
+    # <- type
+    #     ^ variable
+    #           ^ number
+
+    float foo:bar:fizz:buzz = 1
+    # <- type
+    #     ^ namespace
+    #        ^ punctuation.delimiter
+    #         ^ namespace
+    #            ^ punctuation.delimiter
+    #             ^ namespace
+    #                 ^ punctuation.delimiter
+    #                  ^ variable
+}

@@ -1,0 +1,40 @@
+#usda 1.0
+(
+    "Some comment."
+    # <- comment.documentation
+
+    colorConfiguration = @colorconfig@
+    # <- keyword
+    colorManagementSystem = """asdfasdf
+    # <- keyword
+    asdfasdf
+
+    """
+    # <- string
+    customLayerData = {}
+    # <- keyword
+    defaultPrim = "root"
+    # <- keyword
+    #             ^ string
+    doc = "documentation data."
+    # <- keyword
+    #     ^ string
+    endTimeCode = 1200.4
+    # <- keyword
+    framesPerSecond = 24
+    # <- keyword
+    owner = "owner"
+    # <- keyword
+    startTimeCode = 1001.2
+    # <- keyword
+    subLayers = [
+    # <- keyword
+        @./relative/path1.usda@,
+        @relative/path2.usda@,
+        @/absolute/path3.usda@,
+        @uri:www.foobar.com:JOB()as/df(*$%&)?fizz=buzz&extension=.usda:.usd:.usdc@,
+    ]
+
+    customThing = 8
+    # <- variable
+)

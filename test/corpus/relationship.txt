@@ -1,0 +1,178 @@
+==============================================================================
+Relationship declaration
+==============================================================================
+
+rel material:binding:collection:Erasers
+
+------------------------------------------------------------------------------
+
+(module
+  (relationship_declaration
+    (relationship_type)
+    (qualified_identifier
+      (namespace_identifier
+        (namespace_identifier
+          (namespace_identifier)
+          (identifier))
+        (identifier))
+      (identifier))))
+
+==============================================================================
+Relationship declaration with metadata
+==============================================================================
+
+rel material:binding:collection:Erasers (doc="asdfasdf")
+
+------------------------------------------------------------------------------
+
+(module
+  (relationship_declaration
+    (relationship_type)
+    (qualified_identifier
+      (namespace_identifier
+        (namespace_identifier
+          (namespace_identifier)
+          (identifier))
+        (identifier))
+      (identifier)))
+  (metadata
+    (metadata_assignment
+      (identifier)
+      (string))))
+
+==============================================================================
+Relationship - None
+==============================================================================
+
+rel material:binding:collection:Erasers = None
+
+------------------------------------------------------------------------------
+
+(module
+  (relationship_assignment
+    (relationship_type)
+    (qualified_identifier
+      (namespace_identifier
+        (namespace_identifier
+          (namespace_identifier)
+          (identifier))
+        (identifier))
+      (identifier))
+    (None)))
+
+==============================================================================
+Relationship nested material namespace
+==============================================================================
+
+rel material:binding:collection:Erasers = [
+    </foo/child>,
+    <../relative_1/thing>,
+    <relative_2/thing>
+]
+
+------------------------------------------------------------------------------
+
+(module
+  (relationship_assignment
+    (relationship_type)
+    (qualified_identifier
+      (namespace_identifier
+        (namespace_identifier
+          (namespace_identifier)
+          (identifier))
+        (identifier))
+      (identifier))
+    (prim_paths
+      (prim_path)
+      (prim_path)
+      (prim_path))))
+
+==============================================================================
+Relationship single
+==============================================================================
+
+rel foo = </foo/child>
+
+------------------------------------------------------------------------------
+
+(module
+  (relationship_assignment
+    (relationship_type)
+    (identifier)
+    (prim_path)))
+
+==============================================================================
+Relationship - add
+==============================================================================
+
+add rel foo = </foo/child>
+
+------------------------------------------------------------------------------
+
+(module
+  (relationship_assignment
+    (orderer)
+    (relationship_type)
+    (identifier)
+    (prim_path)))
+
+==============================================================================
+Relationship - append
+==============================================================================
+
+append rel foo = </foo/child>
+
+------------------------------------------------------------------------------
+
+(module
+  (relationship_assignment
+    (orderer)
+    (relationship_type)
+    (identifier)
+    (prim_path)))
+
+==============================================================================
+Relationship - delete
+==============================================================================
+
+delete rel foo = </foo/child>
+
+------------------------------------------------------------------------------
+
+(module
+  (relationship_assignment
+    (orderer)
+    (relationship_type)
+    (identifier)
+    (prim_path)))
+
+==============================================================================
+Relationship - prepend
+==============================================================================
+
+prepend rel foo = </foo/child>
+
+------------------------------------------------------------------------------
+
+(module
+  (relationship_assignment
+    (orderer)
+    (relationship_type)
+    (identifier)
+    (prim_path)))
+
+==============================================================================
+Relationship - reorder
+==============================================================================
+
+reorder rel foo = [</foo/child>]
+
+------------------------------------------------------------------------------
+
+(module
+  (relationship_assignment
+    (orderer)
+    (relationship_type)
+    (identifier)
+    (prim_paths
+      (prim_path))))

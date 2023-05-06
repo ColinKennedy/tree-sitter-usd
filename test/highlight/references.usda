@@ -1,0 +1,10 @@
+over "Parent" (
+    prepend references = [</InternalRef>, @./ref.usda@</RefParent>]
+    # <- function.call
+    #       ^ keyword
+    #                     ^ string.special.prim
+    #                                     ^ string.special.asset
+    #                                                 ^ string.special.prim
+)
+{
+}

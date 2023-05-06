@@ -1,0 +1,189 @@
+==============================================================================
+variantSet - composition arc
+==============================================================================
+
+over "SomeSphere" (
+    prepend variantSets = ["some_variant_set"]
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (metadata
+      (metadata_assignment
+        (orderer)
+        (identifier)
+        (list
+          (string))))
+    (block)))
+
+==============================================================================
+variantSet - variants
+==============================================================================
+
+over "SomeSphere" (
+    prepend variantSets = ["some_variant_set"]
+    variants = {
+        string some_variant_set = "variant_name_1"
+    }
+)
+{
+    variantSet "some_variant_set" = {
+        "variant_name_1" (
+            "Some comment"
+            add references = [@foo.usda@]
+        )
+        {
+        }
+    }
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (metadata
+      (metadata_assignment
+        (orderer)
+        (identifier)
+        (list
+          (string)))
+      (metadata_assignment
+        (identifier)
+        (dictionary
+          (attribute_type)
+          (identifier)
+          (string))))
+    (block
+      (variant_set_definition
+        (string)
+        (variant
+          (string)
+          (metadata
+            (string)
+            (metadata_assignment
+              (orderer)
+              (identifier)
+              (list_proxy
+                (arc_path
+                  (asset_path)))))
+          (block))))))
+
+==============================================================================
+variantSet - complex
+==============================================================================
+
+over "SomeSphere" (
+    prepend variantSets = ["empty_one", "some_variant_set"]
+    variants = {
+        string empty_one = "blah"
+        string some_variant_set = "variant_name_1"
+    }
+)
+{
+    double radius = 20
+
+    variantSet "empty_one" = {}
+
+    variantSet "some_variant_set" = {
+        "variant_name_1" (
+            "Some comment"
+            add references = [@foo.usda@]
+        )
+        {
+            over "blah"
+            {
+                color3f[] primvars:displayColor = [(1, 0, 0)]
+            }
+        }
+
+        "variant_name_2"
+        {
+            over "thing"
+            {
+                color3f[] primvars:displayColor = [(1, 0, 0)]
+            }
+        }
+    }
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (metadata
+      (metadata_assignment
+        (orderer)
+        (identifier)
+        (list
+          (string)
+          (string)))
+      (metadata_assignment
+        (identifier)
+        (dictionary
+          (attribute_type)
+          (identifier)
+          (string)
+          (attribute_type)
+          (identifier)
+          (string))))
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (integer))
+      (variant_set_definition
+        (string))
+      (variant_set_definition
+        (string)
+        (variant
+          (string)
+          (metadata
+            (string)
+            (metadata_assignment
+              (orderer)
+              (identifier)
+              (list_proxy
+                (arc_path
+                  (asset_path)))))
+          (block
+            (prim_definition
+              (prim_type)
+              (string)
+              (block
+                (attribute_assignment
+                  (attribute_type)
+                  (qualified_identifier
+                    (namespace_identifier)
+                    (identifier))
+                  (list
+                    (tuple
+                      (integer)
+                      (integer)
+                      (integer))))))))
+        (variant
+          (string)
+          (block
+            (prim_definition
+              (prim_type)
+              (string)
+              (block
+                (attribute_assignment
+                  (attribute_type)
+                  (qualified_identifier
+                    (namespace_identifier)
+                    (identifier))
+                  (list
+                    (tuple
+                      (integer)
+                      (integer)
+                      (integer))))))))))))

@@ -1,0 +1,73 @@
+==============================================================================
+assetInfo - empty
+==============================================================================
+
+def Xform "cube" (
+    assetInfo = { }
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (dictionary)))
+    (block)))
+
+==============================================================================
+assetInfo - full
+==============================================================================
+
+def Xform "cube" (
+    assetInfo = {
+        # Known keys
+        asset identifier = @./Cube.txt@
+        string name = "Cube"
+        asset[] payloadAssetDependencies = [@fizz.usd@, @buzz.usd@]
+        string version = "v1"
+
+        # Custom stuff - sometimes people put non-standard stuff in assetInfo. It's valid.
+        asset v_meta_a_2 = @./v_meta_a_nonexist.usd@
+    }
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (dictionary
+          (comment)
+          (attribute_type)
+          (identifier)
+          (asset_path)
+          (attribute_type)
+          (identifier)
+          (string)
+          (attribute_type)
+          (identifier)
+          (list
+            (asset_path)
+            (asset_path))
+          (attribute_type)
+          (identifier)
+          (string)
+          (comment)
+          (attribute_type)
+          (identifier)
+          (asset_path))))
+    (block)))

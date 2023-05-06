@@ -1,0 +1,7 @@
+def "foo" (
+    inherits = </thing>
+    # <- keyword
+    #          ^ string.special.prim
+)
+{
+}

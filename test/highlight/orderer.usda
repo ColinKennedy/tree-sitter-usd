@@ -1,0 +1,14 @@
+def "foo" (
+    add references = @foo.usda@
+    # <- function.call
+    append references = @foo.usda@
+    # <- function.call
+    delete references = @foo.usda@
+    # <- function.call
+    reorder references = [@foo.usda@]
+    # <- function.call
+
+    references = [@foo.usda@]  # explicit
+)
+{
+}
