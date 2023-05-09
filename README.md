@@ -3,8 +3,9 @@ This library parses USD ASCII files using
 [tree-sitter](https://tree-sitter.github.io/tree-sitter) to produce
 a light-weight grammar of the file.
 
-For those who don't know know what tree-sitter is and why you'd care to use it,
-see [Why Tree-sitter?](#why-tree-sitter). For install / usage instructions, see below.
+For those who don't know what tree-sitter is and why you'd care to use it, see
+[Why Tree-sitter?](#why-tree-sitter). For install / usage instructions, see
+below.
 
 
 ## Disclaimer
@@ -27,15 +28,46 @@ require("nvim-treesitter.configs").setup {
 
 
 ## Why Tree-sitter?
-In the beginning, most people use Tree-sitter for text editor syntax highlighting.
+In the beginning, Tree-sitter was made to give text editors better syntax highlighting.
 
-Most text editors do syntax highlighting with regex. The results on big files
-are slow and error-prone. Tree-sitter has the full file's context so it is
-accurate while still being fast.
+Most text editors today create syntax highlighting with regex patterns. On
+large files with long line counts, this approach is slow and error-prone.
 
-But that was then and this is now. It became obvious that Tree-sitter can be
-used for a lot more than just syntax highlighting. Here's some of the fun
-plug-ins showing off what you can do using this USD parser.
+In contrast to regex, Tree-sitter actually knows about your file. It can
+convert a USD file like:
+
+```usd
+#usda 1.0
+
+def "root"
+{
+    custom uniform int value = 10
+}
+```
+
+Into a tokenized tree like this:
+
+```scm
+(prim_definition) ; [3:1 - 2:5]
+ (prim_type) ; [3:1 - 4:2]
+ (string) ; [3:5 - 11:2]
+ (block) ; [4:1 - 2:5]
+  (attribute_assignment) ; [5:5 - 34:4]
+   (custom) ; [5:5 - 11:4]
+   (uniform) ; [5:12 - 19:4]
+   (attribute_type) ; [5:20 - 23:4]
+   (identifier) ; [5:24 - 29:4]
+   (integer) ; [5:32 - 34:4]
+```
+
+That tree is built sparsely, interactively, and even works with WIP files where
+you may be missing a `}` or two. Tree-sitter is accurate, fast, and getting
+better all the time.
+
+Having this tree is really powerful. It became clear very quickly to others
+that Tree-sitter can be used for a lot more than just syntax highlighting.
+Here's some of the fun plug-ins showing off what you can do using this USD
+parser.
 
 
 ### Neovim
@@ -122,6 +154,7 @@ Tree-sitter is easy to embed and extend, making it very attractive for plug-in a
 
 
 ### Future Improvements
+#### Plug-Ins
 There's a bunch of open-source momentum behind tree-sitter. New tools and plug-ins
 may come out that further expands upon the list of reasons above. 
 
@@ -135,6 +168,15 @@ Some other plug-ins that could be useful in the future
 - https://github.com/Olical/conjure
 
 And others
+
+
+#### Neovim 0.10+
+I spotted a couple Neovim roadmap items that seem to want to make tree-sitter faster
+and more async. It's already fast but more speed is definitely welcome on larger USD
+files. Needless to say I'll be keeping an eye on those!
+
+- [feat(treesitter): async parsing](https://github.com/neovim/neovim/pull/22420)
+- [Tree-sitter based highlight may be inefficient](https://github.com/neovim/neovim/issues/18108)
 
 
 ## Testing
