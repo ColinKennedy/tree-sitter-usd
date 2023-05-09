@@ -1,16 +1,16 @@
 def Xform "cube" (
     assetInfo = {
-    # <- keyword
+    # <- variable
 
         # Known keys
         # <- comment
         asset identifier = @./Cube.txt@
         # <- type
-        #     ^ keyword
+        #     ^ variable
         #                  ^ string.special.asset
         asset[] payloadAssetDependencies = [@fizz.usd@, @buzz.usd@]
         # <- type
-        #       ^ keyword
+        #       ^ variable
         #                                   ^ string.special.asset
         #                                               ^ string.special.asset
         string version = "v1"

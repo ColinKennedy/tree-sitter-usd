@@ -597,22 +597,8 @@
           ]
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "_special_names"
-              },
-              "named": true,
-              "value": "identifier"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "identifier"
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "identifier"
         },
         {
           "type": "STRING",
@@ -1707,15 +1693,6 @@
               "name": "identifier"
             },
             {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "_special_names"
-              },
-              "named": true,
-              "value": "identifier"
-            },
-            {
               "type": "SYMBOL",
               "name": "string"
             }
@@ -1751,15 +1728,6 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "ALIAS",
-              "content": {
-                "type": "SYMBOL",
-                "name": "_special_names"
-              },
-              "named": true,
-              "value": "identifier"
-            },
-            {
               "type": "SYMBOL",
               "name": "identifier"
             },
@@ -1776,179 +1744,6 @@
         {
           "type": "SYMBOL",
           "name": "dictionary"
-        }
-      ]
-    },
-    "_special_names": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "inherits"
-        },
-        {
-          "type": "STRING",
-          "value": "payload"
-        },
-        {
-          "type": "STRING",
-          "value": "references"
-        },
-        {
-          "type": "STRING",
-          "value": "specializes"
-        },
-        {
-          "type": "STRING",
-          "value": "variantSets"
-        },
-        {
-          "type": "STRING",
-          "value": "variants"
-        },
-        {
-          "type": "STRING",
-          "value": "assetInfo"
-        },
-        {
-          "type": "STRING",
-          "value": "identifier"
-        },
-        {
-          "type": "STRING",
-          "value": "name"
-        },
-        {
-          "type": "STRING",
-          "value": "payloadAssetDependencies"
-        },
-        {
-          "type": "STRING",
-          "value": "version"
-        },
-        {
-          "type": "STRING",
-          "value": "clips"
-        },
-        {
-          "type": "STRING",
-          "value": "active"
-        },
-        {
-          "type": "STRING",
-          "value": "assetPaths"
-        },
-        {
-          "type": "STRING",
-          "value": "manifestAssetPath"
-        },
-        {
-          "type": "STRING",
-          "value": "primPath"
-        },
-        {
-          "type": "STRING",
-          "value": "templateAssetPath"
-        },
-        {
-          "type": "STRING",
-          "value": "templateEndTime"
-        },
-        {
-          "type": "STRING",
-          "value": "templateStartTime"
-        },
-        {
-          "type": "STRING",
-          "value": "templateStride"
-        },
-        {
-          "type": "STRING",
-          "value": "times"
-        },
-        {
-          "type": "STRING",
-          "value": "customData"
-        },
-        {
-          "type": "STRING",
-          "value": "apiSchemaAutoApplyTo"
-        },
-        {
-          "type": "STRING",
-          "value": "apiSchemaOverridePropertyNames"
-        },
-        {
-          "type": "STRING",
-          "value": "className"
-        },
-        {
-          "type": "STRING",
-          "value": "extraPlugInfo"
-        },
-        {
-          "type": "STRING",
-          "value": "isUsdShadeContainer"
-        },
-        {
-          "type": "STRING",
-          "value": "libraryName"
-        },
-        {
-          "type": "STRING",
-          "value": "providesUsdShadeConnectableAPIBehavior"
-        },
-        {
-          "type": "STRING",
-          "value": "requiresUsdShadeEncapsulation"
-        },
-        {
-          "type": "STRING",
-          "value": "skipCodeGeneration"
-        },
-        {
-          "type": "STRING",
-          "value": "colorConfiguration"
-        },
-        {
-          "type": "STRING",
-          "value": "colorManagementSystem"
-        },
-        {
-          "type": "STRING",
-          "value": "customLayerData"
-        },
-        {
-          "type": "STRING",
-          "value": "defaultPrim"
-        },
-        {
-          "type": "STRING",
-          "value": "doc"
-        },
-        {
-          "type": "STRING",
-          "value": "endTimeCode"
-        },
-        {
-          "type": "STRING",
-          "value": "framesPerSecond"
-        },
-        {
-          "type": "STRING",
-          "value": "owner"
-        },
-        {
-          "type": "STRING",
-          "value": "startTimeCode"
-        },
-        {
-          "type": "STRING",
-          "value": "subLayers"
-        },
-        {
-          "type": "STRING",
-          "value": "instanceable"
         }
       ]
     }

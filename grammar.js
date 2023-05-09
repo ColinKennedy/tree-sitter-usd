@@ -134,7 +134,8 @@ module.exports = grammar(
             ),
             metadata_assignment: $ => seq(
                 optional($.orderer),
-                choice(alias($._special_names, $.identifier), $.identifier),
+                $.identifier,
+                // choice(alias($._special_names, $.identifier), $.identifier),
                 "=",
                 choice($.list_proxy, $.list, $._metadata_value),
             ),
@@ -335,7 +336,7 @@ module.exports = grammar(
                 $.attribute_type,
                 choice(
                     $.identifier,
-                    alias($._special_names, $.identifier),
+                    // alias($._special_names, $.identifier),
                     // It's rare but it's valid for a dict to contain string identifiers
                     // e.g.
                     //
@@ -361,72 +362,12 @@ module.exports = grammar(
             _inner_dictionary_assignment: $ => seq(
                 $._dictionary_type,
                 choice(
-                    alias($._special_names, $.identifier),
+                    // alias($._special_names, $.identifier),
                     $.identifier,
                     $.string,  // ``$.string`` seems to be uncommon
                 ),
                 "=",
                 $.dictionary,
-            ),
-
-            // A list of known names which helps with syntax highlighting.
-            // There might be a better way to expose this list to highlighting without
-            // defining it here but it should be okay as long as parsing is still fast.
-            //
-            _special_names: $ => choice(
-                // LIVRPS names
-                "inherits",
-                "payload",
-                "references",
-                "specializes",
-                "variantSets",
-                "variants",
-
-                // assetInfo
-                "assetInfo",
-                "identifier",
-                "name",
-                "payloadAssetDependencies",
-                "version",
-
-                // clips
-                "clips",
-                "active",
-                "assetPaths",
-                "manifestAssetPath",
-                "primPath",
-                "templateAssetPath",
-                "templateEndTime",
-                "templateStartTime",
-                "templateStride",
-                "times",
-
-                // customData
-                "customData",
-                "apiSchemaAutoApplyTo",
-                "apiSchemaOverridePropertyNames",
-                "className",
-                "extraPlugInfo",
-                "isUsdShadeContainer",
-                "libraryName",
-                "providesUsdShadeConnectableAPIBehavior",
-                "requiresUsdShadeEncapsulation",
-                "skipCodeGeneration",
-
-                // Layer metadata
-                "colorConfiguration",
-                "colorManagementSystem",
-                "customLayerData",
-                "defaultPrim",
-                "doc",
-                "endTimeCode",
-                "framesPerSecond",
-                "owner",
-                "startTimeCode",
-                "subLayers",
-
-                // Prim metadata
-                "instanceable",
             ),
         }
     }

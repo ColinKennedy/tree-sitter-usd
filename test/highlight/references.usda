@@ -1,7 +1,7 @@
 over "Parent" (
     prepend references = [</InternalRef>, @./ref.usda@</RefParent>]
     # <- function.call
-    #       ^ keyword
+    #       ^ variable
     #                     ^ string.special.prim
     #                                     ^ string.special.asset
     #                                                 ^ string.special.prim
