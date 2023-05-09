@@ -1,9 +1,8 @@
 #usda 1.0
 (
     subLayers = [
-    # <- keyword
+    # <- variable
         @./model_sub.usda@ (offset = 1)
         # <- string.special.asset
-        #                   ^ keyword
     ]
 )

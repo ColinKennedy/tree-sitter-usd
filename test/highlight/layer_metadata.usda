@@ -4,31 +4,31 @@
     # <- comment.documentation
 
     colorConfiguration = @colorconfig@
-    # <- keyword
+    # <- variable
     colorManagementSystem = """asdfasdf
-    # <- keyword
+    # <- variable
     asdfasdf
 
     """
     # <- string
     customLayerData = {}
-    # <- keyword
+    # <- variable
     defaultPrim = "root"
-    # <- keyword
+    # <- variable
     #             ^ string
     doc = "documentation data."
-    # <- keyword
+    # <- variable
     #     ^ string
     endTimeCode = 1200.4
-    # <- keyword
+    # <- variable
     framesPerSecond = 24
-    # <- keyword
+    # <- variable
     owner = "owner"
-    # <- keyword
+    # <- variable
     startTimeCode = 1001.2
-    # <- keyword
+    # <- variable
     subLayers = [
-    # <- keyword
+    # <- variable
         @./relative/path1.usda@,
         @relative/path2.usda@,
         @/absolute/path3.usda@,

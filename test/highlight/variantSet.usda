@@ -1,10 +1,10 @@
 over "SomeSphere" (
     prepend variantSets = ["empty_one", "some_variant_set"]
     # <- function.call
-    #       ^ keyword
+    #       ^ variable
     #                      ^ string
     variants = {
-    # <- keyword
+    # <- variable
         string empty_one = "blah"
         # <- type
         #      ^ variable
@@ -31,7 +31,7 @@ over "SomeSphere" (
             # <- comment.documentation
             add references = [@foo.usda@]
             # <- function.call
-            #   ^ keyword
+            #   ^ variable
             #                 ^ string.special.asset
         )
         {

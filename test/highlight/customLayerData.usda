@@ -1,7 +1,7 @@
 #usda 1.0
 (
     customLayerData = {
-    # <- keyword
+    # <- variable
         timecode timeCode = 10.0
         # <- type
         #        ^ variable
