@@ -1,14 +1,27 @@
 (None) @constant.builtin
-(asset_path) @string.special.asset
+(asset_path) @text.uri
+(attribute_property) @property
 (bool) @boolean
 (comment) @comment @spell
 (custom) @function.builtin
 (float) @float
 (integer) @number
-(namespace_identifier) @namespace
 (orderer) @function.call
-(prim_path) @string.special.prim
+(prim_path) @string.special
+(relationship_type) @type
 (uniform) @function.builtin
+(variant_set_definition) @keyword
+
+;; Prefer namespace highlighting, if any.
+;;
+;; e.g. `rel fizz` - `fizz` uses `@identifier`
+;; e.g. `rel foo:bar:fizz` - `foo` and `bar` use `@namespace` and `fizz` uses `@identifier`
+;;
+(namespace_identifier) @namespace
+(namespace_identifier
+  (identifier) @namespace
+)
+(identifier) @variable
 
 [
   "class"
@@ -22,25 +35,6 @@
 [
   "="
 ] @operator
-
-;; Simple variables
-(attribute_assignment
- (identifier) @variable
-)
-(attribute_declaration
- (identifier) @variable
-)
-(relationship_declaration
- (identifier) @variable
-)
-(relationship_assignment
- (identifier) @variable
-)
-(qualified_identifier
-  (identifier) @variable)
-
-;; Attribute components
-(attribute_property) @property
 
 (attribute_type) @type
 (
@@ -104,24 +98,6 @@
  )
 )
 
-;; Relationships
-(relationship_type) @type
-(relationship_assignment
-  (identifier) @variable
-)
-(relationship_declaration
-  (identifier) @variable
-)
-
-(variant_set_definition) @keyword
-
-;; String rules
-(attribute_assignment
- (string) @string)
-(dictionary
- (string) @string)
-(list
- (string) @string)
 ; In USD def "foo" ("This is a docstring") {} < the ""s within the ()s is not
 ; a string but a docstring
 ;
@@ -129,23 +105,5 @@
  (comment)*
  .
  (string) @comment.documentation)
-(metadata_assignment
- (string) @string)
-(prim_definition
- (string) @string)
-(variant_set_definition
- (string) @string)
-(variant
- (string) @string)
 
-;; Layer metadata
-(metadata_assignment
- (identifier) @variable)
-(dictionary
- (identifier) @variable)
-
-;; Docstrings in USD
-(metadata
- (comment)*
- (string) @comment.documentation
-)
+(string) @string

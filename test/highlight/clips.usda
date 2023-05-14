@@ -9,11 +9,11 @@ def "World"
                 asset manifestAssetPath = @./clip_manifest.usda@
                 # <- type
                 #     ^ variable
-                #                         ^ string.special.asset
+                #                         ^ text.uri
                 asset[] assetPaths = [@./clip.usda@]
                 # <- type
                 #       ^ variable
-                #                     ^ string.special.asset
+                #                     ^ text.uri
                 double templateEndTime   = 3
                 # <- type
                 #      ^ variable

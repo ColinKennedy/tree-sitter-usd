@@ -1,0 +1,16 @@
+==============================================================================
+namespace materials
+==============================================================================
+
+rel material:another:binding
+
+------------------------------------------------------------------------------
+
+(module
+  (relationship_declaration
+    (relationship_type)
+    (qualified_identifier
+      (namespace_identifier
+        (namespace_identifier)
+        (identifier))
+      (identifier))))

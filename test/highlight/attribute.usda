@@ -8,7 +8,7 @@ def Scope "Prim"
     #           ^ namespace
     #               ^ variable
     #                     ^ property
-    #                               ^ string.special.prim
+    #                               ^ string.special
 }
 
 

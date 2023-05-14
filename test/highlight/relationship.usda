@@ -22,15 +22,15 @@ rel material:binding:collection:Erasers = None
 rel foo = </foo/child>
 # <- type
 #   ^ variable
-#         ^ string.special.prim
+#         ^ string.special
 
 rel material:binding:collection:Erasers = [
 # <- type
 #   ^ namespace
     </foo/child>,
-#   ^ string.special.prim
+#   ^ string.special
     <../relative_1/thing>,
-#   ^ string.special.prim
+#   ^ string.special
     <relative_2/thing>
-#   ^ string.special.prim
+#   ^ string.special
 ]
