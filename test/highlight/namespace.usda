@@ -1,0 +1,6 @@
+rel material:another:binding = </asdffsd>
+#   ^ namespace
+#           ^ punctuation.delimiter
+#            ^ namespace
+#                   ^ punctuation.delimiter
+#                    ^ variable

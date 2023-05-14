@@ -2,8 +2,8 @@ def "foo" (
     add payload = @foo.usda@</foo>
     # <- function.call
     #   ^ variable
-    #             ^ string.special.asset
-    #                       ^ string.special.prim
+    #             ^ text.uri
+    #                       ^ string.special
 )
 {
 }

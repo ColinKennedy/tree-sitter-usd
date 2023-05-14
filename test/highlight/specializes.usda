@@ -1,7 +1,7 @@
 def "foo" (
     specializes = <../../parent/another/thing>
     # <- variable
-    #             ^ string.special.prim
+    #             ^ string.special
 )
 {
 }
@@ -9,7 +9,7 @@ def "foo" (
 def "foo" (
     specializes = [</foo>, </bar>, ]
     # <- variable
-    #              ^ string.special.prim
+    #              ^ string.special
 )
 {
 }

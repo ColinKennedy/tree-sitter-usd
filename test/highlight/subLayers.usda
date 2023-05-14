@@ -3,6 +3,6 @@
     subLayers = [
     # <- variable
         @./model_sub.usda@ (offset = 1)
-        # <- string.special.asset
+        # <- text.uri
     ]
 )

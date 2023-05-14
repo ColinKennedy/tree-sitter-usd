@@ -32,7 +32,7 @@ over "SomeSphere" (
             add references = [@foo.usda@]
             # <- function.call
             #   ^ variable
-            #                 ^ string.special.asset
+            #                 ^ text.uri
         )
         {
             over "blah"

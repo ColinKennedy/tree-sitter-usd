@@ -7,12 +7,12 @@ def Xform "cube" (
         asset identifier = @./Cube.txt@
         # <- type
         #     ^ variable
-        #                  ^ string.special.asset
+        #                  ^ text.uri
         asset[] payloadAssetDependencies = [@fizz.usd@, @buzz.usd@]
         # <- type
         #       ^ variable
-        #                                   ^ string.special.asset
-        #                                               ^ string.special.asset
+        #                                   ^ text.uri
+        #                                               ^ text.uri
         string version = "v1"
         int foo = 8
     }

@@ -135,7 +135,6 @@ module.exports = grammar(
             metadata_assignment: $ => seq(
                 optional($.orderer),
                 $.identifier,
-                // choice(alias($._special_names, $.identifier), $.identifier),
                 "=",
                 choice($.list_proxy, $.list, $._metadata_value),
             ),
@@ -336,7 +335,6 @@ module.exports = grammar(
                 $.attribute_type,
                 choice(
                     $.identifier,
-                    // alias($._special_names, $.identifier),
                     // It's rare but it's valid for a dict to contain string identifiers
                     // e.g.
                     //
@@ -362,7 +360,6 @@ module.exports = grammar(
             _inner_dictionary_assignment: $ => seq(
                 $._dictionary_type,
                 choice(
-                    // alias($._special_names, $.identifier),
                     $.identifier,
                     $.string,  // ``$.string`` seems to be uncommon
                 ),
