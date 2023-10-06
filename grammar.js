@@ -1,4 +1,4 @@
-// Copyright (C) THEDATE Colin Kennedy
+// Copyright (C) 2023 Colin Kennedy
 // This file is part of tree-sitter-usd <https://github.com/ColinKennedy/tree-sitter-usd>.
 //
 // tree-sitter-usd is free software: you can redistribute it and/or modify
