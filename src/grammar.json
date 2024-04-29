@@ -793,7 +793,8 @@
     },
     "_identifier": {
       "type": "PATTERN",
-      "value": "[a-zA-Z0-9_]+"
+      "value": "[a-zA-Z0-9_]+",
+      "flags": "i"
     },
     "identifier": {
       "type": "SYMBOL",
@@ -1313,7 +1314,7 @@
               },
               {
                 "type": "PATTERN",
-                "value": "u{[0-9a-fA-F]+}"
+                "value": "u\\{[0-9a-fA-F]+\\}"
               },
               {
                 "type": "PATTERN",
@@ -1764,4 +1765,3 @@
   "inline": [],
   "supertypes": []
 }
-
