@@ -1683,40 +1683,115 @@
     "asset_path": {
       "type": "TOKEN",
       "content": {
-        "type": "SEQ",
+        "type": "CHOICE",
         "members": [
           {
-            "type": "STRING",
-            "value": "@"
-          },
-          {
-            "type": "REPEAT",
-            "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "PATTERN",
-                  "value": "[^@\\\\]+"
-                },
-                {
-                  "type": "SEQ",
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "@@@"
+              },
+              {
+                "type": "REPEAT",
+                "content": {
+                  "type": "CHOICE",
                   "members": [
                     {
-                      "type": "STRING",
-                      "value": "\\"
+                      "type": "SEQ",
+                      "members": [
+                        {
+                          "type": "STRING",
+                          "value": "\\"
+                        },
+                        {
+                          "type": "STRING",
+                          "value": "@@@"
+                        }
+                      ]
                     },
                     {
                       "type": "PATTERN",
                       "value": "[^@]"
+                    },
+                    {
+                      "type": "PATTERN",
+                      "value": "@[^@]"
+                    },
+                    {
+                      "type": "PATTERN",
+                      "value": "@@[^@]"
                     }
                   ]
                 }
-              ]
-            }
+              },
+              {
+                "type": "STRING",
+                "value": "@@@"
+              },
+              {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": "@"
+                  },
+                  {
+                    "type": "BLANK"
+                  }
+                ]
+              },
+              {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": "@"
+                  },
+                  {
+                    "type": "BLANK"
+                  }
+                ]
+              }
+            ]
           },
           {
-            "type": "STRING",
-            "value": "@"
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "@"
+              },
+              {
+                "type": "REPEAT",
+                "content": {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "PATTERN",
+                      "value": "[^@\\\\]+"
+                    },
+                    {
+                      "type": "SEQ",
+                      "members": [
+                        {
+                          "type": "STRING",
+                          "value": "\\"
+                        },
+                        {
+                          "type": "PATTERN",
+                          "value": "[^@]"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "STRING",
+                "value": "@"
+              }
+            ]
           }
         ]
       }

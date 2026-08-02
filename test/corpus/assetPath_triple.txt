@@ -1,0 +1,108 @@
+==============================================================================
+AssetPath triple - empty, plain, and containing a single "@"
+==============================================================================
+
+def Scope "S"
+{
+    asset empty = @@@@@@
+    asset relative = @@@sdf/Model.usda@@@
+    asset withAt = @@@//host/global/unit_defs.usda@stable-prepro_0.42@@@
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (asset_path))
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (asset_path))
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (asset_path)))))
+
+==============================================================================
+AssetPath triple - escaped delimiter and an extra delimiter at each end
+==============================================================================
+
+def Scope "S"
+{
+    asset escaped = @@@foo.sdf\@@@testing\\@@@@@@
+    asset extraDelim = @@@@foo.usda@@@@
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (asset_path))
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (asset_path)))))
+
+==============================================================================
+AssetPath triple - a list stays separate paths
+==============================================================================
+
+def Scope "S"
+{
+    asset[] array = [@@@@@@, @@@sdf/Model.usda@@@, @@@a@b@@@]
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (list
+          (asset_path)
+          (asset_path)
+          (asset_path))))))
+
+==============================================================================
+AssetPath triple - with a prim path target
+==============================================================================
+
+def "root" (
+    prepend references = @@@/test/layer3.usda@@@</Prim>
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (metadata
+      (metadata_assignment
+        (orderer)
+        (identifier)
+        (arc_path
+          (asset_path)
+          (prim_path))))
+    (block)))

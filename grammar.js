@@ -416,16 +416,47 @@ module.exports = grammar(
                     ),
                 )
             ),
+            // Reference: pxr/usd/sdf/textFileFormatParser.h, ``AssetRef``
+            //
             // This has to be a single ``token``. Without it ``extras`` are free
             // to appear between the "@"s, so the "//" of a path like
             // ``@///test/layer.usda@`` starts a line comment and swallows the
             // rest of the line.
             //
             asset_path: $ => token(
-                seq(
-                    "@",
-                    repeat(choice(/[^@\\]+/, seq("\\", /[^@]/))),
-                    "@",
+                choice(
+                    // The "@@@" form is what a path containing a literal "@"
+                    // uses, e.g. ``@@@//host/defs.usda@stable-prepro_0.42@@@``.
+                    //
+                    // Content may hold "@" and "@@" but not a bare "@@@" - that
+                    // has to be escaped as "\@@@". The three-way split below is
+                    // the usual "everything up to a multi-character terminator"
+                    // shape; it is what stops a list like
+                    // ``[@@@a@@@, @@@b@@@]`` from being swallowed as one path.
+                    //
+                    // USD closes the path on a run of 3-5 "@": the last three
+                    // close and any extra 0-2 belong to the path. That is why
+                    // ``@@@@foo.usda@@@@`` and the empty ``@@@@@@`` both work.
+                    //
+                    seq(
+                        "@@@",
+                        repeat(
+                            choice(
+                                seq("\\", "@@@"),
+                                /[^@]/,
+                                /@[^@]/,
+                                /@@[^@]/,
+                            ),
+                        ),
+                        "@@@",
+                        optional("@"),
+                        optional("@"),
+                    ),
+                    seq(
+                        "@",
+                        repeat(choice(/[^@\\]+/, seq("\\", /[^@]/))),
+                        "@",
+                    ),
                 ),
             ),
             prim_path: $ => seq("<", /[^<>]+/, ">"),
