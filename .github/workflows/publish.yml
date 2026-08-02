@@ -92,3 +92,10 @@ jobs:
           path: dist
           merge-multiple: true
       - uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          # NOTE: PyPI rejects a re-upload of a file that it already has, which
+          # would fail the whole step. Skipping the duplicates instead lets
+          # wheels be added to a release whose sdist went up separately, and
+          # makes a re-run after a half-finished upload safe.
+          #
+          skip-existing: true
