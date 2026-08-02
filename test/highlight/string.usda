@@ -1,19 +1,19 @@
 def Scope "root"
 {
     string foo01 = 'blah'
-    # <- type
+    # <- type.builtin
     #      ^ variable
     #              ^ string
     string foo02 = "blah"
-    # <- type
+    # <- type.builtin
     #      ^ variable
     #              ^ string
     string foo03 = '''blah'''
-    # <- type
+    # <- type.builtin
     #      ^ variable
     #              ^ string
     string foo04 = """blah"""
-    # <- type
+    # <- type.builtin
     #      ^ variable
     #              ^ string
 }

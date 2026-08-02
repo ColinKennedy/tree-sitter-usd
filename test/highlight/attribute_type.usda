@@ -1,10 +1,10 @@
-dictionary foo = {}
-# <- type
+dictionary foo
+# <- type.builtin
 half[] foo = [2, 1, 2]
-# <- type
+# <- type.builtin
 string foo = "something"
-# <- type
+# <- type.builtin
 timecode time = 1.0
-# <- type
+# <- type.builtin
 token[] purpose = ["default", "render"]
-# <- type
+# <- type.builtin

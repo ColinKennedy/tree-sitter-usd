@@ -3,20 +3,20 @@
     customLayerData = {
     # <- variable
         timecode timeCode = 10.0
-        # <- type
+        # <- type.builtin
         #        ^ variable
         #                   ^ float
         timecode[] timeCodeArray = [10.0, 20.0]
-        # <- type
+        # <- type.builtin
         #          ^ variable
         dictionary subDict = {
-        # <- type
+        # <- type.builtin
         #          ^ variable
             timecode timeCode = 10.0
-            # <- type
+            # <- type.builtin
             #        ^ variable
             timecode[] timeCodeArray = [10.0, 20.0]
-            # <- type
+            # <- type.builtin
             #          ^ variable
         }
     }

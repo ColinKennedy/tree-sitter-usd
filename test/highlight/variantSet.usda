@@ -6,11 +6,11 @@ over "SomeSphere" (
     variants = {
     # <- variable
         string empty_one = "blah"
-        # <- type
+        # <- type.builtin
         #      ^ variable
         #                  ^ string
         string some_variant_set = "variant_name_1"
-        # <- type
+        # <- type.builtin
         #      ^ variable
         #                         ^ string
     }
@@ -40,7 +40,7 @@ over "SomeSphere" (
             #    ^ string
             {
                 color3f[] primvars:displayColor = [(1, 0, 0)]
-                # <- type
+                # <- type.builtin
                 #         ^ namespace
                 #                                   ^ number
             }
@@ -54,7 +54,7 @@ over "SomeSphere" (
             #    ^ string
             {
                 color3f[] primvars:displayColor = [(1, 0, 0)]
-                # <- type
+                # <- type.builtin
                 #         ^ namespace
                 #                                   ^ number
             }

@@ -3,39 +3,39 @@ class UsdShadeTestPlugConfiguredType "UsdShadeTestPlugConfiguredType" (
     customData = {
     # <- variable
         string className = "UsdShadeTestPlugConfiguredType"
-        # <- type
+        # <- type.builtin
         #      ^ variable
         dictionary extraPlugInfo = {
-        # <- type
+        # <- type.builtin
         #          ^ variable
             bool providesUsdShadeConnectableAPIBehavior = 1
-            # <- type
+            # <- type.builtin
             #    ^ variable
             bool isUsdShadeContainer = 0
-            # <- type
+            # <- type.builtin
             #    ^ variable
             #                          ^ number
             bool requiresUsdShadeEncapsulation = 0
-            # <- type
+            # <- type.builtin
             #    ^ variable
         }
         token[] apiSchemaAutoApplyTo = [
-        # <- type
+        # <- type.builtin
         #       ^ variable
             "UsdShadeMaterial",
             "UsdShadeTestTypedHasAutoApplyRequiresEncapsulation"
             # <- string
         ]
         token[] apiSchemaOverridePropertyNames = ["overrideBaseTrueDerivedTrue"]
-        # <- type
+        # <- type.builtin
         #       ^ variable
         #                                         ^ string
         string libraryName      = "testUsdShadeConnectableAPIBehaviorClearing"
-        # <- type
+        # <- type.builtin
         #      ^ variable
         #                         ^ string
         bool skipCodeGeneration = true
-        # <- type
+        # <- type.builtin
         #    ^ variable
         #                         ^ boolean
     }

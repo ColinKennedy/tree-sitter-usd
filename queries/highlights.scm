@@ -2,7 +2,7 @@
 (asset_path) @text.uri
 (attribute_property) @property
 (bool) @boolean
-(comment) @comment @spell
+(comment) @spell @comment
 (custom) @function.builtin
 (float) @float
 (integer) @number
@@ -57,11 +57,14 @@
 ;; e.g. `rel fizz` - `fizz` uses `@identifier`
 ;; e.g. `rel foo:bar:fizz` - `foo` and `bar` use `@namespace` and `fizz` uses `@identifier`
 ;;
+;; NOTE: The later a pattern is written, the higher its priority. So the
+;; @namespace patterns must come after the more general @variable pattern.
+;;
+(identifier) @variable
 (namespace_identifier) @namespace
 (namespace_identifier
   (identifier) @namespace
 )
-(identifier) @variable
 
 [
   "class"
@@ -138,6 +141,8 @@
  )
 )
 
+(string) @string
+
 ; In USD def "foo" ("This is a docstring") {} < the ""s within the ()s is not
 ; a string but a docstring
 ;
@@ -145,5 +150,3 @@
  (comment)*
  .
  (string) @comment.documentation)
-
-(string) @string

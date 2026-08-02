@@ -3,7 +3,7 @@
 def Scope "Prim"
 {
     color3f foo:bar:value.connect = </some/prim>
-    # <- type
+    # <- type.builtin
     #       ^ namespace
     #           ^ namespace
     #               ^ variable
@@ -15,59 +15,59 @@ def Scope "Prim"
 def "foo"
 {
     float value01 = 0.5
-    # <- type
+    # <- type.builtin
     #     ^ variable
     #               ^ float
     float value02 = -0.5
-    # <- type
+    # <- type.builtin
     #     ^ variable
     #               ^ float
     float value03 = -.5
-    # <- type
+    # <- type.builtin
     #     ^ variable
     #               ^ float
     float value04 = .5
-    # <- type
+    # <- type.builtin
     #     ^ variable
     #               ^ float
     float value05 = -5.
-    # <- type
+    # <- type.builtin
     #     ^ variable
     #               ^ float
     float value06 = 5.
-    # <- type
+    # <- type.builtin
     #     ^ variable
     #               ^ float
     float value07 = 5.1e+10
-    # <- type
+    # <- type.builtin
     #     ^ variable
     #               ^ float
     float value08 = 5.1e-10
-    # <- type
+    # <- type.builtin
     #     ^ variable
     #               ^ float
     float value09 = -5.1e+10
-    # <- type
+    # <- type.builtin
     #     ^ variable
     #               ^ float
     float value10 = -5.1e-10
-    # <- type
+    # <- type.builtin
     #     ^ variable
     #               ^ float
     float value11 = inf
-    # <- type
+    # <- type.builtin
     #     ^ variable
     #               ^ float
     float value12 = -inf
-    # <- type
+    # <- type.builtin
     #     ^ variable
     #               ^ float
     float value13 = 1e30
-    # <- type
+    # <- type.builtin
     #     ^ variable
     #               ^ float
     float value14 = -1e30
-    # <- type
+    # <- type.builtin
     #     ^ variable
     #               ^ float
 }
@@ -75,15 +75,15 @@ def "foo"
 def Shader "PbrPreview"
 {
     float foo (doc="foo");
-    # <- type
+    # <- type.builtin
     #     ^ variable
     float bar = 1
-    # <- type
+    # <- type.builtin
     #     ^ variable
     #           ^ number
 
     float foo:bar:fizz:buzz = 1
-    # <- type
+    # <- type.builtin
     #     ^ namespace
     #        ^ punctuation.delimiter
     #         ^ namespace

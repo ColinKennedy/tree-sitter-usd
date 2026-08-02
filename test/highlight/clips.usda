@@ -4,42 +4,42 @@ def "World"
         clips = {
         # <- variable
             dictionary default = {
-            # <- type
+            # <- type.builtin
             #          ^ variable
                 asset manifestAssetPath = @./clip_manifest.usda@
-                # <- type
+                # <- type.builtin
                 #     ^ variable
                 #                         ^ text.uri
                 asset[] assetPaths = [@./clip.usda@]
-                # <- type
+                # <- type.builtin
                 #       ^ variable
                 #                     ^ text.uri
                 double templateEndTime   = 3
-                # <- type
+                # <- type.builtin
                 #      ^ variable
                 #                          ^ number
                 double templateStartTime = 1
-                # <- type
+                # <- type.builtin
                 #      ^ variable
                 #                          ^ number
                 double templateStride    = 1
-                # <- type
+                # <- type.builtin
                 #      ^ variable
                 #                          ^ number
                 double2[] active = [(0, 0)]
-                # <- type
+                # <- type.builtin
                 #         ^ variable
                 #                    ^ number
                 double2[] times = [(101, 101), (102, 102)]
-                # <- type
+                # <- type.builtin
                 #         ^ variable
                 #                   ^ number
                 string primPath = "/points"
-                # <- type
+                # <- type.builtin
                 #      ^ variable
                 #                 ^ string
                 string templateAssetPath = "./p.###.usda"
-                # <- type
+                # <- type.builtin
                 #      ^ variable
                 #                          ^ string
             }
