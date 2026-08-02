@@ -1,0 +1,61 @@
+name: Publish Python
+on:
+  push:
+    tags:
+      - "v*"
+  # NOTE: A manual run builds and uploads the artifacts but does not publish
+  # them. Handy for checking a release before tagging it.
+  #
+  workflow_dispatch:
+
+jobs:
+  wheels:
+    name: Wheels - ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, ubuntu-24.04-arm, macos-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+      # NOTE: See [tool.cibuildwheel] in pyproject.toml for what gets built.
+      # On Linux this runs inside the manylinux / musllinux images, which is
+      # the only way to produce a wheel that PyPI accepts.
+      #
+      - uses: pypa/cibuildwheel@v4.1.1
+      - uses: actions/upload-artifact@v7
+        with:
+          name: wheels-${{ matrix.os }}
+          path: wheelhouse/*.whl
+
+  sdist:
+    name: Source distribution
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pipx run build --sdist
+      - uses: actions/upload-artifact@v7
+        with:
+          name: sdist
+          path: dist/*.tar.gz
+
+  publish:
+    name: Publish to PyPI
+    needs: [sdist, wheels]
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      # NOTE: Trusted Publishing. PyPI checks this workflow's OIDC token, so
+      # no API token is ever stored in the repository.
+      #
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          path: dist
+          merge-multiple: true
+      - uses: pypa/gh-action-pypi-publish@release/v1

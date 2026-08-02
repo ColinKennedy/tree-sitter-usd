@@ -31,6 +31,28 @@ test = ["tree-sitter~=0.25"]
 #
 lint = ["mypy>=1.11", "Qt.py", "ruff>=0.6", "tree-sitter~=0.25"]
 
+# NOTE: PyPI rejects plain `linux_x86_64` wheels, which is all that a local
+# `python -m build` can make. cibuildwheel builds within the manylinux /
+# musllinux images and re-tags the result so that it is installable.
+#
+[tool.cibuildwheel]
+# NOTE: setup.py builds the extension against the stable ABI (abi3, 3.10+), so
+# one wheel per platform serves every supported interpreter. Building CPython
+# 3.10 is enough - 3.11+ installs that same wheel.
+#
+build = "cp310-*"
+# NOTE: 32-bit Linux and Windows are skipped. Nobody runs USD there.
+#
+archs = "auto64"
+test-requires = "tree-sitter~=0.25"
+test-command = "python -m unittest discover -v -s {project}/bindings/python/tests"
+
+# NOTE: The x86_64 wheel is cross-compiled from the arm64 runner, so
+# cibuildwheel builds it but skips its tests. Intel Macs still get a wheel.
+#
+[tool.cibuildwheel.macos]
+archs = ["arm64", "x86_64"]
+
 [tool.ruff]
 line-length = 100
 src = ["bindings/python", "bindings/python/tests", "examples/qt"]
