@@ -23,5 +23,24 @@ readme = "README.md"
 Homepage = "https://github.com/ColinKennedy/tree-sitter-usd"
 
 [project.optional-dependencies]
-core = ["tree-sitter~=0.24"]
-test = ["tree-sitter~=0.24"]
+core = ["tree-sitter~=0.25"]
+test = ["tree-sitter~=0.25"]
+lint = ["mypy>=1.11", "ruff>=0.6", "tree-sitter~=0.25"]
+
+[tool.ruff]
+line-length = 100
+src = ["bindings/python", "bindings/python/tests"]
+
+[tool.ruff.lint]
+select = ["A", "ANN", "B", "C4", "D", "E", "F", "I", "N", "RUF", "SIM", "UP", "W"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["tree_sitter_usda"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.mypy]
+files = ["bindings/python/tests"]
+mypy_path = "bindings/python/tests"
+strict = true

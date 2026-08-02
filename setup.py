@@ -1,3 +1,5 @@
+"""Build the ``tree_sitter_usda`` C extension, which wraps ``src/parser.c``."""
+
 from os.path import isdir, join
 from platform import system
 from shutil import copytree
@@ -12,15 +14,22 @@ except ImportError:
 
 
 class Build(build):
-    def run(self):
+    """A builder that includes the tree-sitter queries in the built package."""
+
+    def run(self) -> None:
+        """Copy ``queries/`` into the package and then build like normal."""
         if isdir("queries"):
             dest = join(self.build_lib, "tree_sitter_usda", "queries")
             copytree("queries", dest, dirs_exist_ok=True)
+
         super().run()
 
 
 class BdistWheel(bdist_wheel):
-    def get_tag(self):
+    """A wheel builder that marks the C extension as stable-ABI (abi3)."""
+
+    def get_tag(self) -> tuple[str, str, str]:
+        """Replace the CPython-specific tag with an ``abi3`` tag."""
         python, abi, platform = super().get_tag()
 
         if python.startswith("cp"):
@@ -41,9 +50,7 @@ setup(
                 "bindings/python/tree_sitter_usda/binding.c",
                 "src/parser.c",
             ],
-            extra_compile_args=(
-                ["-std=c11"] if system() != "Windows" else ["/std:c11", "/utf-8"]
-            ),
+            extra_compile_args=(["-std=c11"] if system() != "Windows" else ["/std:c11", "/utf-8"]),
             define_macros=[
                 ("Py_LIMITED_API", "0x030A0000"),
                 ("PY_SSIZE_T_CLEAN", None),

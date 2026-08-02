@@ -1,0 +1,27 @@
+name: Lint Python
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - "**"
+
+jobs:
+  lint_python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: python -m pip install --upgrade pip
+      # NOTE: mypy needs the built package so it can find tree_sitter_usda's stubs
+      #
+      - run: python -m pip install ".[lint]"
+      - name: ruff check
+        run: python -m ruff check .
+      - name: ruff format
+        run: python -m ruff format --check .
+      - name: mypy
+        run: python -m mypy
