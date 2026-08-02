@@ -265,6 +265,7 @@ module.exports = grammar(
             _metadata_value: $ => choice(
                 $.arc_path,
                 $.dictionary,
+                $.display_unit,
                 $.permission,
                 $.relocates,
                 $._base_value,
@@ -310,6 +311,20 @@ module.exports = grammar(
             // save", which is about file writability and has no syntax.
             //
             permission: $ => choice("public", "private"),
+
+            // Attribute metadata only. The value is the display name of an
+            // SdfUnit - see the ``_SDF_UNITS`` tables in sdf/types.h.
+            //
+            display_unit: $ => choice(
+                // Length
+                "mm", "cm", "dm", "m", "km", "in", "ft", "yd", "mi",
+                // Angular
+                "deg", "rad",
+                // Dimensionless. USD parses displayUnit as an Identifier, so
+                // it cannot actually read "%" back - but its writer emits the
+                // bare name, so a file may still hold one.
+                "default", "%",
+            ),
 
             None: $ => "None",
             // Both capital and undercase ``bool`` are accepted

@@ -1008,6 +1008,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "display_unit"
+        },
+        {
+          "type": "SYMBOL",
           "name": "permission"
         },
         {
@@ -1093,6 +1097,63 @@
         {
           "type": "STRING",
           "value": "private"
+        }
+      ]
+    },
+    "display_unit": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "mm"
+        },
+        {
+          "type": "STRING",
+          "value": "cm"
+        },
+        {
+          "type": "STRING",
+          "value": "dm"
+        },
+        {
+          "type": "STRING",
+          "value": "m"
+        },
+        {
+          "type": "STRING",
+          "value": "km"
+        },
+        {
+          "type": "STRING",
+          "value": "in"
+        },
+        {
+          "type": "STRING",
+          "value": "ft"
+        },
+        {
+          "type": "STRING",
+          "value": "yd"
+        },
+        {
+          "type": "STRING",
+          "value": "mi"
+        },
+        {
+          "type": "STRING",
+          "value": "deg"
+        },
+        {
+          "type": "STRING",
+          "value": "rad"
+        },
+        {
+          "type": "STRING",
+          "value": "default"
+        },
+        {
+          "type": "STRING",
+          "value": "%"
         }
       ]
     },

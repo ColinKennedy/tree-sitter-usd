@@ -1,0 +1,142 @@
+==============================================================================
+displayUnit - inline on an attribute
+==============================================================================
+
+def MfScope "Root"
+{
+    custom double attr = 1 (displayUnit = mm)
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (block
+      (attribute_assignment
+        (custom)
+        (attribute_type)
+        (identifier)
+        (integer)
+        (metadata
+          (metadata_assignment
+            (identifier)
+            (display_unit)))))))
+
+==============================================================================
+displayUnit - length, angular and dimensionless units
+==============================================================================
+
+def MfScope "Root"
+{
+    custom double a = 1 (displayUnit = km)
+    custom double b = 1 (displayUnit = rad)
+    custom double c = 1 (displayUnit = default)
+    custom double d = 1 (displayUnit = %)
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (block
+      (attribute_assignment
+        (custom)
+        (attribute_type)
+        (identifier)
+        (integer)
+        (metadata
+          (metadata_assignment
+            (identifier)
+            (display_unit))))
+      (attribute_assignment
+        (custom)
+        (attribute_type)
+        (identifier)
+        (integer)
+        (metadata
+          (metadata_assignment
+            (identifier)
+            (display_unit))))
+      (attribute_assignment
+        (custom)
+        (attribute_type)
+        (identifier)
+        (integer)
+        (metadata
+          (metadata_assignment
+            (identifier)
+            (display_unit))))
+      (attribute_assignment
+        (custom)
+        (attribute_type)
+        (identifier)
+        (integer)
+        (metadata
+          (metadata_assignment
+            (identifier)
+            (display_unit)))))))
+
+==============================================================================
+displayUnit - alongside other metadata in a multi-line block
+==============================================================================
+
+def MfScope "Root"
+{
+    custom double attr = 1 (
+        displayUnit = deg
+        permission = private
+    )
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (block
+      (attribute_assignment
+        (custom)
+        (attribute_type)
+        (identifier)
+        (integer)
+        (metadata
+          (metadata_assignment
+            (identifier)
+            (display_unit))
+          (metadata_assignment
+            (identifier)
+            (permission)))))))
+
+==============================================================================
+displayUnit - an unknown unit name is rejected
+==============================================================================
+
+def MfScope "Root"
+{
+    double attr = 1.0 (displayUnit = badDisplayUnit)
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (float)
+        (metadata
+          (ERROR
+            (identifier)
+            (UNEXPECTED 'a')))))))

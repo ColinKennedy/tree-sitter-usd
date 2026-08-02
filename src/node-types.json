@@ -697,6 +697,11 @@
     }
   },
   {
+    "type": "display_unit",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "float",
     "named": true,
     "fields": {}
@@ -832,6 +837,10 @@
         },
         {
           "type": "dictionary",
+          "named": true
+        },
+        {
+          "type": "display_unit",
           "named": true
         },
         {
@@ -1704,6 +1713,10 @@
     "named": false
   },
   {
+    "type": "%",
+    "named": false
+  },
+  {
     "type": "&",
     "named": false
   },
@@ -1808,6 +1821,10 @@
     "named": false
   },
   {
+    "type": "cm",
+    "named": false
+  },
+  {
     "type": "comment",
     "named": true,
     "extra": true
@@ -1837,7 +1854,15 @@
     "named": false
   },
   {
+    "type": "deg",
+    "named": false
+  },
+  {
     "type": "delete",
+    "named": false
+  },
+  {
+    "type": "dm",
     "named": false
   },
   {
@@ -1857,11 +1882,19 @@
     "named": false
   },
   {
+    "type": "ft",
+    "named": false
+  },
+  {
     "type": "held",
     "named": false
   },
   {
     "type": "hermite",
+    "named": false
+  },
+  {
+    "type": "in",
     "named": false
   },
   {
@@ -1877,6 +1910,10 @@
     "named": true
   },
   {
+    "type": "km",
+    "named": false
+  },
+  {
     "type": "linear",
     "named": false
   },
@@ -1885,11 +1922,23 @@
     "named": false
   },
   {
+    "type": "m",
+    "named": false
+  },
+  {
     "type": "maxsize",
     "named": false
   },
   {
+    "type": "mi",
+    "named": false
+  },
+  {
     "type": "minsize",
+    "named": false
+  },
+  {
+    "type": "mm",
     "named": false
   },
   {
@@ -1922,6 +1971,10 @@
   },
   {
     "type": "public",
+    "named": false
+  },
+  {
+    "type": "rad",
     "named": false
   },
   {
@@ -1974,6 +2027,10 @@
   },
   {
     "type": "write",
+    "named": false
+  },
+  {
+    "type": "yd",
     "named": false
   },
   {
