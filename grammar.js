@@ -177,6 +177,7 @@ module.exports = grammar(
             _metadata_value: $ => choice(
                 $.arc_path,
                 $.dictionary,
+                $.relocates,
                 $._base_value,
             ),
             _attribute_value: $ => choice($.asset_path, $._base_value),
@@ -324,6 +325,45 @@ module.exports = grammar(
             ),
             prim_path: $ => seq("<", /[^<>]+/, ">"),
             prim_paths: $ => seq("[", repeat(seq($.prim_path, optional(","))), "]"),
+            // An empty path. Only meaningful as a ``relocates`` target, where it
+            // deletes a relocation that an ancestor layer introduced.
+            //
+            // It is always aliased back to ``prim_path`` so callers only ever
+            // have one path node to match on.
+            //
+            _empty_prim_path: $ => token(seq("<", ">")),
+
+            // ``relocates`` renames a namespace-descendant prim. It maps a
+            // source path onto a target path. e.g.
+            //
+            //     over "Model" (
+            //         relocates = {
+            //             </Model/Rig/Scope>: </Model/Anim/Scope>,
+            //             </Model/Old>: <>,
+            //         }
+            //     )
+            //     {
+            //     }
+            //
+            // Both paths may be absolute or relative.
+            //
+            relocates: $ => prec(
+                2,
+                seq(
+                    "{",
+                    comma_separated($.relocate),
+                    optional(","),
+                    "}",
+                ),
+            ),
+            relocate: $ => seq(
+                field("source", $.prim_path),
+                ":",
+                field(
+                    "target",
+                    choice($.prim_path, alias($._empty_prim_path, $.prim_path)),
+                ),
+            ),
 
             // Various syntax components
             layer_offset: $ => seq(

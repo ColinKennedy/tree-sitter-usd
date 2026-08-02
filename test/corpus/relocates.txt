@@ -1,0 +1,306 @@
+==============================================================================
+relocates - single entry with a trailing comma
+==============================================================================
+
+over "Model" (
+    relocates = {
+        </Model/Rig/Scope>: </Model/Anim/Scope>,
+    }
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (relocates
+          (relocate
+            source: (prim_path)
+            target: (prim_path)))))
+    (block)))
+
+==============================================================================
+relocates - multiple entries, no trailing comma
+==============================================================================
+
+over "Model" (
+    relocates = {
+        </Sphere/ChildFromPayload> : </Sphere/SubReloChildFromPayload>,
+        </Sphere/ChildFromReference> : </Sphere/SubReloChildFromReference>
+    }
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (relocates
+          (relocate
+            source: (prim_path)
+            target: (prim_path))
+          (relocate
+            source: (prim_path)
+            target: (prim_path)))))
+    (block)))
+
+==============================================================================
+relocates - all on one line
+==============================================================================
+
+over "Model" (
+    relocates = {</World/Group1/Model>: </World/Group1/Subgroup/Relocated>}
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (relocates
+          (relocate
+            source: (prim_path)
+            target: (prim_path)))))
+    (block)))
+
+==============================================================================
+relocates - relative paths
+==============================================================================
+
+over "Model" (
+    relocates = {
+        </absolute> : <some/nested/relative/path>,
+        <relative/path> : <some/other/relative/path>,
+    }
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (relocates
+          (relocate
+            source: (prim_path)
+            target: (prim_path))
+          (relocate
+            source: (prim_path)
+            target: (prim_path)))))
+    (block)))
+
+==============================================================================
+relocates - empty target path deletes an inherited relocation
+==============================================================================
+
+over "Model" (
+    relocates = {
+        <to/delete> : <>,
+    }
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (relocates
+          (relocate
+            source: (prim_path)
+            target: (prim_path)))))
+    (block)))
+
+==============================================================================
+relocates - a body with no entries is an ordinary, empty dictionary
+==============================================================================
+
+over "Model" (
+    relocates = {
+        # This page intentionally left blank
+    }
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (dictionary
+          (comment))))
+    (block)))
+
+==============================================================================
+relocates - entries must be comma-separated
+==============================================================================
+
+over "Model" (
+    relocates = {
+        </source> : </target>
+        </no> : </comma>
+    }
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (relocates
+          (ERROR
+            (relocate
+              source: (prim_path)
+              target: (prim_path)))
+          (relocate
+            source: (prim_path)
+            target: (prim_path)))))
+    (block)))
+
+==============================================================================
+relocates - entries are separated by ":", not "="
+==============================================================================
+
+over "Model" (
+    relocates = {
+        </source> = </target>
+    }
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (dictionary
+          (ERROR
+            (prim_path)
+            (prim_path)))))
+    (block)))
+
+==============================================================================
+relocates - the body is a "{}" dictionary, not a "[]" list
+==============================================================================
+
+over "Model" (
+    relocates = [
+        </source> : </target>
+    ]
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (list_proxy
+          (ERROR
+            (prim_path))
+          (arc_path
+            (prim_path)))))
+    (block)))
+
+==============================================================================
+relocates - paths are not strings
+==============================================================================
+
+over "Model" (
+    relocates = {
+        "/source" : "/target"
+    }
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (ERROR)
+        (string))
+      (ERROR)
+      (string)
+      (ERROR))
+    (block)))
+
+==============================================================================
+relocates - an empty source path is not allowed
+==============================================================================
+
+over "Model" (
+    relocates = {
+        <> : </target>
+    }
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (dictionary
+          (ERROR
+            (prim_path)))))
+    (block)))

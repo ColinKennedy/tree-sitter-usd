@@ -425,6 +425,10 @@
           "named": true
         },
         {
+          "type": "relocates",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         },
@@ -438,6 +442,7 @@
   {
     "type": "module",
     "named": true,
+    "root": true,
     "fields": {},
     "children": {
       "multiple": true,
@@ -652,6 +657,47 @@
         },
         {
           "type": "relationship_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "relocate",
+    "named": true,
+    "fields": {
+      "source": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "prim_path",
+            "named": true
+          }
+        ]
+      },
+      "target": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "prim_path",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "relocates",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "relocate",
           "named": true
         }
       ]
@@ -911,7 +957,8 @@
   },
   {
     "type": "comment",
-    "named": true
+    "named": true,
+    "extra": true
   },
   {
     "type": "connect",
