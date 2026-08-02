@@ -1,0 +1,158 @@
+==============================================================================
+Layer offset - newline-separated entries
+==============================================================================
+
+def Scope "S" (
+    payload = @./l.usda@ (
+        offset = 10
+        scale = 0.2
+    )
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (arc_path
+          (asset_path)
+          (layer_offset
+            (identifier)
+            (integer)
+            (identifier)
+            (float)))))
+    (block)))
+
+==============================================================================
+Layer offset - a trailing ";" is allowed
+==============================================================================
+
+def Scope "S" (
+    payload = @./l.usda@ (
+        offset = 10;
+        scale = 0.2;
+    )
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (arc_path
+          (asset_path)
+          (layer_offset
+            (identifier)
+            (integer)
+            (identifier)
+            (float)))))
+    (block)))
+
+==============================================================================
+Layer offset - a reference also accepts customData
+==============================================================================
+
+def "root" (
+    references = [
+        @foo.usda@</Prim> (
+            offset = 0.1
+            scale = 0.2
+            customData = {
+                bool b1 = True
+            }
+        )
+    ]
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (list_proxy
+          (arc_path
+            (asset_path)
+            (prim_path)
+            (layer_offset
+              (identifier)
+              (float)
+              (identifier)
+              (float)
+              (identifier)
+              (dictionary
+                (attribute_type)
+                (identifier)
+                (bool)))))))
+    (block)))
+
+==============================================================================
+Layer offset - an empty arc drops a weaker layer's opinion
+==============================================================================
+
+def "root" (
+    references = <> (offset = 11; scale = 22)
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (arc_path
+          (prim_path)
+          (layer_offset
+            (identifier)
+            (integer)
+            (identifier)
+            (integer)))))
+    (block)))
+
+==============================================================================
+Layer offset - an asset path containing "//" is not a comment
+==============================================================================
+
+def "root" (
+    references = @///test/layer.usda@</Prim>
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (arc_path
+          (asset_path)
+          (prim_path))))
+    (block)))

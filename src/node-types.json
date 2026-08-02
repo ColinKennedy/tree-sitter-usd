@@ -441,11 +441,6 @@
     }
   },
   {
-    "type": "asset_path",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "attribute_assignment",
     "named": true,
     "fields": {},
@@ -711,6 +706,10 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "dictionary",
+          "named": true
+        },
         {
           "type": "float",
           "named": true
@@ -1711,10 +1710,6 @@
     "named": false
   },
   {
-    "type": "@",
-    "named": false
-  },
-  {
     "type": "False",
     "named": false
   },
@@ -1735,10 +1730,6 @@
     "named": false
   },
   {
-    "type": "\\",
-    "named": false
-  },
-  {
     "type": "]",
     "named": false
   },
@@ -1749,6 +1740,10 @@
   {
     "type": "append",
     "named": false
+  },
+  {
+    "type": "asset_path",
+    "named": true
   },
   {
     "type": "at",

@@ -356,17 +356,46 @@ module.exports = grammar(
 
             // Special types
             _dictionary_type: $ => alias("dictionary", $.attribute_type),
+            // ``references = <>`` and ``payload = <>`` are how a layer drops an
+            // arc that a weaker layer introduced, so the empty path is allowed
+            // here as well as in ``relocate``.
+            //
+            // Written out rather than routed through a shared helper rule. A
+            // helper would be a nonterminal of its own and its reduction would
+            // clash with the ``prim_path`` that ``_base_value`` already offers
+            // in this position.
+            //
             arc_path: $ => prec(
                 3,
                 choice(
                     seq($.prim_path, optional($.layer_offset)),
-                    seq($.asset_path, optional($.prim_path), optional($.layer_offset)),
+                    seq(
+                        alias($._empty_prim_path, $.prim_path),
+                        optional($.layer_offset),
+                    ),
+                    seq(
+                        $.asset_path,
+                        optional(
+                            choice(
+                                $.prim_path,
+                                alias($._empty_prim_path, $.prim_path),
+                            ),
+                        ),
+                        optional($.layer_offset),
+                    ),
                 )
             ),
-            asset_path: $ => seq(
-                "@",
-                repeat(choice(/[^@\\]+/, seq("\\", /[^@]/))),
-                "@",
+            // This has to be a single ``token``. Without it ``extras`` are free
+            // to appear between the "@"s, so the "//" of a path like
+            // ``@///test/layer.usda@`` starts a line comment and swallows the
+            // rest of the line.
+            //
+            asset_path: $ => token(
+                seq(
+                    "@",
+                    repeat(choice(/[^@\\]+/, seq("\\", /[^@]/))),
+                    "@",
+                ),
             ),
             prim_path: $ => seq("<", /[^<>]+/, ">"),
             prim_paths: $ => seq("[", repeat(seq($.prim_path, optional(","))), "]"),
@@ -411,9 +440,35 @@ module.exports = grammar(
             ),
 
             // Various syntax components
+            //
+            // Reference: pxr/usd/sdf/textFileFormatParser.h, ``LayerOffset``
+            //
+            // ``offset`` and ``scale`` entries, separated by a newline or a ";".
+            // Newlines are already ``extras`` so, like a ``dictionary``, this is
+            // a repeat with an optional ";". e.g.
+            //
+            //     payload = @./l.usda@ (offset = 10; scale = 0.2)
+            //
+            //     payload = @./l.usda@ (
+            //         offset = 10
+            //         scale = 0.2
+            //     )
+            //
+            // USD calls this block a ReferenceParameter / PayloadParameter list.
+            // A reference also accepts ``customData = {...}`` there, which is why
+            // this is not purely a list of offsets. A payload does not, but the
+            // two share one rule here because ``arc_path`` cannot tell them apart.
+            //
             layer_offset: $ => seq(
                 "(",
-                semicolon_separated(seq($.identifier, "=", choice($.float, $.integer))),
+                repeat(
+                    seq(
+                        $.identifier,
+                        "=",
+                        choice($.float, $.integer, $.dictionary),
+                        optional(";"),
+                    ),
+                ),
                 ")",
             ),
             orderer: $ => choice("add", "append", "delete", "prepend", "reorder"),
@@ -721,8 +776,4 @@ function attribute_right_side($, value) {
 
 function comma_separated(rule) {
   return optional(seq(rule, repeat(seq(",", rule))));
-}
-
-function semicolon_separated(rule) {
-  return optional(seq(rule, repeat(seq(";", rule))));
 }
