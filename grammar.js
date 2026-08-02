@@ -38,8 +38,16 @@ module.exports = grammar(
             ),
 
             comment: $ => token(
-                // Comments in USD can be ``# foo`` or ``// bar``. ``//`` is rare
-                choice(seq("#", /.*/), seq("//", /.*/))
+                // Comments in USD can be ``# foo``, ``// bar`` or ``/* fizz */``.
+                // Everything but ``#`` is rare. The ``/* */`` form does not
+                // nest and, because it cannot span tokens, shows up in places a
+                // line comment cannot - e.g. ``post curve/* here */(1.1, -1.4)``.
+                //
+                choice(
+                    seq("#", /.*/),
+                    seq("//", /.*/),
+                    seq("/*", /[^*]*\*+([^/*][^*]*\*+)*/, "/"),
+                )
             ),
 
             prim_type: $ => choice("class", "def", "over"),
@@ -78,32 +86,58 @@ module.exports = grammar(
                 optional($.uniform),
                 $.attribute_type,
                 choice($.qualified_identifier, $.identifier),
-                optional(seq(".", $.attribute_property)),
             ),
 
-            attribute_property: $=> choice("connect", "timeSamples"),
+            attribute_property: $=> choice("connect", "spline", "timeSamples"),
 
             attribute_declaration: $ => prec.left(
                 2,
                 seq(
                     $._attribute_left_side,
+                    optional(seq(".", $.attribute_property)),
                     optional($.metadata),
                     optional(";"),  // Rare but attributes can end in a ";"
                 ),
             ),
 
+            // ``.spline`` and ``.timeSamples`` each take one specific kind of
+            // "{}" body. Pairing the property with its body here is what keeps
+            // an empty ``{}`` from being ambiguous between the two.
+            //
             attribute_assignment: $ => seq(
                 $._attribute_left_side,
-                "=",
-                prec.left(
-                    1,
+                choice(
                     seq(
-                        choice($.list, $._attribute_value, $.timeSamples, $.None),
-                        optional($.metadata),
-                        optional(";"),  // Rare but attributes can end in a ";"
+                        ".",
+                        alias($._spline_property, $.attribute_property),
+                        "=",
+                        attribute_right_side($, $.spline),
+                    ),
+                    seq(
+                        ".",
+                        alias($._timeSamples_property, $.attribute_property),
+                        "=",
+                        attribute_right_side($, $.timeSamples),
+                    ),
+                    seq(
+                        optional(
+                            seq(
+                                ".",
+                                alias($._connect_property, $.attribute_property),
+                            ),
+                        ),
+                        "=",
+                        attribute_right_side(
+                            $,
+                            choice($.list, $._attribute_value, $.None),
+                        ),
                     ),
                 ),
             ),
+
+            _connect_property: $ => "connect",
+            _spline_property: $ => "spline",
+            _timeSamples_property: $ => "timeSamples",
 
             relationship_declaration: $ => prec.left(
                 2,
@@ -186,9 +220,15 @@ module.exports = grammar(
                 seq(
                     "{",
                     repeat(
-                        choice(
-                            $._inner_dictionary_assignment,
-                            $._inner_attribute_assignment,
+                        seq(
+                            choice(
+                                $._inner_dictionary_assignment,
+                                $._inner_attribute_assignment,
+                            ),
+                            // Entries are separated by a newline or a ";". The
+                            // ";" is what a spline knot's metadata uses, e.g.
+                            // ``{ string a = "yes"; int b = 4 }``.
+                            optional(";"),
                         ),
                     ),
                     "}",
@@ -388,6 +428,140 @@ module.exports = grammar(
                 )
             ),
 
+            // Reference: pxr/usd/sdf/textFileFormatParser.h, the ``Spline*`` rules
+            //
+            // A spline is an animation curve. Like ``timeSamples`` it is a
+            // "{}" body of comma-separated items with an optional trailing
+            // comma. Unlike ``timeSamples``, an item is one of four things -
+            // a curve type, an extrapolation rule, a loop, or a knot. e.g.
+            //
+            //     double myAttr.spline = {
+            //         bezier,
+            //         pre: linear,
+            //         post: sloped(0.57),
+            //         loop: (15, 25, 0, 2, 11.7),
+            //         7: 5.5 & 7.21; post held,
+            //         15: 8.18; post curve (2.49, 1.17); { string comment = "climb!" },
+            //     }
+            //
+            spline: $ => prec(
+                2,
+                seq(
+                    "{",
+                    comma_separated($._spline_item),
+                    optional(","),
+                    "}",
+                ),
+            ),
+            _spline_item: $ => choice(
+                $.spline_curve_type,
+                $.spline_extrapolation,
+                $.spline_loop,
+                $.spline_knot,
+            ),
+
+            spline_curve_type: $ => choice("bezier", "hermite"),
+
+            // How the curve behaves before its first knot / after its last one.
+            spline_extrapolation: $ => seq(
+                field("side", choice("pre", "post")),
+                ":",
+                field("mode", $._spline_extrapolation_mode),
+            ),
+            _spline_extrapolation_mode: $ => choice(
+                "none",
+                "held",
+                "linear",
+                $.spline_sloped,
+                $.spline_extrapolation_loop,
+            ),
+            spline_sloped: $ => seq("sloped", "(", $._number, ")"),
+            spline_extrapolation_loop: $ => seq(
+                "loop",
+                choice("repeat", "reset", "oscillate"),
+                // The boundary time is optional
+                optional(seq("(", $._number, ")")),
+            ),
+
+            // ``loop: (protoStart, protoEnd, preLoops, postLoops, valueOffset)``
+            spline_loop: $ => seq(
+                "loop",
+                ":",
+                "(",
+                field("proto_start", $._number),
+                ",",
+                field("proto_end", $._number),
+                ",",
+                field("pre_loops", $._number),
+                ",",
+                field("post_loops", $._number),
+                ",",
+                field("value_offset", $._number),
+                ")",
+            ),
+
+            // ``<time>: <value>`` plus any number of ";"-separated parameters
+            spline_knot: $ => seq(
+                field("time", $._number),
+                ":",
+                $._spline_knot_value,
+                repeat(seq(";", $._spline_knot_param)),
+            ),
+            // A knot may hold two values. ``7: 5.5 & 7.21`` is 5.5 on approach
+            // and 7.21 on the way out, which makes the knot a discontinuity.
+            _spline_knot_value: $ => choice(
+                field("value", $._number),
+                seq(
+                    field("pre_value", $._number),
+                    "&",
+                    field("value", $._number),
+                ),
+            ),
+            _spline_knot_param: $ => choice(
+                $.spline_pre_tangent,
+                $.spline_post_shaping,
+                // Knots carry arbitrary metadata, e.g. ``{ string comment = "climb!" }``
+                $.dictionary,
+            ),
+            spline_pre_tangent: $ => seq("pre", $.spline_tangent),
+            spline_post_shaping: $ => seq(
+                "post",
+                field(
+                    "interpolation",
+                    choice("none", "held", "linear", "curve"),
+                ),
+                optional($.spline_tangent),
+            ),
+            // ``(slope)``, ``(width, slope)``, ``(slope, algorithm)`` or
+            // ``(width, slope, algorithm)``
+            spline_tangent: $ => seq(
+                "(",
+                choice(
+                    seq(
+                        field("width", $._number),
+                        ",",
+                        field("slope", $._number),
+                        ",",
+                        field("algorithm", $.spline_tangent_algorithm),
+                    ),
+                    seq(
+                        field("width", $._number),
+                        ",",
+                        field("slope", $._number),
+                    ),
+                    seq(
+                        field("slope", $._number),
+                        ",",
+                        field("algorithm", $.spline_tangent_algorithm),
+                    ),
+                    field("slope", $._number),
+                ),
+                ")",
+            ),
+            spline_tangent_algorithm: $ => choice("custom", "autoEase"),
+
+            _number: $ => choice($.float, $.integer),
+
             _inner_attribute_assignment: $ => seq(
                 $.attribute_type,
                 choice(
@@ -426,6 +600,20 @@ module.exports = grammar(
         }
     }
 )
+
+// The shared tail of every ``attribute_assignment``. ``value`` is whichever
+// value the left-hand side allows.
+//
+function attribute_right_side($, value) {
+  return prec.left(
+    1,
+    seq(
+      value,
+      optional($.metadata),
+      optional(";"),  // Rare but attributes can end in a ";"
+    ),
+  );
+}
 
 function comma_separated(rule) {
   return optional(seq(rule, repeat(seq(",", rule))));

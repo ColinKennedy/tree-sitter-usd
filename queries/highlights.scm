@@ -12,6 +12,23 @@
 (uniform) @function.builtin
 (variant_set_definition) @keyword
 
+;; Splines
+(spline_curve_type) @keyword
+(spline_tangent_algorithm) @keyword
+[
+  "pre"
+  "post"
+  "loop"
+  "sloped"
+  "repeat"
+  "reset"
+  "oscillate"
+  "none"
+  "held"
+  "linear"
+  "curve"
+] @keyword
+
 ;; Prefer namespace highlighting, if any.
 ;;
 ;; e.g. `rel fizz` - `fizz` uses `@identifier`

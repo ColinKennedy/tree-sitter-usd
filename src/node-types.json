@@ -92,6 +92,10 @@
           "named": true
         },
         {
+          "type": "spline",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         },
@@ -200,6 +204,11 @@
   },
   {
     "type": "bool",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "custom",
     "named": true,
     "fields": {}
   },
@@ -704,6 +713,366 @@
     }
   },
   {
+    "type": "spline",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "spline_curve_type",
+          "named": true
+        },
+        {
+          "type": "spline_extrapolation",
+          "named": true
+        },
+        {
+          "type": "spline_knot",
+          "named": true
+        },
+        {
+          "type": "spline_loop",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "spline_curve_type",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "spline_extrapolation",
+    "named": true,
+    "fields": {
+      "mode": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "held",
+            "named": false
+          },
+          {
+            "type": "linear",
+            "named": false
+          },
+          {
+            "type": "none",
+            "named": false
+          },
+          {
+            "type": "spline_extrapolation_loop",
+            "named": true
+          },
+          {
+            "type": "spline_sloped",
+            "named": true
+          }
+        ]
+      },
+      "side": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "post",
+            "named": false
+          },
+          {
+            "type": "pre",
+            "named": false
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "spline_extrapolation_loop",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "float",
+          "named": true
+        },
+        {
+          "type": "integer",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "spline_knot",
+    "named": true,
+    "fields": {
+      "pre_value": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "float",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          }
+        ]
+      },
+      "time": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "float",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "float",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "dictionary",
+          "named": true
+        },
+        {
+          "type": "spline_post_shaping",
+          "named": true
+        },
+        {
+          "type": "spline_pre_tangent",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "spline_loop",
+    "named": true,
+    "fields": {
+      "post_loops": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "float",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          }
+        ]
+      },
+      "pre_loops": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "float",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          }
+        ]
+      },
+      "proto_end": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "float",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          }
+        ]
+      },
+      "proto_start": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "float",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          }
+        ]
+      },
+      "value_offset": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "float",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "spline_post_shaping",
+    "named": true,
+    "fields": {
+      "interpolation": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "curve",
+            "named": false
+          },
+          {
+            "type": "held",
+            "named": false
+          },
+          {
+            "type": "linear",
+            "named": false
+          },
+          {
+            "type": "none",
+            "named": false
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "spline_tangent",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "spline_pre_tangent",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "spline_tangent",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "spline_sloped",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "float",
+          "named": true
+        },
+        {
+          "type": "integer",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "spline_tangent",
+    "named": true,
+    "fields": {
+      "algorithm": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "spline_tangent_algorithm",
+            "named": true
+          }
+        ]
+      },
+      "slope": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "float",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          }
+        ]
+      },
+      "width": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "float",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "spline_tangent_algorithm",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "string",
     "named": true,
     "fields": {}
@@ -864,6 +1233,10 @@
     "named": false
   },
   {
+    "type": "&",
+    "named": false
+  },
+  {
     "type": "'",
     "named": false
   },
@@ -952,6 +1325,14 @@
     "named": false
   },
   {
+    "type": "autoEase",
+    "named": false
+  },
+  {
+    "type": "bezier",
+    "named": false
+  },
+  {
     "type": "class",
     "named": false
   },
@@ -965,8 +1346,12 @@
     "named": false
   },
   {
+    "type": "curve",
+    "named": false
+  },
+  {
     "type": "custom",
-    "named": true
+    "named": false
   },
   {
     "type": "def",
@@ -981,6 +1366,14 @@
     "named": false
   },
   {
+    "type": "held",
+    "named": false
+  },
+  {
+    "type": "hermite",
+    "named": false
+  },
+  {
     "type": "inf",
     "named": false
   },
@@ -989,7 +1382,31 @@
     "named": true
   },
   {
+    "type": "linear",
+    "named": false
+  },
+  {
+    "type": "loop",
+    "named": false
+  },
+  {
+    "type": "none",
+    "named": false
+  },
+  {
+    "type": "oscillate",
+    "named": false
+  },
+  {
     "type": "over",
+    "named": false
+  },
+  {
+    "type": "post",
+    "named": false
+  },
+  {
+    "type": "pre",
     "named": false
   },
   {
@@ -1002,6 +1419,22 @@
   },
   {
     "type": "reorder",
+    "named": false
+  },
+  {
+    "type": "repeat",
+    "named": false
+  },
+  {
+    "type": "reset",
+    "named": false
+  },
+  {
+    "type": "sloped",
+    "named": false
+  },
+  {
+    "type": "spline",
     "named": false
   },
   {

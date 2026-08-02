@@ -1,0 +1,425 @@
+==============================================================================
+Spline - empty
+==============================================================================
+
+def Xform "Prim"
+{
+    double empty.spline = {
+    }
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (attribute_property)
+        (spline)))))
+
+==============================================================================
+Spline - knots with a trailing comma
+==============================================================================
+
+def Xform "Prim"
+{
+    double xformOp:rotateX.spline = {
+        1: 5; post held,
+        2: 18; post held,
+    }
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (qualified_identifier
+          scope: (namespace_identifier)
+          name: (identifier))
+        (attribute_property)
+        (spline
+          (spline_knot
+            time: (integer)
+            value: (integer)
+            (spline_post_shaping))
+          (spline_knot
+            time: (integer)
+            value: (integer)
+            (spline_post_shaping)))))))
+
+==============================================================================
+Spline - knots without a trailing comma
+==============================================================================
+
+def Xform "Prim"
+{
+    float xformOp:rotateY.spline = {
+        10: 55; post linear,
+        20: 185; post linear
+    }
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (qualified_identifier
+          scope: (namespace_identifier)
+          name: (identifier))
+        (attribute_property)
+        (spline
+          (spline_knot
+            time: (integer)
+            value: (integer)
+            (spline_post_shaping))
+          (spline_knot
+            time: (integer)
+            value: (integer)
+            (spline_post_shaping)))))))
+
+==============================================================================
+Spline - curve types
+==============================================================================
+
+def Xform "Prim"
+{
+    double a.spline = {
+        bezier,
+        1: 8; post curve (4),
+    }
+    float b.spline = {
+        hermite,
+        1: 8; post curve (4),
+    }
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (attribute_property)
+        (spline
+          (spline_curve_type)
+          (spline_knot
+            time: (integer)
+            value: (integer)
+            (spline_post_shaping
+              (spline_tangent
+                slope: (integer))))))
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (attribute_property)
+        (spline
+          (spline_curve_type)
+          (spline_knot
+            time: (integer)
+            value: (integer)
+            (spline_post_shaping
+              (spline_tangent
+                slope: (integer)))))))))
+
+==============================================================================
+Spline - pre and post extrapolation
+==============================================================================
+
+def Xform "Prim"
+{
+    double a.spline = {
+        pre: linear,
+        post: sloped(0.57),
+    }
+    double b.spline = {
+        pre: none,
+        post: held,
+    }
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (attribute_property)
+        (spline
+          (spline_extrapolation)
+          (spline_extrapolation
+            mode: (spline_sloped
+              (float)))))
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (attribute_property)
+        (spline
+          (spline_extrapolation)
+          (spline_extrapolation))))))
+
+==============================================================================
+Spline - looping extrapolation, with and without a boundary time
+==============================================================================
+
+def Xform "Prim"
+{
+    double a.spline = {
+        pre: loop repeat(5),
+        post: loop repeat,
+    }
+    double b.spline = {
+        pre: loop oscillate(5),
+        post: loop reset(5),
+    }
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (attribute_property)
+        (spline
+          (spline_extrapolation
+            mode: (spline_extrapolation_loop
+              (integer)))
+          (spline_extrapolation
+            mode: (spline_extrapolation_loop))))
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (attribute_property)
+        (spline
+          (spline_extrapolation
+            mode: (spline_extrapolation_loop
+              (integer)))
+          (spline_extrapolation
+            mode: (spline_extrapolation_loop
+              (integer))))))))
+
+==============================================================================
+Spline - inner loop
+==============================================================================
+
+def Xform "Prim"
+{
+    double a.spline = {
+        loop: (15, 25, 0, 2, 11.7),
+        1: 14,
+    }
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (attribute_property)
+        (spline
+          (spline_loop
+            proto_start: (integer)
+            proto_end: (integer)
+            pre_loops: (integer)
+            post_loops: (integer)
+            value_offset: (float))
+          (spline_knot
+            time: (integer)
+            value: (integer)))))))
+
+==============================================================================
+Spline - a knot with a separate pre-value
+==============================================================================
+
+def Xform "Prim"
+{
+    double a.spline = {
+        7: 5.5 & 7.21; post held,
+    }
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (attribute_property)
+        (spline
+          (spline_knot
+            time: (integer)
+            pre_value: (float)
+            value: (float)
+            (spline_post_shaping)))))))
+
+==============================================================================
+Spline - tangents
+==============================================================================
+
+def Xform "Prim"
+{
+    double a.spline = {
+        1: 8; post curve (4),
+        2: 9; pre (3.77, -1.4); post curve (1.1, -1.4),
+        3: 10; pre (2.49, 1.17, autoEase); post curve (2, 3, custom),
+    }
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (attribute_property)
+        (spline
+          (spline_knot
+            time: (integer)
+            value: (integer)
+            (spline_post_shaping
+              (spline_tangent
+                slope: (integer))))
+          (spline_knot
+            time: (integer)
+            value: (integer)
+            (spline_pre_tangent
+              (spline_tangent
+                width: (float)
+                slope: (float)))
+            (spline_post_shaping
+              (spline_tangent
+                width: (float)
+                slope: (float))))
+          (spline_knot
+            time: (integer)
+            value: (integer)
+            (spline_pre_tangent
+              (spline_tangent
+                width: (float)
+                slope: (float)
+                algorithm: (spline_tangent_algorithm)))
+            (spline_post_shaping
+              (spline_tangent
+                width: (integer)
+                slope: (integer)
+                algorithm: (spline_tangent_algorithm)))))))))
+
+==============================================================================
+Spline - knot metadata
+==============================================================================
+
+def Xform "Prim"
+{
+    double a.spline = {
+        0: 6; post linear; { string a = "yes"; int b = 4; dictionary c = { string d = "ugh" } },
+        1: 6; {},
+    }
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (attribute_property)
+        (spline
+          (spline_knot
+            time: (integer)
+            value: (integer)
+            (spline_post_shaping)
+            (dictionary
+              (attribute_type)
+              (identifier)
+              (string)
+              (attribute_type)
+              (identifier)
+              (integer)
+              (attribute_type)
+              (identifier)
+              (dictionary
+                (attribute_type)
+                (identifier)
+                (string))))
+          (spline_knot
+            time: (integer)
+            value: (integer)
+            (dictionary)))))))
+
+==============================================================================
+Spline - knot values must be numbers
+==============================================================================
+
+def Xform "Prim"
+{
+    string bork.spline = {
+        1: "hello",
+    }
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (ERROR
+    (prim_type)
+    (identifier)
+    (ERROR
+      (string)
+      (attribute_type)
+      (identifier)
+      (attribute_property)
+      (integer))
+    (string)))
