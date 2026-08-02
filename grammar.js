@@ -129,7 +129,12 @@ module.exports = grammar(
                         "=",
                         attribute_right_side(
                             $,
-                            choice($.list, $._attribute_value, $.None),
+                            choice(
+                                $.array_edit,
+                                $.list,
+                                $._attribute_value,
+                                $.None,
+                            ),
                         ),
                     ),
                 ),
@@ -420,7 +425,10 @@ module.exports = grammar(
                         seq(
                             field("left", choice($.float, $.integer)),
                             ":",
-                            field("right", choice($.list, $._attribute_value)),
+                            field(
+                                "right",
+                                choice($.array_edit, $.list, $._attribute_value),
+                            ),
                             optional(",")
                         )
                     ),
@@ -561,6 +569,102 @@ module.exports = grammar(
             spline_tangent_algorithm: $ => choice("custom", "autoEase"),
 
             _number: $ => choice($.float, $.integer),
+
+            // Reference: pxr/usd/sdf/textFileFormatParser.h, the ``ArrayEdit*`` rules
+            //
+            // An array edit is a list of instructions that transform whatever
+            // array a weaker layer already composed, instead of replacing it.
+            // e.g.
+            //
+            //     int[] iattr = edit [
+            //         write [0] to [1]
+            //         write 123 to [0]
+            //         append [-1]
+            //         prepend 63
+            //         erase [3]
+            //         minsize 100 fill 0
+            //     ]
+            //
+            // Instructions are separated by a newline or a ";" - the fixtures
+            // use both, sometimes in the same body.
+            //
+            array_edit: $ => seq(
+                "edit",
+                "[",
+                repeat(seq($._array_edit_instruction, optional(";"))),
+                "]",
+            ),
+            _array_edit_instruction: $ => choice(
+                $.array_edit_prepend,
+                $.array_edit_append,
+                $.array_edit_write,
+                $.array_edit_insert,
+                $.array_edit_erase,
+                $.array_edit_minsize,
+                $.array_edit_resize,
+                $.array_edit_maxsize,
+            ),
+
+            array_edit_prepend: $ => seq("prepend", $._array_edit_source),
+            array_edit_append: $ => seq("append", $._array_edit_source),
+            array_edit_write: $ => seq(
+                "write",
+                $._array_edit_source,
+                "to",
+                field("index", $.array_edit_index),
+            ),
+            array_edit_insert: $ => seq(
+                "insert",
+                $._array_edit_source,
+                "at",
+                field("index", $.array_edit_index),
+            ),
+            array_edit_erase: $ => seq(
+                "erase",
+                field("index", $.array_edit_index),
+            ),
+            array_edit_minsize: $ => seq(
+                "minsize",
+                field("size", $.integer),
+                optional($.array_edit_fill),
+            ),
+            array_edit_resize: $ => seq(
+                "resize",
+                field("size", $.integer),
+                optional($.array_edit_fill),
+            ),
+            array_edit_maxsize: $ => seq(
+                "maxsize",
+                field("size", $.integer),
+            ),
+            array_edit_fill: $ => seq(
+                "fill",
+                field("value", $._array_edit_literal),
+            ),
+
+            // The thing being written / appended / prepended is either an index
+            // into the array as it was before the edit or a literal value.
+            // ``append [-1]`` re-appends the last existing element whereas
+            // ``append -1`` appends the number -1.
+            //
+            _array_edit_source: $ => choice(
+                field("source", $.array_edit_index),
+                field("source", $._array_edit_literal),
+            ),
+            array_edit_index: $ => seq("[", $.integer, "]"),
+            // USD calls this an AtomicValue or a TypedTupleValue. The identifier
+            // is what makes ``write yes to [-1]`` work.
+            //
+            // Note that this cannot be ``$.identifier``. That rule allows a
+            // leading digit, so it would match ``123`` just as happily as
+            // ``$.integer`` does and ``write 123 to [0]`` would come out as an
+            // identifier. USD does not allow a leading digit here anyway.
+            //
+            _array_edit_literal: $ => choice(
+                $._attribute_value,
+                alias($._array_edit_identifier, $.identifier),
+            ),
+            _array_edit_identifier: $ => /[a-zA-Z_][a-zA-Z0-9_]*/,
 
             _inner_attribute_assignment: $ => seq(
                 $.attribute_type,

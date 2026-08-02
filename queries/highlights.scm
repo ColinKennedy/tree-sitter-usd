@@ -12,6 +12,26 @@
 (uniform) @function.builtin
 (variant_set_definition) @keyword
 
+;; Array edits
+[
+  "edit"
+  "write"
+  "insert"
+  "erase"
+  "minsize"
+  "resize"
+  "maxsize"
+  "fill"
+  "to"
+  "at"
+] @keyword
+
+;; Scoped to the instruction so that the ``add``/``append``/``prepend`` of an
+;; (orderer) keeps its own @function.call highlight.
+;;
+(array_edit_append "append" @keyword)
+(array_edit_prepend "prepend" @keyword)
+
 ;; Splines
 (spline_curve_type) @keyword
 (spline_tangent_algorithm) @keyword

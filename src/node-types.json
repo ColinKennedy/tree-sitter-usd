@@ -23,6 +23,424 @@
     }
   },
   {
+    "type": "array_edit",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "array_edit_append",
+          "named": true
+        },
+        {
+          "type": "array_edit_erase",
+          "named": true
+        },
+        {
+          "type": "array_edit_insert",
+          "named": true
+        },
+        {
+          "type": "array_edit_maxsize",
+          "named": true
+        },
+        {
+          "type": "array_edit_minsize",
+          "named": true
+        },
+        {
+          "type": "array_edit_prepend",
+          "named": true
+        },
+        {
+          "type": "array_edit_resize",
+          "named": true
+        },
+        {
+          "type": "array_edit_write",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "array_edit_append",
+    "named": true,
+    "fields": {
+      "source": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "None",
+            "named": true
+          },
+          {
+            "type": "array_edit_index",
+            "named": true
+          },
+          {
+            "type": "asset_path",
+            "named": true
+          },
+          {
+            "type": "bool",
+            "named": true
+          },
+          {
+            "type": "float",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "prim_path",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          },
+          {
+            "type": "tuple",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "array_edit_erase",
+    "named": true,
+    "fields": {
+      "index": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "array_edit_index",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "array_edit_fill",
+    "named": true,
+    "fields": {
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "None",
+            "named": true
+          },
+          {
+            "type": "asset_path",
+            "named": true
+          },
+          {
+            "type": "bool",
+            "named": true
+          },
+          {
+            "type": "float",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "prim_path",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          },
+          {
+            "type": "tuple",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "array_edit_index",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "integer",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "array_edit_insert",
+    "named": true,
+    "fields": {
+      "index": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "array_edit_index",
+            "named": true
+          }
+        ]
+      },
+      "source": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "None",
+            "named": true
+          },
+          {
+            "type": "array_edit_index",
+            "named": true
+          },
+          {
+            "type": "asset_path",
+            "named": true
+          },
+          {
+            "type": "bool",
+            "named": true
+          },
+          {
+            "type": "float",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "prim_path",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          },
+          {
+            "type": "tuple",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "array_edit_maxsize",
+    "named": true,
+    "fields": {
+      "size": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "integer",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "array_edit_minsize",
+    "named": true,
+    "fields": {
+      "size": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "integer",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "array_edit_fill",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "array_edit_prepend",
+    "named": true,
+    "fields": {
+      "source": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "None",
+            "named": true
+          },
+          {
+            "type": "array_edit_index",
+            "named": true
+          },
+          {
+            "type": "asset_path",
+            "named": true
+          },
+          {
+            "type": "bool",
+            "named": true
+          },
+          {
+            "type": "float",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "prim_path",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          },
+          {
+            "type": "tuple",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "array_edit_resize",
+    "named": true,
+    "fields": {
+      "size": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "integer",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "array_edit_fill",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "array_edit_write",
+    "named": true,
+    "fields": {
+      "index": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "array_edit_index",
+            "named": true
+          }
+        ]
+      },
+      "source": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "None",
+            "named": true
+          },
+          {
+            "type": "array_edit_index",
+            "named": true
+          },
+          {
+            "type": "asset_path",
+            "named": true
+          },
+          {
+            "type": "bool",
+            "named": true
+          },
+          {
+            "type": "float",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "prim_path",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          },
+          {
+            "type": "tuple",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "asset_path",
     "named": true,
     "fields": {}
@@ -37,6 +455,10 @@
       "types": [
         {
           "type": "None",
+          "named": true
+        },
+        {
+          "type": "array_edit",
           "named": true
         },
         {
@@ -1104,6 +1526,10 @@
             "named": true
           },
           {
+            "type": "array_edit",
+            "named": true
+          },
+          {
             "type": "asset_path",
             "named": true
           },
@@ -1325,6 +1751,10 @@
     "named": false
   },
   {
+    "type": "at",
+    "named": false
+  },
+  {
     "type": "autoEase",
     "named": false
   },
@@ -1362,7 +1792,19 @@
     "named": false
   },
   {
+    "type": "edit",
+    "named": false
+  },
+  {
+    "type": "erase",
+    "named": false
+  },
+  {
     "type": "false",
+    "named": false
+  },
+  {
+    "type": "fill",
     "named": false
   },
   {
@@ -1378,6 +1820,10 @@
     "named": false
   },
   {
+    "type": "insert",
+    "named": false
+  },
+  {
     "type": "integer",
     "named": true
   },
@@ -1387,6 +1833,14 @@
   },
   {
     "type": "loop",
+    "named": false
+  },
+  {
+    "type": "maxsize",
+    "named": false
+  },
+  {
+    "type": "minsize",
     "named": false
   },
   {
@@ -1430,6 +1884,10 @@
     "named": false
   },
   {
+    "type": "resize",
+    "named": false
+  },
+  {
     "type": "sloped",
     "named": false
   },
@@ -1442,6 +1900,10 @@
     "named": false
   },
   {
+    "type": "to",
+    "named": false
+  },
+  {
     "type": "true",
     "named": false
   },
@@ -1451,6 +1913,10 @@
   },
   {
     "type": "variantSet",
+    "named": false
+  },
+  {
+    "type": "write",
     "named": false
   },
   {

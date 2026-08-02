@@ -1,0 +1,241 @@
+==============================================================================
+Array edit - empty
+==============================================================================
+
+over "foo"
+{
+    int[] attr = edit [ ]
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (array_edit)))))
+
+==============================================================================
+Array edit - a single instruction, inline
+==============================================================================
+
+def "Root"
+{
+    int[] attr = edit [ append -999 ]
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (array_edit
+          (array_edit_append
+            source: (integer)))))))
+
+==============================================================================
+Array edit - newline-separated instructions
+==============================================================================
+
+over "foo"
+{
+    int[] iattr = edit [
+        write [0] to [1]
+        write 123 to [0]
+        append [-1]
+        prepend 63
+    ]
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (array_edit
+          (array_edit_write
+            source: (array_edit_index
+              (integer))
+            index: (array_edit_index
+              (integer)))
+          (array_edit_write
+            source: (integer)
+            index: (array_edit_index
+              (integer)))
+          (array_edit_append
+            source: (array_edit_index
+              (integer)))
+          (array_edit_prepend
+            source: (integer)))))))
+
+==============================================================================
+Array edit - ";"-separated instructions
+==============================================================================
+
+over "foo"
+{
+    string[] sattr = edit [
+        minsize 1024; append "hello world"; append 'with "quotes"'
+    ]
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (array_edit
+          (array_edit_minsize
+            size: (integer))
+          (array_edit_append
+            source: (string))
+          (array_edit_append
+            source: (string)))))))
+
+==============================================================================
+Array edit - erase, sizing and insert
+==============================================================================
+
+over "foo"
+{
+    bool[] battr = edit [
+        erase [3]
+        minsize 100 fill yes
+        resize 200 fill no
+        maxsize 150
+        insert 5 at [2]
+    ]
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (array_edit
+          (array_edit_erase
+            index: (array_edit_index
+              (integer)))
+          (array_edit_minsize
+            size: (integer)
+            (array_edit_fill
+              value: (identifier)))
+          (array_edit_resize
+            size: (integer)
+            (array_edit_fill
+              value: (identifier)))
+          (array_edit_maxsize
+            size: (integer))
+          (array_edit_insert
+            source: (integer)
+            index: (array_edit_index
+              (integer))))))))
+
+==============================================================================
+Array edit - inside timeSamples
+==============================================================================
+
+def "Model"
+{
+    int[] attr.timeSamples = {
+        1: edit [write 8 to [0]],
+        3: edit [
+            write 10 to [0]
+            write 11 to [2]
+        ]
+    }
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (attribute_property)
+        (timeSamples
+          left: (integer)
+          right: (array_edit
+            (array_edit_write
+              source: (integer)
+              index: (array_edit_index
+                (integer))))
+          left: (integer)
+          right: (array_edit
+            (array_edit_write
+              source: (integer)
+              index: (array_edit_index
+                (integer)))
+            (array_edit_write
+              source: (integer)
+              index: (array_edit_index
+                (integer)))))))))
+
+==============================================================================
+Array edit - tuple values
+==============================================================================
+
+def "Prim"
+{
+    point3d[] points.timeSamples = {
+        3: edit [
+            write (1, 2, 3) to [0]
+            append (2, 3, 4)
+        ]
+    }
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (attribute_property)
+        (timeSamples
+          left: (integer)
+          right: (array_edit
+            (array_edit_write
+              source: (tuple
+                (integer)
+                (integer)
+                (integer))
+              index: (array_edit_index
+                (integer)))
+            (array_edit_append
+              source: (tuple
+                (integer)
+                (integer)
+                (integer)))))))))
