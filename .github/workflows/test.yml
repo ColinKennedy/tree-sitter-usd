@@ -3,8 +3,8 @@ on:
   push:
     branches:
       - master
-      # TODO: Remove this branch, before merging
-      - add_python_bindings
+    tags:
+      - "v*"
   pull_request:
     branches:
       - "**"
