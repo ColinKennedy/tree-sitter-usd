@@ -16,6 +16,7 @@ import os
 import sys
 
 from Qt import QtCore, QtWidgets
+
 from tree_sitter_qt import editor, layer, themes
 
 _THEMES = {"Dark": themes.DARK_THEME, "Light": themes.LIGHT_THEME}

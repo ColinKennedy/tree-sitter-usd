@@ -24,23 +24,34 @@ Homepage = "https://github.com/ColinKennedy/tree-sitter-usd"
 
 [project.optional-dependencies]
 core = ["tree-sitter~=0.25"]
+example = ["PySide6-Essentials", "Qt.py", "tree-sitter~=0.25"]
 test = ["tree-sitter~=0.25"]
-lint = ["mypy>=1.11", "ruff>=0.6", "tree-sitter~=0.25"]
+# NOTE: Qt.py brings its own stubs, which is all that mypy needs in order to
+# check examples/. The Qt bindings themselves are only needed to run them.
+#
+lint = ["mypy>=1.11", "Qt.py", "ruff>=0.6", "tree-sitter~=0.25"]
 
 [tool.ruff]
 line-length = 100
-src = ["bindings/python", "bindings/python/tests"]
+src = ["bindings/python", "bindings/python/tests", "examples/qt"]
 
 [tool.ruff.lint]
 select = ["A", "ANN", "B", "C4", "D", "E", "F", "I", "N", "RUF", "SIM", "UP", "W"]
 
 [tool.ruff.lint.isort]
-known-first-party = ["tree_sitter_usda"]
+known-first-party = ["tree_sitter_qt", "tree_sitter_usda"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
 
 [tool.mypy]
-files = ["bindings/python/tests"]
-mypy_path = "bindings/python/tests"
+files = ["bindings/python/tests", "examples/qt"]
+mypy_path = ["bindings/python/tests", "examples/qt"]
 strict = true
+
+# NOTE: USD's Python bindings are optional (and unstubbed). examples/ only
+# imports them to export binary layers as text.
+#
+[[tool.mypy.overrides]]
+module = ["pxr.*"]
+ignore_missing_imports = true

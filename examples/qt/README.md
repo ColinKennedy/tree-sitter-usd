@@ -8,10 +8,10 @@ A small example which shows a USD layer, from disk, in a read-only
 From a checkout of this repository, using [uv](https://docs.astral.sh/uv):
 
 ```sh
-uv run --no-editable \
-    --with Qt.py --with PySide6-Essentials --with "tree-sitter~=0.25" \
-    examples/qt/usda_viewer.py /path/to/some_layer.usda
+uv run --no-editable --extra example examples/qt/usda_viewer.py /path/to/some_layer.usda
 ```
+
+The `example` extra is `Qt.py`, `PySide6-Essentials`, and `tree-sitter`.
 
 `--no-editable` matters. `uv run` installs this project in editable mode by
 default, which points `tree_sitter_usda` at `bindings/python/tree_sitter_usda`,

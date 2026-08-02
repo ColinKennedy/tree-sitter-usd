@@ -157,6 +157,94 @@ a testiment to tree-sitter that the same mappings do as you expect across all
 languages.
 
 
+### Qt
+[examples/qt](examples/qt) is a runnable USD layer viewer - a `QLineEdit` which
+takes a path on-disk plus a read-only, syntax highlighted `QPlainTextEdit`.
+
+```sh
+uv run --no-editable --extra example examples/qt/usda_viewer.py /path/to/some_layer.usda
+```
+
+<img width="737" height="805" alt="Image" src="https://github.com/user-attachments/assets/b3a3d1e5-010c-485f-883a-19cec61625c6" />
+
+The example uses [Qt.py](https://github.com/mottosso/Qt.py), so the same code
+runs on PySide6, PySide2, PyQt5, or PyQt6. Only its `Usda`-prefixed classes and
+its layer reader know about USD - everything else works for any tree-sitter
+grammar.
+
+
+<details>
+<summary><b>Integrating Tree-sitter With Qt</b></summary>
+
+Qt colors text with `QSyntaxHighlighter`. It calls `highlightBlock` once per
+block (one line, in a `QPlainTextEdit`) and you answer with `setFormat` calls.
+tree-sitter parses whole files and answers with captured nodes. Bridging the
+two is mostly a matter of translating coordinates:
+
+```python
+from Qt import QtGui
+from tree_sitter import Language, Parser, Query, QueryCursor
+
+import tree_sitter_usda
+
+
+class Highlighter(QtGui.QSyntaxHighlighter):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+        language = Language(tree_sitter_usda.language())
+        self._parser = Parser(language)
+        self._cursor = QueryCursor(Query(language, tree_sitter_usda.HIGHLIGHTS_QUERY))
+        self._formats = {"string": _make_format("#98c379")}  # And so on, per capture
+
+    def highlightBlock(self, text):
+        # NOTE: Real code caches this parse. See examples/qt for how + why.
+        source = self.document().toPlainText().encode("utf-8")
+        tree = self._parser.parse(source)
+
+        start_byte = _get_block_start_byte(source, self.currentBlock().blockNumber())
+        end_byte = start_byte + len(text.encode("utf-8"))
+        self._cursor.set_byte_range(start_byte, end_byte)
+
+        for _, captures in self._cursor.matches(tree.root_node):
+            for capture, nodes in captures.items():
+                format_ = self._formats.get(capture)  # e.g. @spell is not a color
+
+                if format_ is None:
+                    continue
+
+                for node in nodes:
+                    # NOTE: Byte offsets are Qt offsets only while the line is ASCII
+                    start = max(node.start_byte, start_byte) - start_byte
+                    end = min(node.end_byte, end_byte) - start_byte
+                    self.setFormat(start, end - start, format_)
+```
+
+The parts which that sketch glosses over, and which
+[examples/qt](examples/qt) handles:
+
+- **Offsets** - tree-sitter counts UTF-8 bytes, Qt counts UTF-16 code units.
+  They agree until a line contains a `é` (2 bytes, 1 unit) or a `🙂` (4 bytes,
+  2 units), and then every color on that line slides sideways.
+- **Priority** - a highlights query captures the same text more than once on
+  purpose. `(comment) @spell @comment` and `(attribute_type) @type` +
+  `@type.builtin` both do. tree-sitter 0.25+ gives the last-written pattern
+  priority, so sort the captures by pattern order and paint the low priority
+  ones first. Qt's `setFormat` is last-write-wins, which does the rest.
+- **Speed** - do not re-parse per block. Re-parse once per edit, hand the old
+  tree to `Parser.parse` so tree-sitter re-uses the subtrees which did not
+  change, and give each block a `QueryCursor.set_byte_range` so it is not
+  querying the whole document.
+- **Repaints** - Qt only re-highlights the blocks which the user typed in,
+  which is not enough for multi-line constructs. Deleting the `"""` which
+  opened a docstring re-interprets every line below it. `Tree.changed_ranges`
+  says exactly which bytes changed meaning, so those blocks can be repainted.
+
+</details>
+
+See [examples/qt/README.md](examples/qt/README.md) for the details.
+
+
 ### Need A Parser? Look No Further
 USD of course has parsing capabilities but, at the time of writing, most of the
 parsing classes and functions are private. On top of that, it's a multi-million
