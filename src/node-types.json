@@ -1617,6 +1617,11 @@
     }
   },
   {
+    "type": "uniform",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "variant",
     "named": true,
     "fields": {},
@@ -1776,6 +1781,10 @@
     "extra": true
   },
   {
+    "type": "config",
+    "named": false
+  },
+  {
     "type": "connect",
     "named": false
   },
@@ -1918,10 +1927,6 @@
   {
     "type": "true",
     "named": false
-  },
-  {
-    "type": "uniform",
-    "named": true
   },
   {
     "type": "variantSet",

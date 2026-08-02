@@ -1,0 +1,79 @@
+==============================================================================
+config - deprecated spelling of uniform, reported as (uniform)
+==============================================================================
+
+def Cylinder "CylinderL"
+{
+    config token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ"]
+    uniform token[] other = ["a"]
+    double radius = 0.4
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (block
+      (attribute_assignment
+        (uniform)
+        (attribute_type)
+        (identifier)
+        (list
+          (string)
+          (string)))
+      (attribute_assignment
+        (uniform)
+        (attribute_type)
+        (identifier)
+        (list
+          (string)))
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (float)))))
+
+==============================================================================
+config - only a keyword in the variability slot, so it is still a valid name
+==============================================================================
+
+def Scope "S"
+{
+    double config = 5
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (block
+      (attribute_assignment
+        (attribute_type)
+        (identifier)
+        (integer)))))
+
+==============================================================================
+config - on a declaration with no value
+==============================================================================
+
+class "Schema"
+{
+    config token[] xformOpOrder
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (string)
+    (block
+      (attribute_declaration
+        (uniform)
+        (attribute_type)
+        (identifier)))))

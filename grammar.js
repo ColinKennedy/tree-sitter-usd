@@ -80,10 +80,16 @@ module.exports = grammar(
             custom: $ => "custom",
             uniform: $ => "uniform",
 
+            // Deprecated spelling of ``uniform``. USD converts it on read and
+            // never writes it back, so it is aliased to ``uniform`` here too.
+            //
+            _config: $ => "config",
+
             _attribute_left_side: $ => seq(
                 optional($.orderer),
                 optional($.custom),
-                optional($.uniform),
+                // USD's AttributeVariability is "config / uniform", never both
+                optional(choice($.uniform, alias($._config, $.uniform))),
                 $.attribute_type,
                 choice($.qualified_identifier, $.identifier),
             ),

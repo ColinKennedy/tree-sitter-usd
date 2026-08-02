@@ -204,6 +204,10 @@
       "type": "STRING",
       "value": "uniform"
     },
+    "_config": {
+      "type": "STRING",
+      "value": "config"
+    },
     "_attribute_left_side": {
       "type": "SEQ",
       "members": [
@@ -235,8 +239,22 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "uniform"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "uniform"
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "_config"
+                  },
+                  "named": true,
+                  "value": "uniform"
+                }
+              ]
             },
             {
               "type": "BLANK"
