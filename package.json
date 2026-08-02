@@ -8,7 +8,7 @@
     },
     "description": "Parse Pixar's USD files, using tree-sitter ",
     "devDependencies": {
-        "tree-sitter-cli": "^0.20.8"
+        "tree-sitter-cli": "^0.25.10"
     },
     "homepage": "https://github.com/ColinKennedy/tree-sitter-usd#readme",
     "keywords": [

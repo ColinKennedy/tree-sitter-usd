@@ -1,0 +1,32 @@
+{
+  "grammars": [
+    {
+      "name": "usd",
+      "camelcase": "Usd",
+      "scope": "source.usd",
+      "path": ".",
+      "file-types": [
+        "usd",
+        "usda",
+        "usdc"
+      ],
+      "highlights": [
+        "queries/highlights.scm"
+      ],
+      "injection-regex": "usd"
+    }
+  ],
+  "metadata": {
+    "version": "0.7.0",
+    "license": "MIT",
+    "description": "Parse Pixar's USD files, using tree-sitter",
+    "authors": [
+      {
+        "name": "Colin Kennedy"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/ColinKennedy/tree-sitter-usd"
+    }
+  }
+}
