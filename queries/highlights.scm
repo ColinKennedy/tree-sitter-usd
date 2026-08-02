@@ -11,6 +11,7 @@
 (prim_path) @string.special
 (relationship_type) @type
 (uniform) @function.builtin
+(varying) @function.builtin
 (variant_set_definition) @keyword
 
 ;; Array edits

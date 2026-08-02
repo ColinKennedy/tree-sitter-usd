@@ -1,0 +1,102 @@
+==============================================================================
+varying - on relationships, with custom, an orderer and .default
+==============================================================================
+
+def GprimSphere "Sphere"
+{
+    varying rel constraintTarget = </Pivot>
+    custom varying rel other = </Pivot2>
+    delete varying rel constraintTarget = </Pivot3>
+    varying rel constraintTarget.default = </Pivot>
+    varying rel declaredOnly
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (block
+      (relationship_assignment
+        (varying)
+        (relationship_type)
+        (identifier)
+        (prim_path))
+      (relationship_assignment
+        (custom)
+        (varying)
+        (relationship_type)
+        (identifier)
+        (prim_path))
+      (relationship_assignment
+        (orderer)
+        (varying)
+        (relationship_type)
+        (identifier)
+        (prim_path))
+      (relationship_assignment
+        (varying)
+        (relationship_type)
+        (identifier)
+        (attribute_property)
+        (prim_path))
+      (relationship_declaration
+        (varying)
+        (relationship_type)
+        (identifier)))))
+
+==============================================================================
+varying - on a non-relationship attribute
+==============================================================================
+
+def Scope "S"
+{
+    varying double attr = 5
+    custom varying token[] tokens = ["a"]
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (block
+      (attribute_assignment
+        (varying)
+        (attribute_type)
+        (identifier)
+        (integer))
+      (attribute_assignment
+        (custom)
+        (varying)
+        (attribute_type)
+        (identifier)
+        (list
+          (string))))))
+
+==============================================================================
+varying - custom rel is a relationship, not an attribute typed "rel"
+==============================================================================
+
+def Scope "S"
+{
+    custom rel plain = </Pivot>
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (block
+      (relationship_assignment
+        (custom)
+        (relationship_type)
+        (identifier)
+        (prim_path)))))

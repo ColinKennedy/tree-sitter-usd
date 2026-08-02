@@ -204,6 +204,10 @@
       "type": "STRING",
       "value": "uniform"
     },
+    "varying": {
+      "type": "STRING",
+      "value": "varying"
+    },
     "_config": {
       "type": "STRING",
       "value": "config"
@@ -253,6 +257,10 @@
                   },
                   "named": true,
                   "value": "uniform"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "varying"
                 }
               ]
             },
@@ -588,6 +596,52 @@
       "type": "STRING",
       "value": "timeSamples"
     },
+    "_relationship_left_side": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "custom"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "varying"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "relationship_type"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "qualified_identifier"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "identifier"
+            }
+          ]
+        }
+      ]
+    },
     "relationship_declaration": {
       "type": "PREC_LEFT",
       "value": 2,
@@ -596,20 +650,7 @@
         "members": [
           {
             "type": "SYMBOL",
-            "name": "relationship_type"
-          },
-          {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "qualified_identifier"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "identifier"
-              }
-            ]
+            "name": "_relationship_left_side"
           },
           {
             "type": "CHOICE",
@@ -646,39 +687,88 @@
           },
           {
             "type": "SYMBOL",
-            "name": "relationship_type"
+            "name": "_relationship_left_side"
           },
           {
             "type": "CHOICE",
             "members": [
               {
-                "type": "SYMBOL",
-                "name": "qualified_identifier"
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": "."
+                  },
+                  {
+                    "type": "ALIAS",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "_timeSamples_property"
+                    },
+                    "named": true,
+                    "value": "attribute_property"
+                  },
+                  {
+                    "type": "STRING",
+                    "value": "="
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "timeSamples"
+                  }
+                ]
               },
               {
-                "type": "SYMBOL",
-                "name": "identifier"
-              }
-            ]
-          },
-          {
-            "type": "STRING",
-            "value": "="
-          },
-          {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "prim_paths"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "prim_path"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "None"
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "SEQ",
+                        "members": [
+                          {
+                            "type": "STRING",
+                            "value": "."
+                          },
+                          {
+                            "type": "ALIAS",
+                            "content": {
+                              "type": "SYMBOL",
+                              "name": "_default_property"
+                            },
+                            "named": true,
+                            "value": "attribute_property"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "BLANK"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "STRING",
+                    "value": "="
+                  },
+                  {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "SYMBOL",
+                        "name": "prim_paths"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "prim_path"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "None"
+                      }
+                    ]
+                  }
+                ]
               }
             ]
           },
@@ -696,6 +786,10 @@
           }
         ]
       }
+    },
+    "_default_property": {
+      "type": "STRING",
+      "value": "default"
     },
     "relationship_type": {
       "type": "STRING",

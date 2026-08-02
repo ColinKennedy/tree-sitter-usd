@@ -79,6 +79,7 @@ module.exports = grammar(
 
             custom: $ => "custom",
             uniform: $ => "uniform",
+            varying: $ => "varying",
 
             // Deprecated spelling of ``uniform``. USD converts it on read and
             // never writes it back, so it is aliased to ``uniform`` here too.
@@ -88,8 +89,12 @@ module.exports = grammar(
             _attribute_left_side: $ => seq(
                 optional($.orderer),
                 optional($.custom),
-                // USD's AttributeVariability is "config / uniform", never both
-                optional(choice($.uniform, alias($._config, $.uniform))),
+                // USD's AttributeVariability is "config / uniform", never both.
+                // ``varying`` is the default and USD only spells it out on a
+                // relationship, but it is accepted here too.
+                optional(
+                    choice($.uniform, alias($._config, $.uniform), $.varying),
+                ),
                 $.attribute_type,
                 choice($.qualified_identifier, $.identifier),
             ),
@@ -150,26 +155,56 @@ module.exports = grammar(
             _spline_property: $ => "spline",
             _timeSamples_property: $ => "timeSamples",
 
+            // USD's RelationshipType is
+            // ``rel / custom rel / varying rel / custom varying rel``
+            _relationship_left_side: $ => seq(
+                optional($.custom),
+                optional($.varying),
+                $.relationship_type,
+                choice($.qualified_identifier, $.identifier),
+            ),
+
             relationship_declaration: $ => prec.left(
                 2,
                 seq(
-                    $.relationship_type,
-                    choice($.qualified_identifier, $.identifier),
+                    $._relationship_left_side,
                     optional($.metadata),
                 )
             ),
 
+            // A relationship takes ``.default`` or ``.timeSamples``, each with
+            // its own kind of value - same pairing as ``attribute_assignment``.
             relationship_assignment: $ => prec.left(
                 2,
                 seq(
                     optional($.orderer),
-                    $.relationship_type,
-                    choice($.qualified_identifier, $.identifier),
-                    "=",
-                    choice($.prim_paths, $.prim_path, $.None),
+                    $._relationship_left_side,
+                    choice(
+                        seq(
+                            ".",
+                            alias($._timeSamples_property, $.attribute_property),
+                            "=",
+                            $.timeSamples,
+                        ),
+                        seq(
+                            optional(
+                                seq(
+                                    ".",
+                                    alias(
+                                        $._default_property,
+                                        $.attribute_property,
+                                    ),
+                                ),
+                            ),
+                            "=",
+                            choice($.prim_paths, $.prim_path, $.None),
+                        ),
+                    ),
                     optional($.metadata),
                 ),
             ),
+
+            _default_property: $ => "default",
 
             relationship_type: $ => "rel",
 

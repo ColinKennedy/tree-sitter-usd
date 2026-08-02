@@ -527,6 +527,10 @@
         {
           "type": "uniform",
           "named": true
+        },
+        {
+          "type": "varying",
+          "named": true
         }
       ]
     }
@@ -569,6 +573,10 @@
         },
         {
           "type": "uniform",
+          "named": true
+        },
+        {
+          "type": "varying",
           "named": true
         }
       ]
@@ -1044,6 +1052,14 @@
           "named": true
         },
         {
+          "type": "attribute_property",
+          "named": true
+        },
+        {
+          "type": "custom",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -1070,6 +1086,14 @@
         {
           "type": "relationship_type",
           "named": true
+        },
+        {
+          "type": "timeSamples",
+          "named": true
+        },
+        {
+          "type": "varying",
+          "named": true
         }
       ]
     }
@@ -1082,6 +1106,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "custom",
+          "named": true
+        },
         {
           "type": "identifier",
           "named": true
@@ -1096,6 +1124,10 @@
         },
         {
           "type": "relationship_type",
+          "named": true
+        },
+        {
+          "type": "varying",
           "named": true
         }
       ]
@@ -1801,6 +1833,10 @@
     "named": false
   },
   {
+    "type": "default",
+    "named": false
+  },
+  {
     "type": "delete",
     "named": false
   },
@@ -1931,6 +1967,10 @@
   {
     "type": "variantSet",
     "named": false
+  },
+  {
+    "type": "varying",
+    "named": true
   },
   {
     "type": "write",
