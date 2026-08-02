@@ -31,7 +31,15 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 20
-      - run: npm install
+      # NOTE: The Node binding needs Visual Studio to compile and the runner's
+      # VS 2026 is newer than the node-gyp that npm ships with. This job only
+      # runs `tree-sitter test`, so skip every install script and then fetch
+      # just the tree-sitter CLI's prebuilt binary.
+      #
+      # The Node binding is still compiled by the `test` job, on Linux + MacOS.
+      #
+      - run: npm install --ignore-scripts
+      - run: npm rebuild tree-sitter-cli
       - run: npm run-script test-windows
 
   test_python:
