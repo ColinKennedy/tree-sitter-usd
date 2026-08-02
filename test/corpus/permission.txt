@@ -1,0 +1,152 @@
+==============================================================================
+permission - on a prim
+==============================================================================
+
+def MfScope "PrivateChild" (permission = private)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (permission)))
+    (block)))
+
+==============================================================================
+permission - on an attribute
+==============================================================================
+
+def MfScope "TestPrim"
+{
+    custom int publicAttribute (permission = public)
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (block
+      (attribute_declaration
+        (custom)
+        (attribute_type)
+        (identifier)
+        (metadata
+          (metadata_assignment
+            (identifier)
+            (permission)))))))
+
+==============================================================================
+permission - on a relationship
+==============================================================================
+
+def MfScope "TestPrim"
+{
+    rel privateRel (permission = private)
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (block
+      (relationship_declaration
+        (relationship_type)
+        (identifier)
+        (metadata
+          (metadata_assignment
+            (identifier)
+            (permission)))))))
+
+==============================================================================
+permission - in a multi-line metadata block
+==============================================================================
+
+def Scope "S"
+{
+    custom double attr = 1 (
+        permission = private
+    )
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (block
+      (attribute_assignment
+        (custom)
+        (attribute_type)
+        (identifier)
+        (integer)
+        (metadata
+          (metadata_assignment
+            (identifier)
+            (permission)))))))
+
+==============================================================================
+permission - metadata entries may be ";"-separated
+==============================================================================
+
+def Scope "S" (
+    permission = public; kind = "group"
+)
+{
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (metadata
+      (metadata_assignment
+        (identifier)
+        (permission))
+      (metadata_assignment
+        (identifier)
+        (string)))
+    (block)))
+
+==============================================================================
+permission - only "public" and "private" are valid
+==============================================================================
+
+def MfScope "TestPrim"
+{
+    custom int badAttribute (permission = bogus)
+}
+
+------------------------------------------------------------------------------
+
+(module
+  (prim_definition
+    (prim_type)
+    (identifier)
+    (string)
+    (block
+      (attribute_declaration
+        (custom)
+        (attribute_type)
+        (identifier)
+        (metadata
+          (ERROR
+            (identifier)
+            (UNEXPECTED 'o')))))))

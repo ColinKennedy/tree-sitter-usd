@@ -185,7 +185,15 @@ module.exports = grammar(
             metadata: $ => seq(
                 "(",
                 // Note: In USD, SdfLayer::SetComment is written as a raw, string literal
-                repeat(choice($.metadata_assignment, $.string)),
+                repeat(
+                    seq(
+                        choice($.metadata_assignment, $.string),
+                        // USD reads a metadata block with StatementSequenceOf,
+                        // so entries take a newline or a ";". e.g.
+                        // ``(permission = public; kind = "group")``
+                        optional(";"),
+                    ),
+                ),
                 ")",
             ),
             metadata_assignment: $ => seq(
@@ -216,6 +224,7 @@ module.exports = grammar(
             _metadata_value: $ => choice(
                 $.arc_path,
                 $.dictionary,
+                $.permission,
                 $.relocates,
                 $._base_value,
             ),
@@ -239,6 +248,28 @@ module.exports = grammar(
                     "}",
                 )
             ),
+            // Reference: pxr/usd/sdf/textFileFormatParser.h, ``PermissionMetadata``
+            //
+            // ``permission = public`` / ``permission = private`` controls which
+            // layers may refer to a prim or property. Valid on a prim, an
+            // attribute and a relationship. e.g.
+            //
+            //     def MfScope "PrivateChild" (permission = private)
+            //     {
+            //         custom int attr (permission = public)
+            //         rel someRel (permission = private)
+            //     }
+            //
+            // USD's own rule takes any identifier here and rejects everything
+            // but "public"/"private" in a parser action. Spelling the two out
+            // costs nothing and makes 117/118/119_bad_permission_metadata fail
+            // the way they should.
+            //
+            // Note that this is not USD's ``SdfLayer`` "permission to edit /
+            // save", which is about file writability and has no syntax.
+            //
+            permission: $ => choice("public", "private"),
+
             None: $ => "None",
             // Both capital and undercase ``bool`` are accepted
             bool: $ => choice("False", "True", "false", "true"),

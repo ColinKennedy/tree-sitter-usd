@@ -851,6 +851,10 @@
           "named": true
         },
         {
+          "type": "permission",
+          "named": true
+        },
+        {
           "type": "prim_path",
           "named": true
         },
@@ -937,6 +941,11 @@
   },
   {
     "type": "orderer",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "permission",
     "named": true,
     "fields": {}
   },
@@ -1860,6 +1869,14 @@
   },
   {
     "type": "prepend",
+    "named": false
+  },
+  {
+    "type": "private",
+    "named": false
+  },
+  {
+    "type": "public",
     "named": false
   },
   {

@@ -7,6 +7,7 @@
 (float) @float
 (integer) @number
 (orderer) @function.call
+(permission) @constant.builtin
 (prim_path) @string.special
 (relationship_type) @type
 (uniform) @function.builtin
