@@ -9,8 +9,40 @@ on:
   workflow_dispatch:
 
 jobs:
+  # NOTE: A tag push carries no branch, so GitHub cannot filter one by branch.
+  # This job does it instead - and it runs before anything is built, so a tag
+  # on the wrong branch costs seconds instead of a full wheel matrix.
+  #
+  master:
+    name: Tag is on master
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # NOTE: `merge-base` needs real history. The default shallow clone
+          # cannot answer whether one commit descends from another.
+          #
+          fetch-depth: 0
+      - name: Check that the tag was pushed from master
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          git fetch --no-tags origin master
+
+          # NOTE: HEAD, not $GITHUB_SHA. This repository's tags are annotated,
+          # so $GITHUB_SHA can be the tag object rather than the commit.
+          #
+          if git merge-base --is-ancestor HEAD FETCH_HEAD
+          then
+              echo "$GITHUB_REF_NAME is on master."
+          else
+              echo "::error::$GITHUB_REF_NAME is not on master. Refusing to publish."
+
+              exit 1
+          fi
+
   wheels:
     name: Wheels - ${{ matrix.os }}
+    needs: [master]
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -30,6 +62,7 @@ jobs:
 
   sdist:
     name: Source distribution
+    needs: [master]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
