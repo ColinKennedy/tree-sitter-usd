@@ -1,0 +1,15 @@
+include binding.gyp
+include grammar.js
+include queries/*.scm
+include src/grammar.json
+include src/node-types.json
+include src/parser.c
+include src/tree_sitter/*.h
+include bindings/python/tree_sitter_usda/*.c
+include bindings/python/tree_sitter_usda/*.pyi
+include bindings/python/tree_sitter_usda/py.typed
+include bindings/python/tests/*.py
+
+exclude BUGS.local.md
+exclude issues.txt
+exclude usd.so

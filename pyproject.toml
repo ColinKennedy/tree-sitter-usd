@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tree-sitter-usda"
+description = "USD grammar for tree-sitter"
+version = "0.7.0"
+keywords = ["incremental", "parsing", "tree-sitter", "usd", "usda", "pixar"]
+classifiers = [
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Topic :: Software Development :: Compilers",
+  "Topic :: Text Processing :: Linguistic",
+  "Typing :: Typed",
+]
+authors = [{ name = "Colin Kennedy" }]
+requires-python = ">=3.10"
+license.text = "MIT"
+readme = "README.md"
+
+[project.urls]
+Homepage = "https://github.com/ColinKennedy/tree-sitter-usd"
+
+[project.optional-dependencies]
+core = ["tree-sitter~=0.24"]
+test = ["tree-sitter~=0.24"]

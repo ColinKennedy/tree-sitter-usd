@@ -26,6 +26,24 @@ require("nvim-treesitter.configs").setup {
 }
 ```
 
+### Python
+```sh
+pip install tree-sitter-usda
+```
+
+```python
+import tree_sitter_usda
+from tree_sitter import Language, Parser
+
+parser = Parser(Language(tree_sitter_usda.language()))
+tree = parser.parse(b'def Xform "root"\n{\n    custom int value = 10\n}\n')
+
+print(tree.root_node)
+```
+
+The bundled highlights query is available as
+`tree_sitter_usda.HIGHLIGHTS_QUERY`.
+
 
 ## Why Tree-sitter?
 In the beginning, Tree-sitter was made to give text editors better syntax highlighting.
